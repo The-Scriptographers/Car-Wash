@@ -266,33 +266,33 @@ footer {
     background: url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhciUyMHdhc2h8ZW58MHx8MHx8fDA%3D') no-repeat center center/cover;
     color: white;
     text-align: center;
-    padding: 30px 15px; /* Reduced padding */
+    padding: 50px 20px;
     position: relative;
     overflow: hidden;
 }
 
 .promo-container {
     background: rgba(0, 0, 0, 0.7);
-    padding: 20px; /* Reduced padding inside the promo box */
+    padding: 30px;
     border-radius: 10px;
     display: inline-block;
-    max-width: 500px; /* Reduced maximum width */
+    max-width: 600px;
     margin: auto;
 }
 
 #promo h2 {
-    font-size: 2rem; /* Reduced font size for the title */
+    font-size: 2.5rem;
     margin-bottom: 10px;
     color: #FFD700;
 }
 
 #promo p {
-    font-size: 1rem; /* Reduced font size for text */
+    font-size: 1.2rem;
     margin: 10px 0;
 }
 
 .offer-price {
-    font-size: 1.5rem; /* Reduced font size for the price */
+    font-size: 1.8rem;
     color: #FF4500;
     font-weight: bold;
 }
@@ -300,28 +300,28 @@ footer {
 #promo ul {
     list-style: none;
     padding: 0;
-    margin: 15px 0; /* Reduced margin for the list */
+    margin: 20px 0;
 }
 
 #promo ul li {
     margin: 5px 0;
-    font-size: 0.9rem; /* Slightly smaller list text */
+    font-size: 1rem;
 }
 
 #countdown {
-    font-size: 1.2rem; /* Reduced font size for the countdown */
+    font-size: 1.5rem;
     font-weight: bold;
     color: #FF6347;
-    margin: 10px 0; /* Reduced margin for spacing */
+    margin: 15px 0;
 }
 
 .btn-primary {
     background-color: #FFD700;
     color: black;
-    padding: 8px 15px; /* Smaller button size */
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    font-size: 1rem; /* Reduced button font size */
+    font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -330,6 +330,7 @@ footer {
     background-color: #FF4500;
     color: white;
 }
+
 
 
 
