@@ -227,9 +227,10 @@ body {
     box-shadow: 0 8px 16px rgb(0, 166, 255);
 }
 .service-card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 1rem;
+    width: 100%; 
+  height: 200px; 
+  object-fit: cover;
+  border-radius: 10px;
 }
 .service-card h3 {
     margin-bottom: 1rem;
