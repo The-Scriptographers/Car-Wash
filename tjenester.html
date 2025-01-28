@@ -1,23 +1,28 @@
+
 <!DOCTYPE html>
-<html lang="no">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="images/fav.png">
-    <title>Tjenester - ULF's Bilpleie</title> <!-- Updated title for the page -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <title>ULF's Bilpleie</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- Header Section -->
     <header class="hero hero-T">
       <div class="hero-content">
-        <h1>Tjenester</h1>
-        <p>Profesjonelle bilpleietjenester</p>
+        <h1>Ulf's Bilpleie</h1>
+        <p>Velkommen til Ulfs Bilpleie</p>
         <button id="bookAppointment">Bestill Time</button>
+              
+       <!--<button onclick="scrollToSection('services')">Bestill Time</button> -->
       </div>
     </header>
-
-    <!-- Navigation Menu -->
+   
+  
+<!-- Navigation Menu -->
     <nav class="navbar">
       <div class="navbar-container">
         <a href="index.html" class="logo" id="logo">ULF's Bilpleie</a>
@@ -28,17 +33,53 @@
           <span></span>
         </label>
         <ul class="nav-links">
-          <li><a href="index.html">Hjem</a></li> <!-- Link back to the homepage -->
-          <li><a href="tjenester.html" class="active">Tjenester</a></li> <!-- Active link for current page -->
+          <li><a href="index.html">Hjem</a></li>
+          <li><a href="tjenester.html" class="active">Tjenester</a></li>
           <li><a href="om-meg.html">Om Meg</a></li>
           <li><a href="kontakt.html">Ta Kontakt</a></li>
-          <li><a href="#testimonials">Fotogalleri </a></li>
+          <li><a href="#testimonials">Fotogalleri</a></li>
         </ul>
       </div>
     </nav>
+<!-- Services Section -->
+    <section id="services" class="section">
+      <h2>Mine Tjenester</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <img
+            src="images/utvendig.jpg"
+            alt="Utvendig Vask"
+          />
+          <h3>Utvendig Vask</h3>
+          <p>Grundig utvendig vask for en skinnende ren bil</p>
+        </div>
+        <div class="service-card">
+          <img
+            src="https://cdn.prod.website-files.com/664d115303f86cf38874153b/6672243c686346eb9239527e_Full%20detailing.jpg"
+            alt="Innvendig Vask"
+          />
+          <h3>Innvendig Vask</h3>
+          <p>Støvsuging, rens av seter og grundig rengjøring av interiøret.</p>
+        </div>
+        <div class="service-card">
+          <img
+            src="images/polering.jpg"
+            alt="Polering og Lakkbehandling"
+          />
+          <h3>Polering og Lakkbehandling</h3>
+          <p>Polering for en speilblank finish, lakkrens for å fjerne urenheter og keramisk coating for ekstra beskyttelse og langvarig glans.</p>
+        </div>
+      </div>
+    </section>
+
+
+
 
    
-    <!-- Footer Section -->
+ <!-- Back to Top Button -->
+    <button id="back-to-top">⬆</button>
+
+ <!-- Footer Section -->
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-section">
@@ -49,10 +90,10 @@
         <div class="footer-section">
           <h3>Lenker</h3>
           <ul>
-            <li><a href="index.html">Hjem</a></li>
-            <li><a href="tjenester.html">Tjenester</a></li>
-            <li><a href="om-meg.html">Om Meg</a></li>
-            <li><a href="kontakt.html">Ta Kontakt</a></li>
+            <li><a href="#services">Tjenester</a></li>
+            <li><a href="#about">Om Meg</a></li>
+            <li><a href="#contact">Ta Kontakt</a></li>
+            <li><a href="#testimonials">Fotogalleri</a></li>
           </ul>
         </div>
         <div class="footer-section">
@@ -67,8 +108,11 @@
         <p>&copy; 2025 ULF's Bilpleie. Alle rettigheter forbeholdt.</p>
       </div>
     </footer>
-
+   
+    
+    
     <!-- Main JavaScript file -->
-    <script src="script.js"></script>
+    <script src="script.js">  </script>
+    
   </body>
 </html>
