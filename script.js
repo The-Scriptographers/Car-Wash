@@ -1,3 +1,46 @@
+// Wait for the DOM to fully load before running the script
+document.addEventListener('DOMContentLoaded', function() {
+    const p = document.querySelector('.hero-content p');
+
+
+//logo
+const logo = document.getElementById('logo');
+const text = logo.textContent;
+logo.innerHTML = ''; // Clear the text
+
+text.split('').forEach((letter, index) => {
+    const span = document.createElement('span');
+    span.textContent = letter;
+    span.style.animationDelay = `${index * 0.1}s`; // Staggered delay for each letter
+    logo.appendChild(span);
+});
+
+    // Array of quotes to cycle through
+    const quotes = [
+        "Skinnende bil, hver gang!",
+        "Den ultimate bilpleieopplevelsen",
+        "Bilen din fortjener det beste",
+        "Gi bilen din den behandlingen den fortjener"
+    ];
+    let currentQuoteIndex = 0;
+
+    // Function to update the quote with a fade in/out effect
+    function updateQuote() {
+        p.style.opacity = '0'; // Fade out the current quote
+        setTimeout(() => {
+            currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+            p.textContent = quotes[currentQuoteIndex];
+            p.style.opacity = '1'; // Fade in the new quote
+        }, 1000); // Delay for fade out animation
+    }
+
+    // Make the initial quote visible
+    p.style.opacity = '1';
+    // Set interval to change the quote every 5 seconds
+    setInterval(updateQuote, 5000);
+});
+
+// Function to scroll smoothly to a section by its ID
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -5,32 +48,31 @@ function scrollToSection(sectionId) {
     }
 }
 
-document.getElementById('contact-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-    alert('Thank you for contacting us! We will get back to you soon.');
-    event.target.reset();
-});
-
+// Testimonial rotation setup
 let currentTestimonial = 0;
 const testimonials = document.querySelectorAll(".testimonial-card");
 const totalTestimonials = testimonials.length;
 
+// Show the testimonial at the given index
 function showTestimonial(index) {
     testimonials.forEach((testimonial, i) => {
         testimonial.style.display = i === index ? "block" : "none";
     });
 }
 
+// Move to the next testimonial
 function nextTestimonial() {
     currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
     showTestimonial(currentTestimonial);
 }
 
+// If there are testimonials, start rotation
 if (totalTestimonials > 0) {
-    setInterval(nextTestimonial, 3000); // Rotate every 3 seconds
-    showTestimonial(currentTestimonial); // Initial display
+    setInterval(nextTestimonial, 9000); // Rotate every 9 seconds
+    showTestimonial(currentTestimonial); // Show initial testimonial
 }
 
+// Change navigation appearance on scroll
 window.addEventListener("scroll", () => {
     const nav = document.querySelector("nav");
     if (window.scrollY > 50) {
@@ -40,6 +82,7 @@ window.addEventListener("scroll", () => {
     }
 });
 
+// Control visibility of 'back to top' button based on scroll position
 const backToTop = document.getElementById("back-to-top");
 
 window.addEventListener("scroll", () => {
@@ -50,10 +93,12 @@ window.addEventListener("scroll", () => {
     }
 });
 
+// Scroll to the top of the page when the 'back to top' button is clicked
 backToTop.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
+// Animate sections when they come into view
 const sections = document.querySelectorAll(".section");
 
 function animateOnScroll() {
@@ -70,30 +115,77 @@ function animateOnScroll() {
 
 window.addEventListener("scroll", animateOnScroll);
 
-// Initial trigger
-animateOnScroll();
+// Initialize Google Map for business location
+function initMap() {
+    const businessLocation = { lat: YOUR_LATITUDE, lng: YOUR_LONGITUDE }; // Replace with actual coordinates
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: businessLocation,
+        styles: [{
+            "featureType": "all",
+            "elementType": "labels.text.fill",
+            "stylers": [{"color": "#ffffff"}]
+        }]
+    });
+    
+    new google.maps.Marker({
+        position: businessLocation,
+        map: map,
+        title: "ULF's Bilpleie" 
+    });
+}
 
-const countdown = document.getElementById("countdown");
-const targetDate = new Date("2025-01-31T23:59:59").getTime();
+// Trigger map initialization when the window loads
+window.initMap = initMap;
 
-function updateCountdown() {
-    const now = new Date().getTime();
-    const timeLeft = targetDate - now;
+// Another animateOnScroll function (likely redundant with previous one)
+function animateOnScroll() {
+    const sections = document.querySelectorAll(".section");
+    const triggerBottom = window.innerHeight * 0.8;
+    sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < triggerBottom) {
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+            section.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
+        } else {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'none';
+        }
+    });
+}
 
-    if (timeLeft > 0) {
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        countdown.textContent = `Offer Ends In: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-    } else {
-        countdown.textContent = "Offer has ended!";
-        clearInterval(timer);
+// Animate contact info when scrolled into view
+function checkAnimation() {
+    const contactInfo = document.querySelector('.contact-info');
+    const rect = contactInfo.getBoundingClientRect();
+    if (rect.top <= window.innerHeight * 0.8) {
+        contactInfo.classList.add('show');
     }
 }
 
+// Trigger animations on scroll and load
+window.addEventListener('scroll', checkAnimation);
+window.addEventListener('load', checkAnimation);
+
+// Ensure initial animation on page load
+window.addEventListener("scroll", animateOnScroll);
+animateOnScroll();
+
+// Update countdown timer (assumed function)
 const timer = setInterval(updateCountdown, 1000);
 updateCountdown();
 
-
+// Mobile menu toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+  
+    document.addEventListener('click', function(event) {
+      const isClickInside = navLinks.contains(event.target) || event.target === navToggle || event.target.parentNode === navToggle;
+      if (!isClickInside && navToggle.checked) {
+        navToggle.checked = false; // Close the menu if clicked outside or on toggle
+      }
+    });
+});
