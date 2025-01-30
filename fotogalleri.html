@@ -62,14 +62,38 @@
     <button class="next" onclick="changeSlide(1)">&#10095;</button>
 </div>
 
+
+
         
 <!-- Fullscreen overlay with navigation buttons -->
 <div id="fullscreenOverlay" class="fullscreen-overlay">
-  <button class="fullscreen-prev" onclick="changeFullscreenImage(-1)">&#10094;</button>
+  <button id="prevFullscreen" class="prev">&#10094;</button>
   <img id="fullscreenImage">
-  <button class="fullscreen-next" onclick="changeFullscreenImage(1)">&#10095;</button>
+  <button id="nextFullscreen" class="next">&#10095;</button>
 </div>
-        
+
+
+
+<!-- Grid-based Gallery Section -->
+<div class="gallery-container">
+  <h2>Flere bilder</h2>
+  <div class="gallery-grid">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_01.jpg" class="gallery-img" alt="Gallery Image 1">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_02.jpg" class="gallery-img" alt="Gallery Image 2">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_03.jpg" class="gallery-img" alt="Gallery Image 3">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_04.jpg" class="gallery-img" alt="Gallery Image 4">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_05.jpg" class="gallery-img" alt="Gallery Image 5">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_07.jpg" class="gallery-img" alt="Gallery Image 6">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_09.jpg" class="gallery-img" alt="Gallery Image 7">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_11.jpg" class="gallery-img" alt="Gallery Image 8">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_14.jpg" class="gallery-img" alt="Gallery Image 9">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_18.jpg" class="gallery-img" alt="Gallery Image 10">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_20.jpg" class="gallery-img" alt="Gallery Image 11">
+      <img src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_30.jpg" class="gallery-img" alt="Gallery Image 12">
+  </div>
+</div>
+
+
 <script>
 let slideIndex = 0;
 let slides = document.querySelectorAll(".slide");
@@ -99,51 +123,63 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
 document.addEventListener("DOMContentLoaded", () => {
-    let slideImages = document.querySelectorAll(".slide img"); // All images
+    let slides = document.querySelectorAll(".slide img");
+    let galleryImages = document.querySelectorAll(".gallery-img"); 
     let fullscreenOverlay = document.getElementById("fullscreenOverlay");
     let fullscreenImage = document.getElementById("fullscreenImage");
-    let fullscreenIndex = 0; // Track current image in fullscreen
-    let slideInterval; // Store interval reference
+    let prevBtn = document.getElementById("prevFullscreen");
+    let nextBtn = document.getElementById("nextFullscreen");
+    let fullscreenIndex = 0;
+    let currentImagePool = [];
     let body = document.body;
+    let slideInterval = null;
 
-    // Function to start slideshow
-    function startSlideshow() {
-        slideInterval = setInterval(showSlides, 5000);
-    }
+    
 
-    // Function to stop slideshow
-    function stopSlideshow() {
-        clearInterval(slideInterval);
-    }
+   
 
-    // Open fullscreen with clicked image
-    function openFullscreen(imgSrc) {
-        fullscreenIndex = [...slideImages].findIndex(img => img.src === imgSrc);
+    // Function to open fullscreen with correct pool
+    function openFullscreen(imgSrc, imagePool) {
+        currentImagePool = [...imagePool]; // Store the correct image set
+        fullscreenIndex = currentImagePool.findIndex(img => img.src === imgSrc);
+        
         fullscreenImage.src = imgSrc;
         fullscreenOverlay.style.display = "flex";
 
-        stopSlideshow(); // Pause auto slideshow
         body.style.overflow = "hidden"; // Disable scrolling
+    }
+
+    // Change fullscreen image with navigation buttons
+    function changeFullscreenImage(n) {
+        fullscreenIndex = (fullscreenIndex + n + currentImagePool.length) % currentImagePool.length;
+        fullscreenImage.src = currentImagePool[fullscreenIndex].src;
     }
 
     // Close fullscreen overlay
     function closeFullscreen() {
         fullscreenOverlay.style.display = "none";
 
-        startSlideshow(); // Resume auto slideshow
         body.style.overflow = "auto"; // Re-enable scrolling
     }
 
-    // Change fullscreen image with navigation buttons
-    function changeFullscreenImage(direction) {
-        fullscreenIndex = (fullscreenIndex + direction + slideImages.length) % slideImages.length;
-        fullscreenImage.src = slideImages[fullscreenIndex].src;
-    }
 
-    // Add event listeners to open fullscreen on click
-    slideImages.forEach(img => {
-        img.addEventListener("click", () => openFullscreen(img.src));
+
+
+
+      // Attach click events to slideshow images (Separate Pool)
+    slides.forEach(img => {
+        img.addEventListener("click", () => openFullscreen(img.src, slides));
     });
+
+    // Attach click events to gallery images (Separate Pool)
+    galleryImages.forEach(img => {
+        img.addEventListener("click", () => openFullscreen(img.src, galleryImages));
+    });
+
+    // Navigation buttons for fullscreen
+    prevBtn.addEventListener("click", () => changeFullscreenImage(-1));
+    nextBtn.addEventListener("click", () => changeFullscreenImage(1));
+
 
     // Close fullscreen when clicking outside the image
     fullscreenOverlay.addEventListener("click", (e) => {
@@ -157,6 +193,15 @@ document.addEventListener("DOMContentLoaded", () => {
     startSlideshow();
 });
 
+
+document.addEventListener("DOMContentLoaded", () => { // alows for the image gallery to use the fullscreen-overlay function
+    let galleryImages = document.querySelectorAll(".gallery-img");
+
+    // Add click event to open fullscreen from gallery images
+    galleryImages.forEach(img => {
+        img.addEventListener("click", () => openFullscreen(img.src));
+    });
+});
 
 </script>
 

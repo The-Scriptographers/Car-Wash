@@ -575,3 +575,37 @@ footer {
 .fullscreen-prev:hover, .fullscreen-next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+/* Gallery Section */
+.gallery-container {
+  text-align: center;
+  margin: 50px auto;
+  max-width: 900px;
+}
+
+.gallery-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust grid for responsiveness */
+  gap: 10px;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover; /* Ensures images fill the space */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+}
+
