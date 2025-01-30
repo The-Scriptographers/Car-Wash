@@ -2,18 +2,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     const p = document.querySelector('.hero-content p');
 
+    //logo
+    const logo = document.getElementById('logo');
+    const text = logo.textContent;
+    logo.innerHTML = ''; // Clear the text
 
-//logo
-const logo = document.getElementById('logo');
-const text = logo.textContent;
-logo.innerHTML = ''; // Clear the text
-
-text.split('').forEach((letter, index) => {
-    const span = document.createElement('span');
-    span.textContent = letter;
-    span.style.animationDelay = `${index * 0.1}s`; // Staggered delay for each letter
-    logo.appendChild(span);
-});
+    text.split('').forEach((letter, index) => {
+        const span = document.createElement('span');
+        span.textContent = letter;
+        span.style.animationDelay = `${index * 0.1}s`; // Staggered delay for each letter
+        logo.appendChild(span);
+    });
 
     // Array of quotes to cycle through
     const quotes = [
@@ -39,6 +38,26 @@ text.split('').forEach((letter, index) => {
     // Set interval to change the quote every 5 seconds
     setInterval(updateQuote, 5000);
 });
+
+// Function to load header and footer dynamically on all pages
+async function loadHeaderFooter() {
+    try {
+        // Load header
+        const headerResponse = await fetch('header.html');
+        const headerData = await headerResponse.text();
+        document.getElementById("header").innerHTML = headerData;
+
+        // Load footer
+        const footerResponse = await fetch('footer.html');
+        const footerData = await footerResponse.text();
+        document.getElementById("footer").innerHTML = footerData;
+    } catch (error) {
+        console.error('Error loading header or footer:', error);
+    }
+}
+
+// Call the loadHeaderFooter function
+loadHeaderFooter(); // Endring: Brukt async/await for å unngå Promise-melding
 
 // Function to scroll smoothly to a section by its ID
 function scrollToSection(sectionId) {
@@ -183,9 +202,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelector('.nav-links');
   
     document.addEventListener('click', function(event) {
-      const isClickInside = navLinks.contains(event.target) || event.target === navToggle || event.target.parentNode === navToggle;
-      if (!isClickInside && navToggle.checked) {
-        navToggle.checked = false; // Close the menu if clicked outside or on toggle
-      }
+        const isClickInside = navLinks.contains(event.target) || event.target === navToggle || event.target.parentNode === navToggle;
+        if (!isClickInside && navToggle.checked) {
+            navToggle.checked = false; // Close the menu if clicked outside or on toggle
+        }
     });
 });

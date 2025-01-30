@@ -1,0 +1,67 @@
+<!-- Footer Section -->
+<footer id="footer" class="footer">
+  <div class="footer-content fade-in">
+    <div class="footer-section">
+      <h3>ULF's Bilpleie</h3>
+      <p>Hvittingfossveien 129, 3085, Holmestrand</p>
+      <p>+47 404 98 499</p>
+    </div>
+    <div class="footer-section">
+      <h3>Lenker</h3>
+      <ul>
+        <li><a href="tjenester.html">Tjenester</a></li>
+        <li><a href="om-meg.html">Om Meg</a></li>
+        <li><a href="#kontakt">Ta Kontakt</a></li>
+        <li><a href="#fotogalleri">Fotogalleri</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Følg meg på Facebook</h3>
+      <ul class="social-icons">
+        <li>
+          <a
+            href="https://www.facebook.com/people/ULFs-Bilpleie/100063566292197/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="images/fb.png" alt="Facebook" />
+          </a>
+        </li>
+        <span>ULF's Bilpleie</span>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 ULF's Bilpleie. Alle rettigheter forbeholdt.</p>
+  </div>
+</footer>
+
+<style>
+  /* Footer Animations */
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInFooter 1s ease forwards;
+  }
+
+  @keyframes fadeInFooter {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Footer Animations when scrolling
+  window.addEventListener("scroll", () => {
+    const footer = document.querySelector(".footer-content");
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const footerOffsetTop = footer.offsetTop;
+
+    if (scrollPosition >= footerOffsetTop) {
+      footer.classList.add("animated");
+    }
+  });
+</script>

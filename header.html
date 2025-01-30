@@ -1,0 +1,89 @@
+<!-- Header Section -->
+<header id="header" class="hero">
+  <div class="hero-content">
+    <h1 class="fade-in">Ulf's Bilpleie</h1>
+    <p class="fade-in">Velkommen til Ulf's Bilpleie</p>
+    <button id="bookAppointment" class="slide-up">Bestill Time</button>
+  </div>
+</header>
+
+<style>
+  /* Header Animations*/
+  .fade-in {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s ease forwards;
+  }
+
+  .slide-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 1s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Activating Header-animasjons when loading
+  document.addEventListener("DOMContentLoaded", () => {
+    const headerElements = document.querySelectorAll(".fade-in, .slide-up");
+    headerElements.forEach((el) => el.classList.add("animated"));
+  });
+</script>
+
+<!-- Navigation Menu -->
+<nav id="navbar" class="navbar">
+  <div class="navbar-container slide-down">
+    <a href="index.html" class="logo" id="logo">ULF's Bilpleie</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <ul class="nav-links">
+      <li><a href="index.html">Hjem</a></li>
+      <li><a href="tjenester.html">Tjenester</a></li>
+      <li><a href="om-meg.html">Om Meg</a></li>
+      <li><a href="#kontakt">Ta Kontakt</a></li>
+      <li><a href="#fotogalleri">Fotogalleri</a></li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  /* Navbar Animations */
+  .slide-down {
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: slideDown 1s ease forwards;
+  }
+
+  @keyframes slideDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // Navbar shows with animation with DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", () => {
+    const navbar = document.querySelector(".slide-down");
+    navbar.classList.add("animated");
+  });
+</script>

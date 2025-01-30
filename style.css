@@ -25,6 +25,10 @@ body {
 .hero-T {
   background: url(images/polering.jpg) no-repeat center center/cover;
 }
+
+.hero-O {
+  background: url(images/Ulf-smil.jpg);
+}
 .hero::after {
     content: '';
     position: absolute;
@@ -468,4 +472,31 @@ footer {
     margin-left:80px; /* Moves the icon to the left */
   }
 
-  
+/* For the text */
+.about-text {
+  max-width: 600px; /* Prevents the text from being too wide */
+}
+
+  /* For the main content */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the items horizontally */
+  justify-content: center; /* Centers the items vertically */
+  text-align: center; /* Centers the text */
+  padding: 50px;
+  min-width: 100vh; /* Makes sure content is centered on the full viewport height */
+}
+
+/* For the image */
+.about-image img {
+  width: 400px; /* Make sure the image is not too big */
+  height: 400px; /* Make it square */
+  object-fit: cover; /* Ensures the image doesn't get distorted */
+  margin-bottom: 20px; /* Adds space between image and text */
+}
+
+/* For the text */
+.about-text {
+  max-width: 600px; /* Prevents the text from being too wide */
+}
