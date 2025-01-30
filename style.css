@@ -468,4 +468,110 @@ footer {
     margin-left:80px; /* Moves the icon to the left */
   }
 
-  
+ 
+ 
+  /* Slideshow container */
+  .slideshow-container {
+      position: relative;        max-width: 100%; /* Adjust to make it more responsive */
+      margin: auto;
+      overflow: hidden;
+      height: 500px; /* Set a fixed height for the slideshow container */
+    }
+
+    /* Navigation buttons */
+    .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;  /* Ensure buttons are above images */
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.prev:hover, .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+
+    /* Ensure uniform image size */
+.slide img {
+    width: 100%;
+    height: auto; /* Fixed height for consistency */
+    object-fit: cover; /* Crop excess parts to fit */
+    cursor: pointer;
+}
+
+    
+  /* Hide all slides initially */
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Smooth fade transition */
+}
+
+/* Show the active slide */
+.slide.active {
+    opacity: 1;
+    z-index: 1; /* Ensure the active slide stays on top */
+}
+
+    
+  /* Ensure images are centered and maintain aspect ratio */
+.slide img {
+    width: 100%;
+    height: 100%; /* Set height to 100% to take up full container height */
+    object-fit: contain; /* This will prevent the images from overflowing */
+    display: block; /* Prevents image from showing extra space below it */
+    margin: 0 auto; /* Ensures the image stays centered */
+}
+
+
+    
+ /* Fullscreen overlay */
+.fullscreen-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  z-index: 9999; /* Ensure it's the top-most element */
+}
+
+/* Fullscreen image */
+.fullscreen-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* Navigation buttons */
+.fullscreen-prev, .fullscreen-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.fullscreen-prev { left: 20px; }
+.fullscreen-next { right: 20px; }
+
+.fullscreen-prev:hover, .fullscreen-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
