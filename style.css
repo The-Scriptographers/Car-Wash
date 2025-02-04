@@ -27,7 +27,7 @@ body {
 }
 
 .hero-O {
-  background: url(images/ulf-smil.png) no-repeat center center/cover;
+  background: url(images/ulf-armoverbildør.jpg) no-repeat center center/cover;
 }
 
 .hero::after {
@@ -537,3 +537,20 @@ footer {
     text-align: left;
     margin-left: 20px;
   }
+  
+  /* Felles stil for begge bookAppointment-knapper */
+
+#bookAppointment {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #ff0400;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#bookAppointment:hover {
+  background-color: #b34b00;
+}

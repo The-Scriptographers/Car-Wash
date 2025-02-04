@@ -7,27 +7,18 @@
     <title>Om Meg - ULF's Bilpleie</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-      .about-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin: 0 auto;
-        max-width: 600px;
-      }
-
       .about-image {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-bottom: 20px;
-        width: 250px;
-        height: 250px;
-        border: 2px solid #ddd;
+        width: 300px;
+        height: 300px;
+        border: 2px solid #5127d8;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         background: #fff;
         padding: 1.5rem;
-        border-radius: 10px;
+        border-radius: 1.5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
@@ -59,12 +50,11 @@
       }
     </style>
   </head>
-
   <body>
     <!-- Header Section -->
-    <header class="hero hero-">
+    <header class="hero hero-O">
       <div class="hero-content">
-        <h1>Ulf's Bilpleie</h1>
+        <h1>Om ULF's Bilpleie</h1>
         <p>Velkommen til Ulfs Bilpleie</p>
         <button id="bookAppointment">Bestill Time</button>
       </div>
@@ -97,22 +87,35 @@
           <h2>Velkommen til ULF's Bilpleie</h2>
         </div>
         <div class="about-image">
-          <img src="images/Ulf-Tshirt.png" alt="Ulf's Bilpleie" />
+          <img src="images/ulf-blåtskjorte.png" alt="Ulf's Bilpleie" />
         </div>
         <div class="about-text">
+          <h2>Om Meg</h2>
           <p>
-            Hos ULF's Bilpleie gir vi bilen din den beste behandlingen. Med
-            mange års erfaring tilbyr vi tjenester som holder bilen din i topp
-            stand.
+            Velkommen til Ulfs Bilpleie, din lokale ekspert på bilpleie i
+            Holmestrand! Vi brenner for å gi bilen din den beste behandlingen,
+            uansett om den trenger en rask vask eller en fullstendig fornyelse.
           </p>
+          <p>
+            Med mange års erfaring i bransjen vet vi hva som skal til for å få
+            bilen din til å skinne, både innvendig og utvendig. Vi bruker
+            kvalitetsprodukter og moderne teknikker for å sikre at du alltid får
+            topp resultat – hver gang du besøker oss.
+          </p>
+
           <b>Hva skiller oss fra andre?</b>
           <ul>
             <li>
-              Miljøvennlige produkter som tar vare på både bilen og naturen.
+              Kvalitet: Vi tar oss tid til detaljene for å sikre at bilen din
+              får den beste behandlingen.
             </li>
-            <li>Fleksible løsninger som passer dine behov, uansett tid.</li>
             <li>
-              Kvalitet i alt vi gjør med erfarent personell og topp utstyr.
+              Pålitelighet: Vi holder det vi lover og leverer tjenester du kan
+              stole på.
+            </li>
+            <li>
+              Pålitelighet: Vi holder det vi lover og leverer tjenester du kan
+              stole på.
             </li>
           </ul>
           <b>Hvorfor velge oss?</b>
@@ -120,8 +123,11 @@
             Vi behandler bilen din som vår egen og sikrer en profesjonell
             serviceopplevelse hver gang.
           </p>
+          <br />
+          <button id="bookAppointment">Bestill Time</button>
         </div>
       </section>
+      <button id="back-to-top">⬆</button>
     </main>
 
     <!-- Footer Section -->
@@ -160,5 +166,6 @@
         <p>&copy; 2025 ULF's Bilpleie. Alle rettigheter forbeholdt.</p>
       </div>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>
