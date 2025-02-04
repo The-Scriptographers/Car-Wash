@@ -25,6 +25,11 @@ body {
 .hero-T {
   background: url(images/polering.jpg) no-repeat center center/cover;
 }
+
+.hero-O {
+  background: url(images/ulf-smil.png) no-repeat center center/cover;
+}
+
 .hero::after {
     content: '';
     position: absolute;
@@ -491,4 +496,44 @@ footer {
     margin-left:80px; /* Moves the icon to the left */
   }
 
-  
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+
+  .about-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 250px;
+    height: 250px;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .about-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+
+  .about-text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 10px 0;
+  }
+
+  .about-text b {
+    display: block;
+    margin: 15px 0 5px;
+  }
+
+  .about-text li {
+    text-align: left;
+    margin-left: 20px;
+  }

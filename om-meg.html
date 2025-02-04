@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/fav.png" />
+    <title>Om Meg - ULF's Bilpleie</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .about-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
+        max-width: 600px;
+      }
+
+      .about-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 250px;
+        height: 250px;
+        border: 2px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .about-image img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+      }
+
+      .about-image:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgb(0, 166, 255);
+      }
+      .about-text {
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 10px 0;
+      }
+
+      .about-text b {
+        display: block;
+        margin: 15px 0 5px;
+      }
+
+      .about-text li {
+        text-align: left;
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header Section -->
+    <header class="hero hero-">
+      <div class="hero-content">
+        <h1>Ulf's Bilpleie</h1>
+        <p>Velkommen til Ulfs Bilpleie</p>
+        <button id="bookAppointment">Bestill Time</button>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="index.html" class="logo" id="logo">ULF's Bilpleie</a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+        <label for="nav-toggle" class="nav-toggle-label">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <ul class="nav-links">
+          <li><a href="index.html">Hjem</a></li>
+          <li><a href="tjenester.html">Tjenester</a></li>
+          <li><a href="om-meg.html" class="active">Om Meg</a></li>
+          <li><a href="kontakt.html">Ta Kontakt</a></li>
+          <li><a href="#testimonials">Fotogalleri</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <main>
+      <section class="about-content">
+        <div class="about-text">
+          <h2>Velkommen til ULF's Bilpleie</h2>
+        </div>
+        <div class="about-image">
+          <img src="images/Ulf-Tshirt.png" alt="Ulf's Bilpleie" />
+        </div>
+        <div class="about-text">
+          <p>
+            Hos ULF's Bilpleie gir vi bilen din den beste behandlingen. Med
+            mange års erfaring tilbyr vi tjenester som holder bilen din i topp
+            stand.
+          </p>
+          <b>Hva skiller oss fra andre?</b>
+          <ul>
+            <li>
+              Miljøvennlige produkter som tar vare på både bilen og naturen.
+            </li>
+            <li>Fleksible løsninger som passer dine behov, uansett tid.</li>
+            <li>
+              Kvalitet i alt vi gjør med erfarent personell og topp utstyr.
+            </li>
+          </ul>
+          <b>Hvorfor velge oss?</b>
+          <p>
+            Vi behandler bilen din som vår egen og sikrer en profesjonell
+            serviceopplevelse hver gang.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>ULF's Bilpleie</h3>
+          <p>Hvittingfossveien 129, 3085, Holmestrand</p>
+          <p>+47 404 98 499</p>
+        </div>
+        <div class="footer-section">
+          <h3>Lenker</h3>
+          <ul>
+            <li><a href="#services">Tjenester</a></li>
+            <li><a href="#about">Om Meg</a></li>
+            <li><a href="#contact">Ta Kontakt</a></li>
+            <li><a href="#testimonials">Fotogalleri</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Følg meg på FaceBook</h3>
+          <ul class="social-icons">
+            <li>
+              <a
+                href="https://www.facebook.com/profile.php?id=100063566292197"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><img src="images/fb.png" alt="Facebook"
+              /></a>
+            </li>
+            <span>Ulf's Bilpleie</span>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ULF's Bilpleie. Alle rettigheter forbeholdt.</p>
+      </div>
+    </footer>
+  </body>
+</html>
