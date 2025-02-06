@@ -95,112 +95,93 @@
 
 
 <script>
+// Global variables for slideshow control
 let slideIndex = 0;
 let slides = document.querySelectorAll(".slide");
 let slideInterval;
+const SLIDE_DURATION = 5000; // Define constant for slide duration
 
 // Function to show slides with fade effect
 function showSlides() {
-    slides.forEach(slide => slide.classList.remove("active")); // Hide all slides
+    slides.forEach(slide => slide.classList.remove("active"));
     slideIndex = (slideIndex + 1) % slides.length;
-    slides[slideIndex].classList.add("active"); // Show next slide
+    slides[slideIndex].classList.add("active");
+}
+
+// Function to start slideshow
+function startSlideshow() {
+    // Clear any existing interval first
+    if (slideInterval) {
+        clearInterval(slideInterval);
+    }
+    // Start a new interval
+    slideInterval = setInterval(showSlides, SLIDE_DURATION);
+}
+
+// Function to stop slideshow
+function stopSlideshow() {
+    if (slideInterval) {
+        clearInterval(slideInterval);
+        slideInterval = null;
+    }
 }
 
 // Function to manually change slides
 function changeSlide(n) {
-    clearInterval(slideInterval); // Stop auto slideshow when manually navigating
-    slides.forEach(slide => slide.classList.remove("active")); // Hide all slides
+    stopSlideshow();
+    slides.forEach(slide => slide.classList.remove("active"));
     slideIndex = (slideIndex + n + slides.length) % slides.length;
-    slides[slideIndex].classList.add("active"); // Show new slide
-    slideInterval = setInterval(showSlides, 5000); // Restart auto slideshow
+    slides[slideIndex].classList.add("active");
+    startSlideshow();
 }
 
-// Start slideshow on page load
 document.addEventListener("DOMContentLoaded", () => {
-    slides[slideIndex].classList.add("active"); // Show the first slide
-    slideInterval = setInterval(showSlides, 5000);
-});
-    
-
-document.addEventListener("DOMContentLoaded", () => {
-    let slides = document.querySelectorAll(".slide img");
-    let galleryImages = document.querySelectorAll(".gallery-img"); 
+    let slideImages = document.querySelectorAll(".slide img");
     let fullscreenOverlay = document.getElementById("fullscreenOverlay");
     let fullscreenImage = document.getElementById("fullscreenImage");
-    let prevBtn = document.getElementById("prevFullscreen");
-    let nextBtn = document.getElementById("nextFullscreen");
     let fullscreenIndex = 0;
-    let currentImagePool = [];
     let body = document.body;
-    let slideInterval = null;
 
-    
-
-   
-
-    // Function to open fullscreen with correct pool
-    function openFullscreen(imgSrc, imagePool) {
-        currentImagePool = [...imagePool]; // Store the correct image set
-        fullscreenIndex = currentImagePool.findIndex(img => img.src === imgSrc);
-        
+    // Function to open fullscreen
+    function openFullscreen(imgSrc) {
+        stopSlideshow(); // Stop the slideshow when entering fullscreen
+        fullscreenIndex = [...slideImages].findIndex(img => img.src === imgSrc);
         fullscreenImage.src = imgSrc;
         fullscreenOverlay.style.display = "flex";
-
-        body.style.overflow = "hidden"; // Disable scrolling
+        body.style.overflow = "hidden";
     }
 
-    // Change fullscreen image with navigation buttons
-    function changeFullscreenImage(n) {
-        fullscreenIndex = (fullscreenIndex + n + currentImagePool.length) % currentImagePool.length;
-        fullscreenImage.src = currentImagePool[fullscreenIndex].src;
-    }
-
-    // Close fullscreen overlay
+    // Function to close fullscreen
     function closeFullscreen() {
         fullscreenOverlay.style.display = "none";
-
-        body.style.overflow = "auto"; // Re-enable scrolling
+        body.style.overflow = "auto";
+        startSlideshow(); // Restart the slideshow when exiting fullscreen
     }
 
+    // Function to change fullscreen image
+    function changeFullscreenImage(direction) {
+        fullscreenIndex = (fullscreenIndex + direction + slideImages.length) % slideImages.length;
+        fullscreenImage.src = slideImages[fullscreenIndex].src;
+    }
 
-
-
-
-      // Attach click events to slideshow images (Separate Pool)
-    slides.forEach(img => {
-        img.addEventListener("click", () => openFullscreen(img.src, slides));
-    });
-
-    // Attach click events to gallery images (Separate Pool)
-    galleryImages.forEach(img => {
-        img.addEventListener("click", () => openFullscreen(img.src, galleryImages));
-    });
-
-    // Navigation buttons for fullscreen
-    prevBtn.addEventListener("click", () => changeFullscreenImage(-1));
-    nextBtn.addEventListener("click", () => changeFullscreenImage(1));
-
-
-    // Close fullscreen when clicking outside the image
-    fullscreenOverlay.addEventListener("click", (e) => {
-        if (e.target === fullscreenOverlay) closeFullscreen();
-    });
-
-    // Attach navigation functions to window (so buttons work)
-    window.changeFullscreenImage = changeFullscreenImage;
-
-    // Start slideshow when page loads
-    startSlideshow();
-});
-
-
-document.addEventListener("DOMContentLoaded", () => { // alows for the image gallery to use the fullscreen-overlay function
-    let galleryImages = document.querySelectorAll(".gallery-img");
-
-    // Add click event to open fullscreen from gallery images
-    galleryImages.forEach(img => {
+    // Event listeners
+    slideImages.forEach(img => {
         img.addEventListener("click", () => openFullscreen(img.src));
     });
+
+    fullscreenOverlay.addEventListener("click", (e) => {
+        if (e.target === fullscreenOverlay) {
+            closeFullscreen();
+        }
+    });
+
+    // Attach functions to window for button access
+    window.changeFullscreenImage = changeFullscreenImage;
+    window.changeSlide = changeSlide;
+
+    // Initialize the slideshow
+    slides[slideIndex].classList.add("active");
+    startSlideshow();
 });
 
 </script>
