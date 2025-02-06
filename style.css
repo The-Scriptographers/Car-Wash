@@ -56,7 +56,7 @@ body {
     padding: 10px 20px;
     font-size: 1rem;
     color: white;
-    background-color: #ff0400;
+    background-color: #FF7D29;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -77,7 +77,8 @@ body {
 /* Navigation */
 /* Navbar Styles */
 .navbar {
-    background: #5127d8;
+  font-family: 'Poppins', sans-serif;
+  background: #023888;
     opacity: 0.9;
     color: white;
     padding: 0.5rem;
@@ -136,7 +137,7 @@ body {
   }
 
   .nav-links a.active {
-    color: #ff6600; /* Highlight color */
+    color: #ff0000; /* Highlight color */
     font-weight: bold;
     
 }
@@ -180,7 +181,7 @@ body {
       position: absolute;
       right: 0;
       top: 60px; /* Adjust based on your header height */
-      background: #5127d8;
+      background: #023888;
       display: none;
       width: 100%;
       flex-direction: column;
@@ -259,7 +260,7 @@ h2::after {
   display: block;
   width: 80px; /* Adjust width */
   height: 4px; /* Adjust thickness */
-  background-color: #007bff; 
+  background-color: #D81E05; 
   margin: 10px auto 0; /* Centers the underline */
   border-radius: 2px;
 }
@@ -333,6 +334,7 @@ h2::after {
 
 /* Footer */
 footer {
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     padding: 1rem;
     background: #333;
@@ -388,7 +390,7 @@ footer {
     bottom: 20px;
     right: 20px;
     display: none;
-    background-color: #d70505;
+    background-color: #D81E05;
     color: white;
     border: none;
     border-radius: 50%;
@@ -544,7 +546,7 @@ footer {
   padding: 10px 20px;
   font-size: 1rem;
   color: white;
-  background-color: #ff0400;
+  background-color: #D81E05;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -552,5 +554,48 @@ footer {
 }
 
 #bookAppointment:hover {
-  background-color: #b34b00;
+  background-color: #D81E05;
+}
+
+
+.about-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #023888;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  padding: 3.5rem;
+  border-radius: 1.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-image img {
+  max-width: 120%;
+  max-height: 120%;
+  object-fit: cover;
+}
+
+.about-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgb(0, 166, 255);
+}
+.about-text {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.about-text b {
+  display: block;
+  margin: 15px 0 5px;
+}
+
+.about-text li {
+  text-align: left;
+  margin-left: 20px;
 }
