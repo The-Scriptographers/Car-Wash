@@ -259,6 +259,47 @@ border-radius: 2px;
   margin-bottom: 1rem;
   color: #007BFF;
 }
+.extra-services-list {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+.extra-services-list:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgb(0, 166, 255);
+}
+
+.extra-service {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+
+.extra-service:last-child {
+  border-bottom: none;
+}
+
+.extra-service h3 {
+  color: #007BFF;
+  font-size: 1.2rem;
+}
+
+.extra-service p {
+  color: #333;
+  font-size: 1rem;
+  margin: 0.3rem 0;
+}
+
+@media (max-width: 768px) {
+  .extra-services-list {
+    padding: 1rem;
+  }
+}
 
 
 
