@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/fav.png" />
+    <title>Fotogalleri - ULF's Bilpleie</title>
+    <!-- Updated title for the page -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="hero hero-F">
+      <div class="hero-content">
+        <h1>Fotogalleri</h1>
+        <p>Profesjonelle bilpleietjenester</p>
+        <button id="bookAppointment">Bestill Time</button>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="index.html" class="logo" id="logo">ULF's Bilpleie</a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+        <label for="nav-toggle" class="nav-toggle-label">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <ul class="nav-links">
+          <li><a href="index.html">Hjem</a></li>
+          <li><a href="tjenester.html">Tjenester</a></li>
+          <li><a href="om-meg.html">Om Meg</a></li>
+          <li><a href="kontakt.html">Ta Kontakt</a></li>
+          <li><a href="fotogalleri.html">Fotogalleri</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="slideshow-container">
+      <div class="slide fade">
+        <img
+          src="https://wallpapers.com/images/hd/cars-lightning-mcqueen-5b4al56pbjivsvg9.jpg"
+          class="slide-image"
+        />
+      </div>
+      <div class="slide fade">
+        <img
+          src="https://monochrome-watches.com/wp-content/uploads/2023/02/2023-Scuderia-Ferrari-SF-23-Formula-1-car-Charles-Leclerc-Carlos-Sainz-1.jpg"
+          class="slide-image"
+        />
+      </div>
+      <div class="slide fade">
+        <img
+          src="https://images8.alphacoders.com/113/1139102.jpg"
+          class="slide-image"
+        />
+      </div>
+      <div class="slide fade">
+        <img src="https://i.redd.it/im5y0rtpk0u51.jpg" class="slide-image" />
+      </div>
+      <div class="slide fade">
+        <img
+          src="http://www.asphaltandrubber.com/wp-content/uploads/2009/07/Tron-Legacy-lightcycle.jpg"
+          class="slide-image"
+        />
+      </div>
+
+      <!-- Navigation buttons -->
+      <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+      <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <!-- Fullscreen overlay with navigation buttons -->
+    <div id="fullscreenOverlay" class="fullscreen-overlay">
+      <button id="prevFullscreen" class="prev">&#10094;</button>
+      <img id="fullscreenImage" />
+      <button id="nextFullscreen" class="next">&#10095;</button>
+    </div>
+
+    <!-- Grid-based Gallery Section -->
+    <div class="gallery-container">
+      <h2>Flere bilder</h2>
+      <div class="gallery-grid">
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_01.jpg"
+          class="gallery-img"
+          alt="Gallery Image 1"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_02.jpg"
+          class="gallery-img"
+          alt="Gallery Image 2"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_03.jpg"
+          class="gallery-img"
+          alt="Gallery Image 3"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_04.jpg"
+          class="gallery-img"
+          alt="Gallery Image 4"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_05.jpg"
+          class="gallery-img"
+          alt="Gallery Image 5"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_07.jpg"
+          class="gallery-img"
+          alt="Gallery Image 6"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_09.jpg"
+          class="gallery-img"
+          alt="Gallery Image 7"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_11.jpg"
+          class="gallery-img"
+          alt="Gallery Image 8"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_14.jpg"
+          class="gallery-img"
+          alt="Gallery Image 9"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_18.jpg"
+          class="gallery-img"
+          alt="Gallery Image 10"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_20.jpg"
+          class="gallery-img"
+          alt="Gallery Image 11"
+        />
+        <img
+          src="https://img.izismile.com/img/img2/20090916/pimp_my_ride_30.jpg"
+          class="gallery-img"
+          alt="Gallery Image 12"
+        />
+      </div>
+    </div>
+
+    <script>
+      let slideIndex = 0;
+      let slides = document.querySelectorAll(".slide");
+      let slideInterval;
+
+      // Function to show slides with fade effect
+      function showSlides() {
+        slides.forEach((slide) => slide.classList.remove("active")); // Hide all slides
+        slideIndex = (slideIndex + 1) % slides.length;
+        slides[slideIndex].classList.add("active"); // Show next slide
+      }
+
+      // Function to manually change slides
+      function changeSlide(n) {
+        clearInterval(slideInterval); // Stop auto slideshow when manually navigating
+        slides.forEach((slide) => slide.classList.remove("active")); // Hide all slides
+        slideIndex = (slideIndex + n + slides.length) % slides.length;
+        slides[slideIndex].classList.add("active"); // Show new slide
+        slideInterval = setInterval(showSlides, 5000); // Restart auto slideshow
+      }
+
+      // Start slideshow on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        slides[slideIndex].classList.add("active"); // Show the first slide
+        slideInterval = setInterval(showSlides, 5000);
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        let slides = document.querySelectorAll(".slide img");
+        let galleryImages = document.querySelectorAll(".gallery-img");
+        let fullscreenOverlay = document.getElementById("fullscreenOverlay");
+        let fullscreenImage = document.getElementById("fullscreenImage");
+        let prevBtn = document.getElementById("prevFullscreen");
+        let nextBtn = document.getElementById("nextFullscreen");
+        let fullscreenIndex = 0;
+        let currentImagePool = [];
+        let body = document.body;
+        let slideInterval = null;
+
+        // Function to open fullscreen with correct pool
+        function openFullscreen(imgSrc, imagePool) {
+          currentImagePool = [...imagePool]; // Store the correct image set
+          fullscreenIndex = currentImagePool.findIndex(
+            (img) => img.src === imgSrc
+          );
+
+          fullscreenImage.src = imgSrc;
+          fullscreenOverlay.style.display = "flex";
+
+          body.style.overflow = "hidden"; // Disable scrolling
+        }
+
+        // Change fullscreen image with navigation buttons
+        function changeFullscreenImage(n) {
+          fullscreenIndex =
+            (fullscreenIndex + n + currentImagePool.length) %
+            currentImagePool.length;
+          fullscreenImage.src = currentImagePool[fullscreenIndex].src;
+        }
+
+        // Close fullscreen overlay
+        function closeFullscreen() {
+          fullscreenOverlay.style.display = "none";
+
+          body.style.overflow = "auto"; // Re-enable scrolling
+        }
+
+        // Attach click events to slideshow images (Separate Pool)
+        slides.forEach((img) => {
+          img.addEventListener("click", () => openFullscreen(img.src, slides));
+        });
+
+        // Attach click events to gallery images (Separate Pool)
+        galleryImages.forEach((img) => {
+          img.addEventListener("click", () =>
+            openFullscreen(img.src, galleryImages)
+          );
+        });
+
+        // Navigation buttons for fullscreen
+        prevBtn.addEventListener("click", () => changeFullscreenImage(-1));
+        nextBtn.addEventListener("click", () => changeFullscreenImage(1));
+
+        // Close fullscreen when clicking outside the image
+        fullscreenOverlay.addEventListener("click", (e) => {
+          if (e.target === fullscreenOverlay) closeFullscreen();
+        });
+
+        // Attach navigation functions to window (so buttons work)
+        window.changeFullscreenImage = changeFullscreenImage;
+
+        // Start slideshow when page loads
+        startSlideshow();
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // alows for the image gallery to use the fullscreen-overlay function
+        let galleryImages = document.querySelectorAll(".gallery-img");
+
+        // Add click event to open fullscreen from gallery images
+        galleryImages.forEach((img) => {
+          img.addEventListener("click", () => openFullscreen(img.src));
+        });
+      });
+    </script>
+    <button id="back-to-top">⬆</button>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>ULF's Bilpleie</h3>
+          <p>Hvittingfossveien 129, 3085, Holmestrand</p>
+          <p>+47 404 98 499</p>
+        </div>
+        <div class="footer-section">
+          <h3>Lenker</h3>
+          <ul>
+            <li><a href="index.html">Hjem</a></li>
+            <li><a href="tjenester.html">Tjenester</a></li>
+            <li><a href="om-meg.html">Om Meg</a></li>
+            <li><a href="kontakt.html">Ta Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Følg meg på FaceBook</h3>
+          <ul class="social-icons">
+            <li>
+              <a
+                href="https://www.facebook.com/profile.php?id=100063566292197"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><img src="images/fb.png" alt="Facebook"
+              /></a>
+            </li>
+            <span>Ulf's Bilpleie</span>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ULF's Bilpleie. Alle rettigheter forbeholdt.</p>
+      </div>
+    </footer>
+
+    <!-- Main JavaScript file -->
+    <script src="script.js" defer></script>
+  </body>
+</html>
