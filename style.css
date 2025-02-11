@@ -25,6 +25,18 @@ body {
 .hero-T {
 background: url(images/polering.jpg) no-repeat center center/cover;
 }
+
+.hero-O {
+background: url(images/ulf-armoverbildør.jpg) no-repeat center center/cover;
+}
+
+.hero-K {
+  background: url(images/UlfOgLokalet.png) no-repeat center center/cover;
+}
+
+.hero-F{
+  background: url(images/ulf-vaskerBil2.png) no-repeat center center/cover;
+}
 .hero::after {
   content: '';
   position: absolute;
@@ -51,7 +63,7 @@ background: url(images/polering.jpg) no-repeat center center/cover;
   padding: 10px 20px;
   font-size: 1rem;
   color: white;
-  background-color: #ff0400;
+  background-color: #FF7D29;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -72,7 +84,8 @@ background: url(images/polering.jpg) no-repeat center center/cover;
 /* Navigation */
 /* Navbar Styles */
 .navbar {
-  background: #5127d8;
+font-family: 'Poppins', sans-serif;
+background: #023888;
   opacity: 0.9;
   color: white;
   padding: 0.5rem;
@@ -131,7 +144,7 @@ background: url(images/polering.jpg) no-repeat center center/cover;
 }
 
 .nav-links a.active {
-  color: #ff6600; /* Highlight color */
+  color: #ff0000; /* Highlight color */
   font-weight: bold;
   
 }
@@ -175,7 +188,7 @@ background: url(images/polering.jpg) no-repeat center center/cover;
     position: absolute;
     right: 0;
     top: 60px; /* Adjust based on your header height */
-    background: #5127d8;
+    background: #023888;
     display: none;
     width: 100%;
     flex-direction: column;
@@ -209,11 +222,15 @@ background: url(images/polering.jpg) no-repeat center center/cover;
   padding: 3rem 1rem;
   text-align: center;
   background-color: #f8f9fa;
+  align-items: center;
 }
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
   gap: 1.5rem;
+  gap: 2rem;
+  max-width: 1200px; /* or whatever fits your design */
+  margin: 0 auto; /* center the grid */
 }
 .service-card {
   background: #fff;
@@ -221,18 +238,26 @@ background: url(images/polering.jpg) no-repeat center center/cover;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  
 }
-
 .service-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgb(0, 166, 255);
 }
 .service-card img {
-width: 100%; 
+  width: 100%; 
 height: 200px; 
 object-fit: cover;
 border-radius: 10px;
+
 }
+.service-card h3 {
+  margin-bottom: 1rem;
+  color: #007BFF;
+  align-items: center;
+}
+
 h2 {
 font-size: 2rem; 
 font-weight: bold; 
@@ -242,6 +267,7 @@ letter-spacing: 2px;
 color: #333; 
 margin-bottom: 20px; 
 position: relative; 
+align-items: center;
 }
 
 /* Fancy underline effect */
@@ -250,61 +276,10 @@ content: "";
 display: block;
 width: 80px; /* Adjust width */
 height: 4px; /* Adjust thickness */
-background-color: #007bff; 
+background-color: #D81E05; 
 margin: 10px auto 0; /* Centers the underline */
 border-radius: 2px;
 }
-
-.service-card h3 {
-  margin-bottom: 1rem;
-  color: #007BFF;
-}
-.extra-services-list {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: left;
-}
-.extra-services-list:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgb(0, 166, 255);
-}
-
-.extra-service {
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(0, 123, 255, 0.3);
-}
-
-
-.extra-service:last-child {
-  border-bottom: none;
-}
-
-.extra-service h3 {
-  color: #007BFF;
-  font-size: 1.2rem;
-}
-
-.extra-service p {
-  color: #333;
-  font-size: 1rem;
-  margin: 0.3rem 0;
-}
-
-@media (max-width: 768px) {
-  .extra-services-list {
-    padding: 1rem;
-  }
-}
-
-
-
-
-
 #location {
   padding: 40px 20px;
   background-color: #f9f9f9;
@@ -375,6 +350,7 @@ border-radius: 2px;
 
 /* Footer */
 footer {
+  font-family: 'Poppins', sans-serif;
   text-align: center;
   padding: 1rem;
   background: #333;
@@ -430,7 +406,7 @@ footer {
   bottom: 20px;
   right: 20px;
   display: none;
-  background-color: #d70505;
+  background-color: #D81E05;
   color: white;
   border: none;
   border-radius: 50%;
@@ -538,3 +514,284 @@ footer {
   margin-left:80px; /* Moves the icon to the left */
 }
 
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.about-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 250px;
+  height: 250px;
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.about-text {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.about-text b {
+  display: block;
+  margin: 15px 0 5px;
+}
+
+.about-text li {
+  text-align: left;
+  margin-left: 20px;
+}
+
+/* Felles stil for begge bookAppointment-knapper */
+
+#bookAppointment {
+padding: 10px 20px;
+font-size: 1rem;
+color: white;
+background-color: #D81E05;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+
+#bookAppointment:hover {
+background-color: #D81E05;
+}
+
+
+.about-image {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-bottom: 20px;
+width: 300px;
+height: 300px;
+border: 2px solid #023888;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+background: #fff;
+padding: 3.5rem;
+border-radius: 1.5px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-image img {
+max-width: 120%;
+max-height: 120%;
+object-fit: cover;
+}
+
+.about-image:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 16px rgb(0, 166, 255);
+}
+.about-text {
+font-size: 16px;
+line-height: 1.6;
+margin: 10px 0;
+}
+
+.about-text b {
+display: block;
+margin: 15px 0 5px;
+}
+
+.about-text li {
+text-align: left;
+margin-left: 20px;
+}
+.extra-services-list {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+.extra-services-list:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgb(0, 166, 255);
+}
+
+.extra-service {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 123, 255, 0.3);
+}
+
+
+.extra-service:last-child {
+  border-bottom: none;
+}
+
+.extra-service h3 {
+  color: #007BFF;
+  font-size: 1.2rem;
+}
+
+.extra-service p {
+  color: #333;
+  font-size: 1rem;
+  margin: 0.3rem 0;
+}
+
+@media (max-width: 768px) {
+  .extra-services-list {
+    padding: 1rem;
+  }
+}
+
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;        max-width: 100%; /* Adjust to make it more responsive */
+  margin: auto;
+  overflow: hidden;
+  height: 500px; /* Set a fixed height for the slideshow container */
+}
+
+/* Navigation buttons */
+.prev, .next {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background-color: rgba(0, 0, 0, 0.5);
+color: white;
+border: none;
+padding: 10px;
+cursor: pointer;
+z-index: 1;  /* Ensure buttons are above images */
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+/* Ensure uniform image size */
+.slide img {
+width: 100%;
+height: auto; /* Fixed height for consistency */
+object-fit: cover; /* Crop excess parts to fit */
+cursor: pointer;
+}
+
+
+/* Hide all slides initially */
+.slide {
+position: absolute;
+width: 100%;
+height: 100%;
+opacity: 0;
+transition: opacity 1s ease-in-out; /* Smooth fade transition */
+}
+
+/* Show the active slide */
+.slide.active {
+opacity: 1;
+z-index: 1; /* Ensure the active slide stays on top */
+}
+
+
+/* Ensure images are centered and maintain aspect ratio */
+.slide img {
+width: 100%;
+height: 100%; /* Set height to 100% to take up full container height */
+object-fit: contain; /* This will prevent the images from overflowing */
+display: block; /* Prevents image from showing extra space below it */
+margin: 0 auto; /* Ensures the image stays centered */
+}
+
+
+
+/* Fullscreen overlay */
+.fullscreen-overlay {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.9);
+justify-content: center;
+align-items: center;
+flex-direction: row;
+z-index: 9999; /* Ensure it's the top-most element */
+}
+
+/* Fullscreen image */
+.fullscreen-overlay img {
+max-width: 90%;
+max-height: 90%;
+}
+
+/* Navigation buttons */
+.fullscreen-prev, .fullscreen-next {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background-color: rgba(0, 0, 0, 0.5);
+color: white;
+border: none;
+padding: 10px 20px;
+font-size: 24px;
+cursor: pointer;
+}
+
+.fullscreen-prev { left: 20px; }
+.fullscreen-next { right: 20px; }
+
+.fullscreen-prev:hover, .fullscreen-next:hover {
+background-color: rgba(0, 0, 0, 0.8);
+}
+/* Gallery Section */
+.gallery-container {
+  text-align: center;
+  margin: 50px auto;
+  max-width: 900px;
+  }
+  
+  .gallery-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  }
+  
+  .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust grid for responsiveness */
+  gap: 10px;
+  justify-content: center;
+  padding: 0 10px;
+  }
+  
+  .gallery-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover; /* Ensures images fill the space */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  }
+  
+  .gallery-img:hover {
+  transform: scale(1.05);
+  }
