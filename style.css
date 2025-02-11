@@ -222,11 +222,13 @@ background: #023888;
   padding: 3rem 1rem;
   text-align: center;
   background-color: #f8f9fa;
+  align-items: center;
 }
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
+  
 }
 .service-card {
   background: #fff;
@@ -234,6 +236,7 @@ background: #023888;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
 }
 .service-card:hover {
   transform: translateY(-5px);
@@ -244,10 +247,12 @@ background: #023888;
 height: 200px; 
 object-fit: cover;
 border-radius: 10px;
+
 }
 .service-card h3 {
   margin-bottom: 1rem;
   color: #007BFF;
+  align-items: center;
 }
 
 h2 {
@@ -259,6 +264,7 @@ letter-spacing: 2px;
 color: #333; 
 margin-bottom: 20px; 
 position: relative; 
+align-items: center;
 }
 
 /* Fancy underline effect */
