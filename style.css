@@ -228,6 +228,7 @@ background: #023888;
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
   gap: 1.5rem;
+  gap: 2rem;
   max-width: 1200px; /* or whatever fits your design */
   margin: 0 auto; /* center the grid */
 }
