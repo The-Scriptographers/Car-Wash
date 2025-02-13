@@ -469,18 +469,23 @@ footer {
 }
 
 
+/*
+
+Start of Fotogalleri functions
+
+*/
 
 /* Slideshow container */
 .slideshow-container {
     position: relative;        max-width: 100%; /* Adjust to make it more responsive */
     margin: auto;
     overflow: hidden;
-    height: 500px; /* Set a fixed height for the slideshow container */
+    height: 800px; /* Set a fixed height for the slideshow container */
   }
 
   /* Navigation buttons */
   .prev, .next {
-  position: absolute;
+  position: absolute; /* Enures buttons have fixed position */
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
@@ -554,9 +559,10 @@ z-index: 9999; /* Ensure it's the top-most element */
 .fullscreen-overlay img {
 max-width: 90%;
 max-height: 90%;
+border-radius: 15px; /* smoothens out the edges of the fullscreen overlay */
 }
 
-/* Navigation buttons */
+/* Navigation buttons for fullscreen */
 .fullscreen-prev, .fullscreen-next {
 position: absolute;
 top: 50%;
@@ -608,3 +614,9 @@ transition: transform 0.3s ease;
 .gallery-img:hover {
 transform: scale(1.05);
 }
+
+/*
+
+End of Fotogalleri
+
+*/
