@@ -99,7 +99,7 @@ backToTop.addEventListener("click", () => {
 });
 
 // Animate sections when they come into view
-const sections = document.querySelectorAll(".section");
+const sections = document.querySelectorAll(".section", ".section-about");
 
 function animateOnScroll() {
     const triggerBottom = window.innerHeight * 0.8;
