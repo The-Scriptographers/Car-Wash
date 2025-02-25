@@ -276,7 +276,7 @@ content: "";
 display: block;
 width: 80px; /* Adjust width */
 height: 4px; /* Adjust thickness */
-background-color: #D81E05; 
+background-color: #0762eb; 
 margin: 10px auto 0; /* Centers the underline */
 border-radius: 2px;
 }
