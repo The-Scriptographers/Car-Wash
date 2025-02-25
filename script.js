@@ -116,22 +116,22 @@ function animateOnScroll() {
 document.addEventListener('DOMContentLoaded', function() {
     var bookAppointmentButton = document.getElementById('bookAppointment');
   
-    // Function to show the popup
-    function showPopup() {
+    // Function to open phone app with the number
+    function initiateCall() {
       // Phone number for appointment booking
-      var phoneNumber = '+47 404 98 499';
+      var phoneNumber = '+4740498499';
       
-      // Create a simple alert with the phone number
-      alert('Ring for å bestille en avtale: ' + phoneNumber);
+      // Navigate to tel: URL which will open the phone app
+      window.location.href = 'tel:' + phoneNumber;
     }
   
     // Add click event listener to the button
     bookAppointmentButton.addEventListener('click', function(e) {
       // Prevent the default action of the button if it's set to submit or similar
       e.preventDefault();
-      showPopup();
+      initiateCall();
     });
-  });
+});
 // This script makes all elements with the class 'service-card' clickable, redirecting to 'tjenester.html' upon click, and changes the cursor to indicate interactivity.
 document.addEventListener('DOMContentLoaded', function() {
     var serviceCards = document.querySelectorAll('.service-card');
