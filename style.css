@@ -224,19 +224,6 @@ background: #023888;
   background-color: #f8f9fa;
   align-items: center;
 }
-
-.section-about {
-  padding: 3rem 1rem;
-  text-align: center;
-  background-color: #f8f9fa;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin: 0 auto;
-  max-width: 600px;
-}
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
@@ -525,6 +512,32 @@ footer {
   width: 30px;
   height: 30px;
   margin-left:80px; /* Moves the icon to the left */
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.about-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 250px;
+  height: 250px;
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.about-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
 }
 
 .about-text {
