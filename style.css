@@ -1,3 +1,156 @@
+/* Design System Variables */
+:root {
+  /* Colors */
+  --accent-color: #D81E05;
+  --hover-color: rgb(0, 166, 255);
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+
+
+    /* Primary Brand Colors 
+    /*--primary-color: #023888;
+    /*--primary-light: #1955A7;
+    /*--primary-dark: #012D6B;
+    
+    /* Secondary Colors 
+    /*--secondary-color: #FF7D29; /* Current accent orange */
+    /*--secondary-light: #FFA066;
+    /*--secondary-dark: #E56314;
+    
+    /* Tertiary/Background Colors */
+    /*--tertiary-color: #F2F5F9; /* Light blue-gray */
+    /*--tertiary-alt: #E6E1DD;   /* Warm gray alternative */
+    
+    /* Functional Colors */
+    /*--success-color: #28A745;
+    /*--warning-color: #FFC107;
+    /*--error-color: #DC3545;
+    /*--info-color: #4A90E2;
+    
+    /* Neutral Colors 
+    /*--text-dark: #333333;
+    /*--text-medium: #666666;
+    /*--text-light: #999999;
+    /*--border-color: #DDDDDD;
+
+
+  
+  /* Typography */
+  --heading-font: 'Poppins', sans-serif;
+  --body-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  /* Spacing */
+  --section-padding: 3rem 1rem;
+  --card-padding: 1.5rem;
+  
+  /* Effects */
+  --standard-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+  --hover-shadow: 0 8px 16px rgb(0, 166, 255);
+  --transition-speed: 0.3s ease;
+}
+
+/* 1. Base & Desktop Styles (applied to all devices, with desktop as default) */
+body, h1, h2, h3, p, ul, li, input, textarea, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Your existing desktop styles go here */
+
+/* 2. Tablet Styles (applied when screen width is 992px or less) */
+@media screen and (max-width: 992px) {
+  /* Header adjustments */
+  .hero-content h1 {
+    font-size: 3rem; /* Smaller headline */
+  }
+  
+  /* Services grid adjustment */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns instead of 3 */
+    gap: 1rem;
+  }
+  
+  /* Footer adjustments */
+  .footer-content {
+    padding: 0 20px;
+  }
+  
+  /* Gallery adjustments */
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}
+
+/* 3. Mobile Styles (applied when screen width is 768px or less) */
+@media screen and (max-width: 768px) {
+  /* Header adjustments */
+  .hero-content h1 {
+    font-size: 2rem; /* Even smaller headline */
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+  
+  /* Nav adjustments - move your existing nav mobile styles here */
+  .nav-links {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background: #023888;
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  .nav-links li {
+    margin: 10px 0;
+  }
+  
+  .nav-toggle:checked ~ .nav-links {
+    display: flex;
+  }
+  
+  .nav-toggle-label {
+    display: block;
+  }
+  
+  /* Service grid adjustment */
+  .services-grid {
+    grid-template-columns: 1fr; /* Single column */
+    gap: 1rem;
+  }
+  
+  /* Location adjustments */
+  .location-info {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .map-container iframe {
+    width: 100%;
+    height: 300px;
+  }
+  
+  /* Footer adjustments */
+  .footer-section {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+  
+  .social-icons img {
+    margin-left: 0;
+  }
+}
+
+
+
+
 /* Reset and Base Styles */
 body, h1, h2, h3, p, ul, li, input, textarea, button {
   margin: 0;
@@ -276,7 +429,7 @@ content: "";
 display: block;
 width: 80px; /* Adjust width */
 height: 4px; /* Adjust thickness */
-background-color: #0762eb; 
+background-color: #D81E05; 
 margin: 10px auto 0; /* Centers the underline */
 border-radius: 2px;
 }
