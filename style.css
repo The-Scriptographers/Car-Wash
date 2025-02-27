@@ -501,15 +501,17 @@ border-radius: 2px;
     display: flex; /* Switch to flexbox for horizontal scrolling */
     overflow-x: auto; /* Enable horizontal scrolling */
     grid-template-columns: none; /* Remove grid columns */
-    padding: 0 1rem; /* Add side padding for better spacing */
+    padding: 0 2rem; /* Add side padding for better spacing */
     scroll-snap-type: x mandatory; /* Snap to each card */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding-bottom: 2rem; 
   }
 
   .service-card {
     flex: 0 0 85%; /* Card takes 85% of viewport width on mobile */
     scroll-snap-align: center; /* Center each card when scrolling */
     margin-right: 1rem; /* Space between cards */
+    
   }
 
   /* Optional: Hide scrollbar for better aesthetics */
