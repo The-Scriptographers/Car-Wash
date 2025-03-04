@@ -2,18 +2,42 @@
 document.addEventListener('DOMContentLoaded', function() {
     const p = document.querySelector('.hero-content p');
 
+    // Existing logo animation code
+    const logo = document.getElementById('logo');
+    const text = logo.textContent;
+    logo.innerHTML = ''; 
 
-//logo
-const logo = document.getElementById('logo');
-const text = logo.textContent;
-logo.innerHTML = ''; // Clear the text
+    text.split('').forEach((letter, index) => {
+        const span = document.createElement('span');
+        span.textContent = letter;
+        span.style.animationDelay = `${index * 0.1}s`;
+        logo.appendChild(span);
+    });
 
-text.split('').forEach((letter, index) => {
-    const span = document.createElement('span');
-    span.textContent = letter;
-    span.style.animationDelay = `${index * 0.1}s`; // Staggered delay for each letter
-    logo.appendChild(span);
-});
+    // Centralized Booking Configuration
+    const BOOKING_CONFIG = {
+        phoneNumber: '+4740498499',
+        buttonSelector: '.book-appointment-btn'
+    };
+
+    // Booking Function
+    function setupBookingButtons() {
+        // Find all elements with the book-appointment-btn class
+        const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
+        
+        bookingButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Prevent default button behavior
+                e.preventDefault();
+                
+                // Initiate phone call
+                window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+            });
+        });
+    }
+
+    // Call the booking setup function
+    setupBookingButtons();
 
     // Array of quotes to cycle through
     const quotes = [
@@ -112,26 +136,7 @@ function animateOnScroll() {
         }
     });
 }
-//btn
-document.addEventListener('DOMContentLoaded', function() {
-    var bookAppointmentButton = document.getElementById('bookAppointment');
-  
-    // Function to open phone app with the number
-    function initiateCall() {
-      // Phone number for appointment booking
-      var phoneNumber = '+4740498499';
-      
-      // Navigate to tel: URL which will open the phone app
-      window.location.href = 'tel:' + phoneNumber;
-    }
-  
-    // Add click event listener to the button
-    bookAppointmentButton.addEventListener('click', function(e) {
-      // Prevent the default action of the button if it's set to submit or similar
-      e.preventDefault();
-      initiateCall();
-    });
-});
+
 // This script makes all elements with the class 'service-card' clickable, redirecting to 'tjenester.html' upon click, and changes the cursor to indicate interactivity.
 document.addEventListener('DOMContentLoaded', function() {
     var serviceCards = document.querySelectorAll('.service-card');
