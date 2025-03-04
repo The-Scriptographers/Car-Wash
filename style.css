@@ -740,19 +740,19 @@ footer {
 
 /* Felles stil for begge bookAppointment-knapper */
 
-#bookAppointment {
-padding: 10px 20px;
-font-size: 1rem;
-color: white;
-background-color: #D81E05;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: background 0.3s ease;
+.book-appointment-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #D81E05;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-#bookAppointment:hover {
-background-color: #D81E05;
+.book-appointment-btn:hover {
+  background-color: #792121;
 }
 
 
