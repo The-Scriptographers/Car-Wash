@@ -1,6 +1,7 @@
 /* Design System Variables */
 :root {
   /* Colors */
+  --primary-color: #023888;
   --accent-color: #D81E05;
   --hover-color: rgb(0, 166, 255);
   --text-color: #333;
