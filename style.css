@@ -62,7 +62,7 @@ body {
   line-height: 1.6;
   background-color: var(--light-bg);;
 }
-
+/* Layout Components */
 /* Header Section */
 .hero {
   background: url(images/header1.jpg) no-repeat center center/cover;
@@ -107,20 +107,6 @@ background: url(images/ulf-armoverbildør.jpg) no-repeat center center/cover;
   margin-bottom: 1.5rem;
   opacity: 0; /* Start with opacity 0 for fade effect */
   transition: opacity 1s ease-in-out; /* Smooth transition for fade effect */
-}
-.book-appointment-btn {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: var(--light-bg);
-  background-color: var(--accent-color);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.book-appointment-btn:hover {
-  background-color: #792121;
 }
 
 /* Navigation */
@@ -180,26 +166,7 @@ background: var(--primary-color);;
   font-weight: bold;
   
 }
-#back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: none;
-  background-color: var(--accent-color);;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
 
-#back-to-top:hover {
-  background-color: #792121;
-}
 
 #services h2 {
   color: #000000; /* Dark text for light backgrounds */
@@ -213,38 +180,7 @@ background: var(--primary-color);;
   background-color: var(--light-bg);;
   align-items: center;
 }
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1200px; /* or whatever fits your design */
-  margin: 0 auto; /* center the grid */
-}
-.service-card {
-  background: #fff;
-  padding: 1.var(--card-padding);
-  border-radius: 10px;
-  box-shadow: var(--standard-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-  
-}
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px var(--hover-color);;
-}
-.service-card img {
-  width: 100%; 
-height: 200px; 
-object-fit: cover;
-border-radius: 10px;
 
-}
-.service-card h3 {
-  margin-bottom: 1rem;
-  color: #007BFF;
-  align-items: center;
-}
 
 h2 {
 font-size: 2rem; 
@@ -334,59 +270,6 @@ footer {
   margin-top: 2rem;
 }
 
-.testimonials-grid {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.testimonial-card {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
-  text-align: center;
-}
-
-.testimonial-card p {
-  font-style: italic;
-  margin-bottom: 10px;
-  color: var(--text-color);;
-}
-
-.testimonial-card h4 {
-  font-weight: bold;
-  color: #007BFF;
-}
-
-.testimonial-card {
-  display: none; /* Hide all by default */
-}
-
-.testimonial-card:first-child {
-  display: block; /* Show the first one initially */
-}
-
-.profile-pic {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.section {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .footer {
   background-color: var(--text-color);
   color: #fff;
@@ -431,6 +314,147 @@ footer {
   color: #fff;
 }
 
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  margin-top: 20px;
+}
+
+
+/* Sections */
+
+.section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/*Components
+cards, buttons and testimonials*/
+
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  background-color: var(--accent-color);;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+#back-to-top:hover {
+  background-color: #792121;
+}
+
+.book-appointment-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: var(--light-bg);
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.book-appointment-btn:hover {
+  background-color: #792121;
+}
+.testimonials-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.testimonial-card {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  text-align: center;
+}
+
+.testimonial-card p {
+  font-style: italic;
+  margin-bottom: 10px;
+  color: var(--text-color);;
+}
+
+.testimonial-card h4 {
+  font-weight: bold;
+  color: #007BFF;
+}
+
+.testimonial-card {
+  display: none; /* Hide all by default */
+}
+
+.testimonial-card:first-child {
+  display: block; /* Show the first one initially */
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px; /* or whatever fits your design */
+  margin: 0 auto; /* center the grid */
+}
+
+.service-card {
+  background: #fff;
+  padding: var(--card-padding);
+  border-radius: 10px;
+  box-shadow: var(--standard-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px var(--hover-color);;
+}
+
+.service-card img {
+  width: 100%; 
+height: 200px; 
+object-fit: cover;
+border-radius: 10px;
+}
+
+.service-card h3 {
+  margin-bottom: 1rem;
+  color: #007BFF;
+  align-items: center;
+}
+
+/* Utilities
+Animations, effects */
+
+.profile-pic {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
 .social-icons {
   display: flex;
 }
@@ -442,13 +466,6 @@ footer {
 .social-icons img {
   width: 30px;
   height: 30px;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 20px;
-  border-top: 1px solid #444;
-  margin-top: 20px;
 }
 
 .social-icons a {
@@ -546,6 +563,7 @@ margin: 15px 0 5px;
 text-align: left;
 margin-left: 20px;
 }
+
 .extra-services-list {
   background: #fff;
   padding: var(--card-padding);
@@ -556,6 +574,7 @@ margin-left: 20px;
   margin: 0 auto;
   text-align: left;
 }
+
 .extra-services-list:hover {
   transform: translateY(-5px);
   box-shadow: var(--hover-shadow);
@@ -565,7 +584,6 @@ margin-left: 20px;
   padding: 1rem 0;
   border-bottom: 1px solid rgba(0, 123, 255, 0.3);
 }
-
 
 .extra-service:last-child {
   border-bottom: none;
@@ -581,7 +599,6 @@ margin-left: 20px;
   font-size: 1rem;
   margin: 0.3rem 0;
 }
-
 
 /* Slideshow container */
 .slideshow-container {
@@ -718,7 +735,14 @@ background-color: rgba(0, 0, 0, 0.8);
   .gallery-img:hover {
   transform: scale(1.05);
 }
-/* Your existing desktop styles go here */
+
+.nav-toggle-label {
+  display: none; /* Hide by default on desktop */
+}
+
+.nav-toggle {
+  display: none; /* Always hide the checkbox */
+}
 
 /* 2. Tablet Styles (applied when screen width is 992px or less) */
 @media screen and (max-width: 992px) {
@@ -812,14 +836,6 @@ background-color: rgba(0, 0, 0, 0.8);
   .extra-services-list {
     padding: 1rem;
   }  
-  .nav-toggle {
-    display: none;
-  }
-
-  .nav-toggle-label {
-    display: none;
-    cursor: pointer;
-  }
 
   .nav-toggle-label span,
   .nav-toggle-label span::before,
