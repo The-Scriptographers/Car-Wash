@@ -227,3 +227,20 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 });
+
+// Remove .html from URL in browser address bar
+if (window.location.pathname.endsWith('.html')) {
+    const cleanPath = window.location.pathname.replace('.html', '');
+    window.history.replaceState({}, document.title, cleanPath);
+  }
+  
+  // Handle navigation clicks to append .html
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      // Only append .html if it’s not already there and not an external link
+      const newHref = href.endsWith('.html') || href.startsWith('http') ? href : href + '.html';
+      window.location.href = newHref;
+    });
+  });
