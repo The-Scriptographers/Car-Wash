@@ -14,7 +14,7 @@
     /*--primary-dark: #012D6B;
     
     /* Secondary Colors 
-    /*--secondary-color: #FF7D29; /* Current accent orange */
+    /*--secondary-color: #FF7D29;
     /*--secondary-light: #FFA066;
     /*--secondary-dark: #E56314;
     
@@ -29,7 +29,7 @@
     /*--info-color: #4A90E2;
     
     /* Neutral Colors 
-    /*--text-dark: #333333;
+    /*--text-dark: #333;
     /*--text-medium: #666666;
     /*--text-light: #999999;
     /*--border-color: #DDDDDD;
@@ -46,7 +46,7 @@
   
   /* Effects */
   --standard-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
-  --hover-shadow: 0 8px 16px rgb(0, 166, 255);
+  --hover-shadow: 0 8px 16px var(--hover-color);
   --transition-speed: 0.3s ease;
 }
 
@@ -56,144 +56,36 @@ body, h1, h2, h3, p, ul, li, input, textarea, button {
   padding: 0;
   box-sizing: border-box;
 }
-/* Your existing desktop styles go here */
-
-/* 2. Tablet Styles (applied when screen width is 992px or less) */
-@media screen and (max-width: 992px) {
-  /* Header adjustments */
-  .hero-content h1 {
-    font-size: 3rem; /* Smaller headline */
-  }
-  
-  /* Services grid adjustment */
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns instead of 3 */
-    gap: 1rem;
-  }
-  
-  /* Footer adjustments */
-  .footer-content {
-    padding: 0 20px;
-  }
-  
-  /* Gallery adjustments */
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
-}
-
-/* 3. Mobile Styles (applied when screen width is 768px or less) */
-@media screen and (max-width: 768px) {
-  /* Header adjustments */
-  .hero-content h1 {
-    font-size: 2rem; /* Even smaller headline */
-  }
-  .hero-content p {
-    font-size: 1rem;
-  }
-  
-  /* Nav adjustments - move your existing nav mobile styles here */
-  .nav-links {
-    position: absolute;
-    right: 0;
-    top: 60px;
-    background: #023888;
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-  }
-  
-  .nav-links li {
-    margin: 10px 0;
-  }
-  
-  .nav-toggle:checked ~ .nav-links {
-    display: flex;
-  }
-  
-  .nav-toggle-label {
-    display: block;
-  }
-  
-  /* Service grid adjustment */
-  .services-grid {
-    grid-template-columns: 1fr; /* Single column */
-    gap: 1rem;
-  }
-  
-  /* Location adjustments */
-  .location-info {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .map-container iframe {
-    width: 100%;
-    height: 300px;
-  }
-  
-  /* Footer adjustments */
-  .footer-section {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .social-icons {
-    justify-content: center;
-  }
-  
-  .social-icons img {
-    margin-left: 0;
-  }
-}
-
-
-
-
-/* Reset and Base Styles */
-body, h1, h2, h3, p, ul, li, input, textarea, button {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
+  font-family: var(--body-font);
+  color: var(--text-color);;
   line-height: 1.6;
-  background-color: #f8f9fa;
+  background-color: var(--light-bg);;
 }
 
 /* Header Section */
 .hero {
   background: url(images/header1.jpg) no-repeat center center/cover;
   height: 90vh;
-  min-height: 300px; /* Ensures it doesn't get too small */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: var(--light-bg);
   position: relative;
 }
-
 .hero-T {
-  background: url(images/polering.jpg) no-repeat center center/cover;
+background: url(images/polering.jpg) no-repeat center center/cover;
 }
-
 .hero-O {
-  background: url(images/ulf-armoverbildør.jpg) no-repeat center center/cover;
+background: url(images/ulf-armoverbildør.jpg) no-repeat center center/cover;
 }
-
 .hero-K {
   background: url(images/UlfOgLokalet.png) no-repeat center center/cover;
 }
-
-.hero-F {
+.hero-F{
   background: url(images/ulf-vaskerBil2.png) no-repeat center center/cover;
 }
-
 .hero::after {
   content: '';
   position: absolute;
@@ -203,75 +95,39 @@ body {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
-
 .hero-content {
   z-index: 1;
-  padding: 20px; /* Added padding for smaller screens */
-  width: 100%;
-  max-width: 1200px; /* Prevents content from stretching too wide */
 }
-
 .hero-content h1 {
-  font-size: clamp(2rem, 8vw, 4rem); /* Scales between 2rem and 4rem */
+  font-size: 4rem;
   margin-bottom: 0.5rem;
 }
-
 .hero-content p {
-  font-size: clamp(1rem, 4vw, 1.5rem); /* Scales between 1rem and 1.5rem */
+  font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+  opacity: 0; /* Start with opacity 0 for fade effect */
+  transition: opacity 1s ease-in-out; /* Smooth transition for fade effect */
 }
-
-.hero-content button {
-  padding: clamp(8px, 2vw, 10px) clamp(16px, 4vw, 20px); /* Scales padding */
-  font-size: clamp(0.875rem, 3vw, 1rem); /* Scales font-size */
-  color: white;
-  background-color: #FF7D29;
+.book-appointment-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: var(--light-bg);
+  background-color: var(--accent-color);
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.hero-content button:hover {
-  background-color: #b34b00;
+.book-appointment-btn:hover {
+  background-color: #792121;
 }
-
-/* Fade in and out for p */
-@keyframes fadeInOut {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
-}
-
-/* Media Queries for fine-tuning */
-@media screen and (max-width: 768px) {
-  .hero {
-    height: 70vh; /* Reduced height for tablets */
-  }
-  
-  .hero-content {
-    padding: 15px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .hero {
-    height: 60vh; /* Reduced height for phones */
-  }
-  
-  .hero-content {
-    padding: 10px;
-  }
-}
-
-
 
 /* Navigation */
 /* Navbar Styles */
 .navbar {
-font-family: 'Poppins', sans-serif;
-background: #023888;
+font-family: var(--heading-font);
+background: var(--primary-color);;
   opacity: 0.9;
   color: white;
   padding: 0.5rem;
@@ -279,15 +135,11 @@ background: #023888;
   top: 0;
   z-index: 1000;
 }
-
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
-
-
 .logo {
   color: white;
   font-family: 'Arial', sans-serif;
@@ -296,12 +148,10 @@ background: #023888;
   padding: 0.5rem;
   display: inline-block;
 }
-
 .logo span {
   opacity: 0;
   animation: fadeInOut 4s infinite; /* Adjust duration as needed */
 }
-
 @keyframes fadeInOut {
   0%, 100% {
       opacity: 0;
@@ -314,90 +164,43 @@ background: #023888;
   list-style: none;
   display: flex;
 }
-
 .nav-links li {
   margin: 0 15px;
 }
-
 .nav-links a {
   color: white;
   text-decoration: none;
   transition: color 0.3s;
 }
-
 .nav-links a:hover {
   color: #007BFF;
 }
-
 .nav-links a.active {
-  color: #ff0000; /* Highlight color */
+  color: var(--accent-color); /* Highlight color */
   font-weight: bold;
   
 }
-
-/* Mobile Styles */
-.nav-toggle {
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   display: none;
-}
-
-.nav-toggle-label {
-  display: none;
+  background-color: var(--accent-color);;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
   cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  display: block;
-  background: white;
-  height: 2px;
-  width: 24px;
-  position: relative;
+#back-to-top:hover {
+  background-color: #792121;
 }
 
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  content: '';
-  position: absolute;
-}
-
-.nav-toggle-label span::before {
-  top: -8px;
-}
-
-.nav-toggle-label span::after {
-  bottom: -8px;
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    position: absolute;
-    right: 0;
-    top: 60px; /* Adjust based on your header height */
-    background: #023888;
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-  }
-
-  .nav-toggle {
-    display: none;
-  }
-
-  .nav-toggle:checked ~ .nav-links {
-    display: flex;
-  }
-
-  .nav-toggle-label {
-    display: block;
-  }
-}
 #services h2 {
   color: #000000; /* Dark text for light backgrounds */
   padding: 1.5rem; /* Padding around the text */
@@ -405,32 +208,30 @@ background: #023888;
 }
 /* Sections */
 .section {
-  padding: 3rem 1rem;
+  padding: var(--section-padding);
   text-align: center;
-  background-color: #f8f9fa;
+  background-color: var(--light-bg);;
   align-items: center;
 }
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
-  gap: 1.5rem;
   gap: 2rem;
   max-width: 1200px; /* or whatever fits your design */
   margin: 0 auto; /* center the grid */
 }
 .service-card {
   background: #fff;
-  padding: 1.5rem;
+  padding: 1.var(--card-padding);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+  box-shadow: var(--standard-shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
-  min-width: 300px;
   
 }
 .service-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgb(0, 166, 255);
+  box-shadow: 0 8px 16px var(--hover-color);;
 }
 .service-card img {
   width: 100%; 
@@ -451,7 +252,7 @@ font-weight: bold;
 text-align: center; 
 text-transform: uppercase; 
 letter-spacing: 2px; 
-color: #333; 
+color: var(--text-color);; 
 margin-bottom: 20px; 
 position: relative; 
 align-items: center;
@@ -463,7 +264,7 @@ content: "";
 display: block;
 width: 80px; /* Adjust width */
 height: 4px; /* Adjust thickness */
-background-color: #D81E05; 
+background-color: var(--accent-color);; 
 margin: 10px auto 0; /* Centers the underline */
 border-radius: 2px;
 }
@@ -513,49 +314,9 @@ border-radius: 2px;
 
 .contact-info strong {
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .location-info {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .map-container iframe {
-    width: 100%;
-    height: 300px;
-  }
-}
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-  .services-grid {
-    display: flex; /* Switch to flexbox for horizontal scrolling */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    grid-template-columns: none; /* Remove grid columns */
-    padding: 0 2rem; /* Add side padding for better spacing */
-    scroll-snap-type: x mandatory; /* Snap to each card */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    padding-bottom: 2rem; 
-  }
-
-  .service-card {
-    flex: 0 0 85%; /* Card takes 85% of viewport width on mobile */
-    scroll-snap-align: center; /* Center each card when scrolling */
-    margin-right: 1rem; /* Space between cards */
-    
-  }
-
-  /* Optional: Hide scrollbar for better aesthetics */
-  .services-grid::-webkit-scrollbar {
-    display: none; /* Hide scrollbar on Webkit browsers */
-  }
-  .services-grid {
-    -ms-overflow-style: none; /* Hide scrollbar on IE/Edge */
-    scrollbar-width: none; /* Hide scrollbar on Firefox */
-  }
-}
 
 /* Hover effect on the map */
 .map-container iframe:hover {
@@ -565,11 +326,11 @@ border-radius: 2px;
 
 /* Footer */
 footer {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--heading-font);
   text-align: center;
   padding: 1rem;
-  background: #333;
-  color: white;
+  background: var(--text-color);;
+  color: var(--light-bg);
   margin-top: 2rem;
 }
 
@@ -592,7 +353,7 @@ footer {
 .testimonial-card p {
   font-style: italic;
   margin-bottom: 10px;
-  color: #333;
+  color: var(--text-color);;
 }
 
 .testimonial-card h4 {
@@ -608,33 +369,11 @@ footer {
   display: block; /* Show the first one initially */
 }
 
-
 .profile-pic {
   width: 90px;
   height: 90px;
   border-radius: 50%;
   margin-bottom: 10px;
-}
-
-#back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: none;
-  background-color: #D81E05;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-#back-to-top:hover {
-  background-color: #792121;
 }
 
 .section {
@@ -649,7 +388,7 @@ footer {
 }
 
 .footer {
-  background-color: #333;
+  background-color: var(--text-color);
   color: #fff;
   padding: 30px 0;
   margin-top: 60px;
@@ -712,11 +451,6 @@ footer {
   margin-top: 20px;
 }
 
-@media (max-width: 768px) {
-  .footer-section {
-    width: 100%;
-  }
-}
 .social-icons a {
   width: 30px;
   height: 30px;
@@ -729,7 +463,7 @@ footer {
   margin-left:80px; /* Moves the icon to the left */
 }
 
-.section-about {
+.about-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -771,24 +505,6 @@ footer {
   margin-left: 20px;
 }
 
-/* Felles stil for begge bookAppointment-knapper */
-
-.book-appointment-btn {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: white;
-  background-color: #D81E05;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.book-appointment-btn:hover {
-  background-color: #792121;
-}
-
-
 .about-image {
 display: flex;
 justify-content: center;
@@ -796,12 +512,12 @@ align-items: center;
 margin-bottom: 20px;
 width: 300px;
 height: 300px;
-border: 2px solid #023888;
+border: 2px solid var(--primary-color);
 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 background: #fff;
 padding: 3.5rem;
 border-radius: 1.5px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+box-shadow: var(--standard-shadow);
 transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -813,7 +529,7 @@ object-fit: cover;
 
 .about-image:hover {
 transform: translateY(-5px);
-box-shadow: 0 8px 16px rgb(0, 166, 255);
+box-shadow: var(--hover-shadow);
 }
 .about-text {
 font-size: 16px;
@@ -832,9 +548,9 @@ margin-left: 20px;
 }
 .extra-services-list {
   background: #fff;
-  padding: 1.5rem;
+  padding: var(--card-padding);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
+  box-shadow: var(--standard-shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-width: 800px;
   margin: 0 auto;
@@ -842,7 +558,7 @@ margin-left: 20px;
 }
 .extra-services-list:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgb(0, 166, 255);
+  box-shadow: var(--hover-shadow);
 }
 
 .extra-service {
@@ -861,40 +577,27 @@ margin-left: 20px;
 }
 
 .extra-service p {
-  color: #333;
+  color: var(--text-color);
   font-size: 1rem;
   margin: 0.3rem 0;
 }
 
-@media (max-width: 768px) {
-  .extra-services-list {
-    padding: 1rem;
-  }
-}
-
-
-
-/*
-
-Start of Fotogalleri functions
-
-*/
 
 /* Slideshow container */
 .slideshow-container {
   position: relative;        max-width: 100%; /* Adjust to make it more responsive */
   margin: auto;
   overflow: hidden;
-  height: 800px; /* Set a fixed height for the slideshow container */
+  height: 500px; /* Set a fixed height for the slideshow container */
 }
 
 /* Navigation buttons */
 .prev, .next {
-position: absolute; /* Enures buttons have fixed position */
+position: absolute;
 top: 50%;
 transform: translateY(-50%);
 background-color: rgba(0, 0, 0, 0.5);
-color: white;
+color: var(--light-bg);
 border: none;
 padding: 10px;
 cursor: pointer;
@@ -943,8 +646,6 @@ display: block; /* Prevents image from showing extra space below it */
 margin: 0 auto; /* Ensures the image stays centered */
 }
 
-
-
 /* Fullscreen overlay */
 .fullscreen-overlay {
 display: none;
@@ -964,10 +665,9 @@ z-index: 9999; /* Ensure it's the top-most element */
 .fullscreen-overlay img {
 max-width: 90%;
 max-height: 90%;
-border-radius: 15px; /* smoothens out the edges of the fullscreen overlay */
 }
 
-/* Navigation buttons for fullscreen */
+/* Navigation buttons */
 .fullscreen-prev, .fullscreen-next {
 position: absolute;
 top: 50%;
@@ -986,42 +686,162 @@ cursor: pointer;
 .fullscreen-prev:hover, .fullscreen-next:hover {
 background-color: rgba(0, 0, 0, 0.8);
 }
-
 /* Gallery Section */
 .gallery-container {
-text-align: center;
-margin: 50px auto;
-max-width: 900px;
+  text-align: center;
+  margin: 50px auto;
+  max-width: 900px;
+  }
+  
+  .gallery-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  }
+  
+  .gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust grid for responsiveness */
+  gap: 10px;
+  justify-content: center;
+  padding: 0 10px;
+  }
+  
+  .gallery-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover; /* Ensures images fill the space */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  }
+  
+  .gallery-img:hover {
+  transform: scale(1.05);
+}
+/* Your existing desktop styles go here */
+
+/* 2. Tablet Styles (applied when screen width is 992px or less) */
+@media screen and (max-width: 992px) {
+  /* Header adjustments */
+  .hero-content h1 {
+    font-size: 3rem; /* Smaller headline */
+  }
+  
+  /* Services grid adjustment */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns instead of 3 */
+    gap: 1rem;
+  }
+  
+  /* Footer adjustments */
+  .footer-content {
+    padding: 0 20px;
+  }
+  
+  /* Gallery adjustments */
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
 }
 
-.gallery-container h2 {
-font-size: 24px;
-margin-bottom: 20px;
+/* 3. Mobile Styles (applied when screen width is 768px or less) */
+@media screen and (max-width: 768px) {
+  /* Header adjustments */
+  .hero-content h1 {
+    font-size: 2rem; /* Even smaller headline */
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+  
+  /* Nav adjustments - move your existing nav mobile styles here */
+  .nav-links {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    background: var(--primary-color);;
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  .nav-links li {
+    margin: 10px 0;
+  }
+  
+  .nav-toggle:checked ~ .nav-links {
+    display: flex;
+  }
+  
+  .nav-toggle-label {
+    display: block;
+  }
+  
+  /* Service grid adjustment */
+  .services-grid {
+    grid-template-columns: 1fr; /* Single column */
+    gap: 1rem;
+  }
+  
+  /* Location adjustments */
+  .location-info {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .map-container iframe {
+    width: 100%;
+    height: 300px;
+  }
+  
+  /* Footer adjustments */
+  .footer-section {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+  
+  .social-icons img {
+    margin-left: 0;
+  }
+  .extra-services-list {
+    padding: 1rem;
+  }  
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-toggle-label {
+    display: none;
+    cursor: pointer;
+  }
+
+  .nav-toggle-label span,
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    display: block;
+    background: white;
+    height: 2px;
+    width: 24px;
+    position: relative;
+  }
+
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+  }
+
+  .nav-toggle-label span::before {
+    top: -8px;
+  }
+
+  .nav-toggle-label span::after {
+    bottom: -8px;
+  }
 }
-
-.gallery-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust grid for responsiveness */
-gap: 10px;
-justify-content: center;
-padding: 0 10px;
-}
-
-.gallery-img {
-width: 100%;
-height: 120px;
-object-fit: cover; /* Ensures images fill the space */
-border-radius: 8px;
-cursor: pointer;
-transition: transform 0.3s ease;
-}
-
-.gallery-img:hover {
-transform: scale(1.05);
-}
-
-/*
-
-End of Fotogalleri
-
-*/
