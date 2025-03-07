@@ -93,13 +93,16 @@ body {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
+
 .hero-content {
   z-index: 1;
 }
+
 .hero-content h1 {
   font-size: 4rem;
   margin-bottom: 0.5rem;
 }
+
 .hero-content p {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
@@ -110,8 +113,8 @@ body {
 
 /* Navigation */
 .navbar {
-font-family: var(--heading-font);
-background: var(--primary-color);;
+  font-family: var(--heading-font);
+  background: var(--primary-color);;
   opacity: 0.9;
   color: var(--light-bg);
   padding: 0.5rem;
@@ -157,7 +160,6 @@ background: var(--primary-color);;
 .nav-links a.active {
   color: var(--accent-color); /* Highlight color */
   font-weight: bold;
-  
 }
 
 .nav-toggle {
@@ -203,7 +205,6 @@ background: var(--primary-color);;
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-
 }
 
 .section.visible {
@@ -212,26 +213,26 @@ background: var(--primary-color);;
 }
 
 h2 {
-font-size: 2rem; 
-font-weight: bold; 
-text-align: center; 
-text-transform: uppercase; 
-letter-spacing: 2px; 
-color: var(--text-color);; 
-margin-bottom: 20px; 
-position: relative; 
-align-items: center;
+  font-size: 2rem; 
+  font-weight: bold; 
+  text-align: center; 
+  text-transform: uppercase; 
+  letter-spacing: 2px; 
+  color: var(--text-color);; 
+  margin-bottom: 20px; 
+  position: relative; 
+  align-items: center;
 }
 
 /* Fancy underline effect */
 h2::after {
-content: "";
-display: block;
-width: 80px; /* Adjust width */
-height: 4px; /* Adjust thickness */
-background-color: var(--accent-color);; 
-margin: 10px auto 0; /* Centers the underline */
-border-radius: 2px;
+  content: "";
+  display: block;
+  width: 80px; /* Adjust width */
+  height: 4px; /* Adjust thickness */
+  background-color: var(--accent-color);; 
+  margin: 10px auto 0; /* Centers the underline */
+  border-radius: 2px;
 }
 
 #services h2 {
@@ -326,7 +327,6 @@ border-radius: 2px;
   width: 30px;
   height: 30px;
   margin-right: 10px; /* Keeps space between icon and text */
-  
 }
 .social-icons img {
   width: 30px;
@@ -367,7 +367,6 @@ cards, buttons and testimonials*/
   box-shadow: var(--standard-shadow);
   transition: var(--transition-speed), box-shadow 0.3s ease;
   overflow: hidden;
-  
 }
 
 .service-card:hover {
@@ -377,9 +376,9 @@ cards, buttons and testimonials*/
 
 .service-card img {
   width: 100%; 
-height: 200px; 
-object-fit: cover;
-border-radius: 10px;
+  height: 200px; 
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .service-card h3 {
@@ -579,21 +578,21 @@ border-radius: 10px;
   margin: 50px auto;
   max-width: 900px;
 }
-  
-  .gallery-container h2 {
+
+.gallery-container h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
-  
-  .gallery-grid {
+
+.gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust grid for responsiveness */
   gap: 10px;
   justify-content: center;
   padding: 0 10px;
 }
-  
-  .gallery-img {
+
+.gallery-img {
   width: 100%;
   height: 120px;
   object-fit: cover; /* Ensures images fill the space */
@@ -601,8 +600,8 @@ border-radius: 10px;
   cursor: pointer;
   transition: var(--transition-speed);
 }
-  
-  .gallery-img:hover {
+
+.gallery-img:hover {
   transform: scale(1.05);
 }
 
@@ -674,15 +673,15 @@ z-index: 1;  /* Ensure buttons are above images */
   flex-direction: row;
   z-index: 9999; /* Ensure it's the top-most element */
 }
-  
+
   /* Fullscreen image */
-  .fullscreen-overlay img {
+.fullscreen-overlay img {
   max-width: 90%;
   max-height: 90%;
 }
-  
+
   /* Navigation buttons */
-  .fullscreen-prev, .fullscreen-next {
+.fullscreen-prev, .fullscreen-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -693,11 +692,11 @@ z-index: 1;  /* Ensure buttons are above images */
   font-size: 24px;
   cursor: pointer;
 }
+
+.fullscreen-prev { left: 20px; }
+.fullscreen-next { right: 20px; }
   
-  .fullscreen-prev { left: 20px; }
-  .fullscreen-next { right: 20px; }
-  
-  .fullscreen-prev:hover, .fullscreen-next:hover {
+.fullscreen-prev:hover, .fullscreen-next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
