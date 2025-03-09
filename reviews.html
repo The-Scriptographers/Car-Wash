@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase WebApp</title>
+    <!-- Firebase SDKs -->
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"
+    ></script>
+
+    <!-- Enkel CSS-styling -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+
+      label {
+        font-weight: bold;
+        color: #444;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+
+      input[type="number"] {
+        width: 100%;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border-radius: 4px;
+        width: 100%;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 40px;
+        color: #333;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        padding: 12px;
+        border-radius: 4px;
+      }
+
+      li span {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ulfs Bilpleie - Legg til anmeldelse</h1>
+
+      <!-- Input Fields for Review -->
+      <label for="title">Bilvask:</label>
+      <input type="text" id="title" placeholder="Bilvasken" /><br />
+
+      <label for="rating">Vurdering (1-5):</label>
+      <input
+        type="number"
+        id="rating"
+        min="1"
+        max="5"
+        placeholder="Vurdering fra 1 til 5"
+      /><br />
+
+      <label for="reviewer">Kunde:</label>
+      <input type="text" id="reviewer" placeholder="Ditt navn" /><br />
+
+      <label for="comment">Kommentar:</label>
+      <textarea
+        id="comment"
+        placeholder="Skriv anmeldelsen her"
+        rows="4"
+        cols="50"
+      ></textarea
+      ><br />
+
+      <button id="addButton">Legg til anmeldelse</button>
+
+      <h2>Tidligere Anmeldelser</h2>
+      <ul id="dataList"></ul>
+    </div>
+
+    <!-- Din JavaScript-fil -->
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

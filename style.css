@@ -1024,3 +1024,73 @@ transform: scale(1.05);
 End of Fotogalleri
 
 */
+
+/*
+
+  reviews
+
+*/
+
+
+/* Container for anmeldelsesskjemaet */
+.reviews-page .container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 25px;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.reviews-page  input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.reviews-page input[type="number"] {
+  width: 100%;
+}
+
+.reviews-page 
+textarea {
+  resize: vertical;
+}
+
+.reviews-page textarea {
+  resize: vertical;
+}
+
+.reviews-page button {
+  background-color: #D81E05;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reviews-page  button:hover {
+  background-color: #D81E05;
+}
+
+.reviews-page h2 {
+  text-align: center;
+        margin-top: 40px;
+        color: #333;
+}
+
+.reviews-page 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
