@@ -1031,8 +1031,6 @@ End of Fotogalleri
 
 */
 
-
-/* Container for anmeldelsesskjemaet */
 .reviews-page .container {
   max-width: 600px;
   margin: 0 auto;
@@ -1042,8 +1040,7 @@ End of Fotogalleri
   border-radius: 10px;
 }
 
-.reviews-page  input,
-textarea {
+.reviews-page input, textarea {
   width: 100%;
   padding: 12px;
   margin-bottom: 16px;
@@ -1055,11 +1052,6 @@ textarea {
 
 .reviews-page input[type="number"] {
   width: 100%;
-}
-
-.reviews-page 
-textarea {
-  resize: vertical;
 }
 
 .reviews-page textarea {
@@ -1079,18 +1071,17 @@ textarea {
   transition: background-color 0.3s;
 }
 
-.reviews-page  button:hover {
+.reviews-page button:hover {
   background-color: #D81E05;
 }
 
 .reviews-page h2 {
   text-align: center;
-        margin-top: 40px;
-        color: #333;
+  margin-top: 40px;
+  color: #333;
 }
 
-.reviews-page 
-ul {
+.reviews-page ul {
   list-style-type: none;
   padding: 0;
 }
