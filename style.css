@@ -801,10 +801,15 @@ cards, buttons and testimonials*/
 
   /* Scroll-down arrow for hero */
   .scroll-down {
-    display: block;
+    position: absolute;
     bottom: 30px;
-    width: 25px;
-    height: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 50px;
+    z-index: 2;
+    display: block; /* Changed from none to block */
+    cursor: pointer; /* Add cursor pointer for better UX */
   }
 
   .scroll-down::before {
