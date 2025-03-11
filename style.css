@@ -59,9 +59,9 @@ body, h1, h2, h3, p, ul, li, input, textarea, button {
 
 body {
   font-family: var(--body-font);
-  color: var(--text-color);;
+  color: var(--text-color);
   line-height: 1.6;
-  background-color: var(--light-bg);;
+  background-color: var(--light-bg);
 }
 
 
@@ -114,7 +114,7 @@ body {
 /* Navigation */
 .navbar {
   font-family: var(--heading-font);
-  background: var(--primary-color);;
+  background: var(--primary-color);
   opacity: 0.9;
   color: var(--light-bg);
   padding: 0.5rem;
@@ -200,7 +200,7 @@ body {
 .section {
   padding: var(--section-padding);
   text-align: center;
-  background-color: var(--light-bg);;
+  background-color: var(--light-bg);
   align-items: center;
   opacity: 0;
   transform: translateY(50px);
@@ -218,7 +218,7 @@ h2 {
   text-align: center; 
   text-transform: uppercase; 
   letter-spacing: 2px; 
-  color: var(--text-color);; 
+  color: var(--text-color);
   margin-bottom: 20px; 
   position: relative; 
   align-items: center;
@@ -230,7 +230,7 @@ h2::after {
   display: block;
   width: 80px; /* Adjust width */
   height: 4px; /* Adjust thickness */
-  background-color: var(--accent-color);; 
+  background-color: var(--accent-color);
   margin: 10px auto 0; /* Centers the underline */
   border-radius: 2px;
 }
@@ -246,7 +246,7 @@ h2::after {
   bottom: 20px;
   right: 20px;
   display: none;
-  background-color: var(--accent-color);;
+  background-color: var(--accent-color);
   color: white;
   border: none;
   border-radius: 50%;
@@ -279,6 +279,7 @@ h2::after {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .footer-section {
   width: 30%;
   margin-bottom: 30px;
@@ -328,6 +329,7 @@ h2::after {
   height: 30px;
   margin-right: 10px; /* Keeps space between icon and text */
 }
+
 .social-icons img {
   width: 30px;
   height: 30px;
@@ -371,7 +373,7 @@ cards, buttons and testimonials*/
 
 .service-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px var(--hover-color);;
+  box-shadow: 0 8px 16px var(--hover-color);
 }
 
 .service-card img {
@@ -449,7 +451,7 @@ cards, buttons and testimonials*/
 .testimonial-card p {
   font-style: italic;
   margin-bottom: 10px;
-  color: var(--text-color);;
+  color: var(--text-color);
 }
 
 .testimonial-card h4 {
@@ -516,7 +518,7 @@ cards, buttons and testimonials*/
 
 .contact-info strong {
   font-weight: bold;
-  color: var(--text-color);;
+  color: var(--text-color);
 }
 
 /* About */
@@ -616,15 +618,15 @@ cards, buttons and testimonials*/
 
 /* Navigation buttons */
 .prev, .next {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
-background-color: rgba(0, 0, 0, 0.5);
-color: var(--light-bg);
-border: none;
-padding: 10px;
-cursor: pointer;
-z-index: 1;  /* Ensure buttons are above images */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--light-bg);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;  /* Ensure buttons are above images */
 }
 
 .prev { left: 10px; }
@@ -695,7 +697,7 @@ z-index: 1;  /* Ensure buttons are above images */
 
 .fullscreen-prev { left: 20px; }
 .fullscreen-next { right: 20px; }
-  
+
 .fullscreen-prev:hover, .fullscreen-next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
@@ -759,7 +761,7 @@ z-index: 1;  /* Ensure buttons are above images */
     position: absolute;
     right: 0;
     top: 60px;
-    background: var(--primary-color);;
+    background: var(--primary-color);
     display: none;
     width: 100%;
     flex-direction: column;
@@ -777,8 +779,29 @@ z-index: 1;  /* Ensure buttons are above images */
   
   /* Service grid adjustment */
   .services-grid {
-    grid-template-columns: 1fr; /* Single column */
-    gap: 1rem;
+    display: flex; /* Switch to flexbox for horizontal scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    grid-template-columns: none; /* Remove grid columns */
+    padding: 0 2rem; /* Add side padding for better spacing */
+    scroll-snap-type: x mandatory; /* Snap to each card */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding-bottom: 2rem; 
+  }
+
+  .service-card {
+    flex: 0 0 85%; /* Card takes 85% of viewport width on mobile */
+    scroll-snap-align: center; /* Center each card when scrolling */
+    margin-right: 1rem; /* Space between cards */
+    
+  }
+
+  /* Optional: Hide scrollbar for better aesthetics */
+  .services-grid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar on Webkit browsers */
+  }
+  .services-grid {
+    -ms-overflow-style: none; /* Hide scrollbar on IE/Edge */
+    scrollbar-width: none; /* Hide scrollbar on Firefox */
   }
   
   /* Location adjustments */
