@@ -717,6 +717,31 @@ cards, buttons and testimonials*/
   opacity: 0;
   animation: fadeInOut 4s infinite; /* Adjust duration as needed */
 }
+/* Base styles - hidden by default */
+.scroll-down {
+  display: none; /* Hidden on desktop */
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  z-index: 2;
+}
+
+.scroll-down::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border-right: 3px solid #fff; /* Adjust color as needed */
+  border-bottom: 3px solid #fff;
+  transform: translateX(-50%) rotate(45deg);
+  animation: scrollArrow 2s infinite;
+}
+
 
 /* 2. Tablet Styles (applied when screen width is 992px or less) */
 @media screen and (max-width: 992px) {
@@ -742,93 +767,187 @@ cards, buttons and testimonials*/
   }
 }
 
-/* 3. Mobile Styles (applied when screen width is 768px or less) */
+/* 3. Mobile Styles (optimized for screens 768px or less) */
 @media screen and (max-width: 768px) {
-  /* Header adjustments */
+  /* Hero Section - Full screen optimization */
+  .hero {
+    min-height: 100vh;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    position: relative; /* For scroll-down arrow */
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem;
+    width: 100%;
+    max-width: 90%;
+  }
+
   .hero-content h1 {
-    font-size: 2rem; /* Even smaller headline */
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
   }
+
   .hero-content p {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    margin-bottom: 1.5rem;
   }
-  
-  /* Nav adjustments - move your existing nav mobile styles here */
+
+  /* Scroll-down arrow for hero */
+  .scroll-down {
+    display: block;
+    bottom: 30px;
+    width: 25px;
+    height: 40px;
+  }
+
+  .scroll-down::before {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+
+  /* Navigation */
   .nav-toggle-label {
     display: block;
+    z-index: 1000;
+    padding: 1rem;
   }
 
   .nav-links {
-    position: absolute;
-    right: 0;
-    top: 60px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 80%;
     background: var(--primary-color);
-    display: none;
-    width: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0;
+    justify-content: center;
+    padding: 0;
+    transition: right 0.3s ease-in-out;
   }
-  
-  .nav-links li {
-    margin: 10px 0;
-  }
-  
+
   .nav-toggle:checked ~ .nav-links {
-    display: flex;
+    right: 0;
   }
-  
-  /* Service grid adjustment */
+
+  .nav-links li {
+    margin: 1.5rem 0;
+  }
+
+  /* Services Grid */
   .services-grid {
-    display: flex; /* Switch to flexbox for horizontal scrolling */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    grid-template-columns: none; /* Remove grid columns */
-    padding: 0 2rem; /* Add side padding for better spacing */
-    scroll-snap-type: x mandatory; /* Snap to each card */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    padding-bottom: 2rem; 
+    display: flex;
+    overflow-x: auto;
+    padding: 1rem 1rem 2rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    white-space: nowrap;
+    position: relative; /* Add this for arrow positioning */
   }
 
   .service-card {
-    flex: 0 0 85%; /* Card takes 85% of viewport width on mobile */
-    scroll-snap-align: center; /* Center each card when scrolling */
-    margin-right: 1rem; /* Space between cards */
-    
+    flex: 0 0 85vw;
+    scroll-snap-align: center;
+    white-space: normal;
+    max-width: 300px;
   }
 
-  /* Optional: Hide scrollbar for better aesthetics */
+  /* Hide scrollbar for cleaner look */
   .services-grid::-webkit-scrollbar {
-    display: none; /* Hide scrollbar on Webkit browsers */
+    display: none;
   }
   .services-grid {
-    -ms-overflow-style: none; /* Hide scrollbar on IE/Edge */
-    scrollbar-width: none; /* Hide scrollbar on Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-  
-  /* Location adjustments */
+
+  /* Location */
   .location-info {
     flex-direction: column;
     align-items: center;
+    padding: 1rem;
+    gap: 1.5rem;
   }
-  
+
   .map-container iframe {
     width: 100%;
-    height: 300px;
+    height: 250px; /* Optimized for mobile */
+    max-width: 500px;
   }
-  
-  /* Footer adjustments */
+
+  /* Footer */
   .footer-section {
     width: 100%;
     text-align: center;
+    padding: 1.5rem 1rem;
   }
-  
+
   .social-icons {
     justify-content: center;
+    gap: 1rem; /* Better spacing */
+    padding: 1rem 0;
   }
-  
+
   .social-icons img {
     margin-left: 0;
+    width: 30px; /* Consistent size */
+    height: 30px;
   }
+
   .extra-services-list {
-    padding: 1rem;
-  }  
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  /* General Mobile Optimizations */
+  body {
+    line-height: 1.6;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 16px; /* Base font size for readability */
+  }
+  .book-appointment-btn {
+    padding: 6px 12px; /* Smaller padding */
+    font-size: clamp(0.8rem, 3.5vw, 0.9rem); /* Smaller fluid font */
+    width: 40%; /* Still full-width for tap area */
+    max-width: 200px; /* Reduced max-width */
+    margin: 0.5rem auto; /* Centered with spacing */
+    display: block;
+    touch-action: manipulation;
+  }
+
+  .book-appointment-btn:hover {
+    background-color: #792121;
+  }
+/* Animation scroll on hero section*/
+@keyframes scrollArrow {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) rotate(45deg);
+  }
+}
+
+
+/* Optional: Adjust for very small screens */
+@media screen and (max-width: 480px) {
+  .scroll-down {
+    bottom: 20px;
+  }
+}
 }
