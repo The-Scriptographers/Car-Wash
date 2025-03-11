@@ -779,8 +779,29 @@ cards, buttons and testimonials*/
   
   /* Service grid adjustment */
   .services-grid {
-    grid-template-columns: 1fr; /* Single column */
-    gap: 1rem;
+    display: flex; /* Switch to flexbox for horizontal scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    grid-template-columns: none; /* Remove grid columns */
+    padding: 0 2rem; /* Add side padding for better spacing */
+    scroll-snap-type: x mandatory; /* Snap to each card */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding-bottom: 2rem; 
+  }
+
+  .service-card {
+    flex: 0 0 85%; /* Card takes 85% of viewport width on mobile */
+    scroll-snap-align: center; /* Center each card when scrolling */
+    margin-right: 1rem; /* Space between cards */
+    
+  }
+
+  /* Optional: Hide scrollbar for better aesthetics */
+  .services-grid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar on Webkit browsers */
+  }
+  .services-grid {
+    -ms-overflow-style: none; /* Hide scrollbar on IE/Edge */
+    scrollbar-width: none; /* Hide scrollbar on Firefox */
   }
   
   /* Location adjustments */
