@@ -802,7 +802,7 @@ cards, buttons and testimonials*/
   /* Scroll-down arrow for hero */
   .scroll-down {
     position: absolute;
-    bottom: 30px;
+    bottom: 45px;
     left: 50%;
     transform: translateX(-50%);
     width: 30px;
