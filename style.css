@@ -121,6 +121,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
+  position: relative;
 }
 
 .navbar-container {
@@ -170,31 +171,6 @@ body {
   display: none; /* Hide by default on desktop */
   cursor: pointer;
 }
-
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  display: block;
-  background: var(--light-bg);
-  height: 2px;
-  width: 24px;
-  position: relative;
-}
-
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  content: '';
-  position: absolute;
-}
-
-.nav-toggle-label span::before {
-  top: -8px;
-}
-
-.nav-toggle-label span::after {
-  bottom: -8px;
-}
-
 
 /* Section Layout */
 .section {
@@ -522,7 +498,7 @@ cards, buttons and testimonials*/
 }
 
 /* About */
-.about-content {
+.section-about {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -770,8 +746,9 @@ cards, buttons and testimonials*/
 /* 3. Mobile Styles (optimized for screens 768px or less) */
 @media screen and (max-width: 768px) {
   /* Hero Section - Full screen optimization */
-  .hero {
-    min-height: 100vh;
+  
+   .hero {
+    min-height: 95vh;
     padding: 0;
     display: flex;
     align-items: center;
@@ -779,7 +756,7 @@ cards, buttons and testimonials*/
     text-align: center;
     background-size: cover;
     background-position: center;
-    position: relative; /* For scroll-down arrow */
+    position: relative;
   }
 
   .hero-content {
@@ -801,10 +778,15 @@ cards, buttons and testimonials*/
 
   /* Scroll-down arrow for hero */
   .scroll-down {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 50px;
+    z-index: 2;
     display: block;
-    bottom: 30px;
-    width: 25px;
-    height: 40px;
+    cursor: pointer;
   }
 
   .scroll-down::before {
@@ -814,33 +796,128 @@ cards, buttons and testimonials*/
   }
 
   /* Navigation */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
   .nav-toggle-label {
     display: block;
-    z-index: 1000;
+    z-index: 1001; /* Above the menu */
     padding: 1rem;
+    cursor: pointer;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-toggle-label span {
+    display: block;
+    background: var(--light-bg);
+    height: 2px;
+    width: 24px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle-label span:nth-child(1) {
+    margin-bottom: 6px;
+  }
+
+  .nav-toggle-label span:nth-child(2) {
+    margin: 6px 0;
+  }
+
+  .nav-toggle-label span:nth-child(3) {
+    margin-top: 6px;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
   }
 
   .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100vh;
-    width: 80%;
+    position: absolute;
+    top: 100%; 
+    right: -70%; /* Off-screen to the right */
+    width: 100%;
+    height: auto; /* Only as tall as content */
     background: var(--primary-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 0;
-    transition: right 0.3s ease-in-out;
+    justify-content: flex-start;
+    padding: 5rem 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 999; /* Below navbar but above hero */
   }
 
   .nav-toggle:checked ~ .nav-links {
     right: 0;
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .nav-links li {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .nav-toggle:checked ~ .nav-links li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-toggle:checked ~ .nav-links li:nth-child(1) { transition-delay: 0.1s; }
+  .nav-toggle:checked ~ .nav-links li:nth-child(2) { transition-delay: 0.2s; }
+  .nav-toggle:checked ~ .nav-links li:nth-child(3) { transition-delay: 0.3s; }
+  .nav-toggle:checked ~ .nav-links li:nth-child(4) { transition-delay: 0.4s; }
+  .nav-toggle-label span {
+    display: block;
+    background: var(--light-bg);
+    height: 2px;
+    width: 24px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle-label span:nth-child(2) {
+    margin: 6px 0;
+  }
+
+  .nav-toggle-label span:nth-child(1) { margin-bottom: 6px; }
+  .nav-toggle-label span:nth-child(3) { margin-top: 6px; }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
 
   /* Services Grid */
