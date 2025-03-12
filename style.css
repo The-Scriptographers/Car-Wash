@@ -56,12 +56,22 @@ body, h1, h2, h3, p, ul, li, input, textarea, button {
   padding: 0;
   box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;  
+  width: 100%;  
+  margin: 0;  
+  padding: 0;  
+}
 body {
   font-family: var(--body-font);
   color: var(--text-color);
   line-height: 1.6;
   background-color: var(--light-bg);
+  overflow-x: hidden;  
+  width: 100%;  
+  margin: 0; 
+  padding: 0; 
 }
 
 
@@ -987,11 +997,6 @@ cards, buttons and testimonials*/
   }
 
   /* General Mobile Optimizations */
-  body {
-    line-height: 1.6;
-    -webkit-tap-highlight-color: transparent;
-    font-size: 16px; /* Base font size for readability */
-  }
   .book-appointment-btn {
     padding: 6px 12px; /* Smaller padding */
     font-size: clamp(0.8rem, 3.5vw, 0.9rem); /* Smaller fluid font */
