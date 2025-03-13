@@ -14,35 +14,46 @@ document.addEventListener('DOMContentLoaded', function() {
         logo.appendChild(span);
     });
 //booking 
-    const BOOKING_CONFIG = {
-        phoneNumber: '+4740498499',
-        buttonSelector: '.book-appointment-btn',
-        defaultMessage: 'Hei, jeg vil gjerne bestille en tid med ULF.',
-    };
+const BOOKING_CONFIG = {
+    phoneNumber: '+4740498499',
+    buttonSelector: '.book-appointment-btn',
+    defaultMessage: 'Hei, jeg vil gjerne bestille en tid med ULF.'
+};
+
+function setupBookingButtons() {
+    const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
     
-    function setupBookingButtons() {
-        const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
-        
-        bookingButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Check if it's a mobile device
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                
+    bookingButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Create a custom popup using confirm dialog
+            const userChoice = confirm('Hvordan vil du bestille?\nOK for SMS\nAvbryt for telefon');
+
+            // Check if it's a mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            if (userChoice) {
+                // User chose SMS (clicked OK)
                 if (isMobile) {
                     window.location.href = `sms:${BOOKING_CONFIG.phoneNumber}?body=${encodeURIComponent(BOOKING_CONFIG.defaultMessage)}`;
                 } else {
-                    // Fallback for desktop - could show a popup or use the phone call instead
-                    alert(`Please text ${BOOKING_CONFIG.phoneNumber} to book an appointment.\nMessage: ${BOOKING_CONFIG.defaultMessage}`);
-                    // Or fallback to phone call: window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+                    alert(`Vennligst send SMS til ${BOOKING_CONFIG.phoneNumber}\nMelding: ${BOOKING_CONFIG.defaultMessage}`);
                 }
-            });
+            } else {
+                // User chose Call (clicked Cancel)
+                if (isMobile) {
+                    window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+                } else {
+                    alert(`Vennligst ring ${BOOKING_CONFIG.phoneNumber} for å bestille en time.`);
+                }
+            }
         });
-    }
+    });
+}
 
-    // Call the booking setup function
-    setupBookingButtons();
+// Call the booking setup function
+setupBookingButtons();
 
     // Array of quotes to cycle through
     const quotes = [
