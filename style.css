@@ -1107,7 +1107,7 @@ cards, buttons and testimonials*/
 }
 
 .mobile-popup-content {
-  background: white;
+  background: var(--light-bg);
   padding: 20px;
   border-radius: 8px;
   text-align: center;
@@ -1129,15 +1129,15 @@ cards, buttons and testimonials*/
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  background: #792121;
-  color: white;
+  background: var(--accent-color);
+  color: var(--light-bg);
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .call-option:hover, .message-option:hover {
-  background: #5f1a1a;
+  background: var(--hover-color);
 }
 
 /* Optional: Adjust for very small screens */

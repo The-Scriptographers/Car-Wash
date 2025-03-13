@@ -17,30 +17,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Centralized Booking Configuration
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
-        defaultMessage: 'Hei, jeg vil gjerne bestille en time.',
+        defaultMessage: 'Hei, jeg vil gjerne bestille en time for .. (ex: utvendig og invendig vask).',
         buttonSelector: '.book-appointment-btn'
     };
-    // Create and append the mobile choice popup
-     const mobilePopup = document.createElement('div');
-     mobilePopup.className = 'mobile-choice-popup';
-     mobilePopup.innerHTML = `
-    <div class="mobile-popup-content">
-        <span class="close-mobile-popup">×</span>
-        <h3>Ring meg eller send en melding med ønsket tidspunkt – jeg svarer deg så snart jeg kan! 😊</h3>
-        <button class="call-option">Ring nå</button>
-        <button class="message-option">Send melding</button>
-    </div>
-`;
-document.body.appendChild(mobilePopup);
-
+  
     // Create and append the popup element to the body
     const popup = document.createElement('div');
     popup.className = 'phone-popup';
     popup.innerHTML = `
         <div class="popup-content">
             <span class="close-popup">&times;</span>
-            <h3>Ta kontakt</h3>
-            <p>Ring oss på:</p>
+            <h3>En ren bil er bare ett telefonsamtale unna!</h3>
+            <p>Ring oss eller send en SMS, så finner vi et tidspunkt som passer deg:📞</p>
             <p class="phone-number">${BOOKING_CONFIG.phoneNumber}</p>
         </div>
     `;
@@ -68,6 +56,19 @@ document.body.appendChild(mobilePopup);
             popup.style.display = 'none';
         }, 300);
     }
+      // Create and append the mobile choice popup
+      const mobilePopup = document.createElement('div');
+      mobilePopup.className = 'mobile-choice-popup';
+      mobilePopup.innerHTML = `
+     <div class="mobile-popup-content">
+         <span class="close-mobile-popup">×</span>
+         <h3>Ring meg eller send en melding med ønsket tidspunkt – jeg svarer deg så snart jeg kan! 😊</h3>
+         <button class="call-option">Ring nå</button>
+         <button class="message-option">Send melding</button>
+     </div>
+ `;
+ document.body.appendChild(mobilePopup);
+ 
     // Function to show mobile popup
 function showMobilePopup() {
     mobilePopup.style.display = 'flex';
@@ -112,19 +113,18 @@ mobilePopup.querySelector('.message-option').addEventListener('click', () => {
     });
 
     // Setup booking buttons
+// Replace this in your setupBookingButtons function
 function setupBookingButtons() {
     const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
-    
+    console.log('Found buttons:', bookingButtons.length);
     bookingButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
-            
+            console.log('Button clicked, isMobile:', isMobileDevice());
             if (isMobileDevice()) {
-                // Show mobile choice popup
-                showMobilePopup();
+                showMobilePopup();  // This is correct
             } else {
-                // Show desktop popup
-                showDesktopPopup();
+                showPopup();       // Changed from showDesktopPopup() to showPopup()
             }
         });
     });
