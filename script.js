@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
      mobilePopup.innerHTML = `
     <div class="mobile-popup-content">
         <span class="close-mobile-popup">×</span>
-        <h3>Velg handling</h3>
+        <h3>Ring meg eller send en melding med ønsket tidspunkt – jeg svarer deg så snart jeg kan! 😊</h3>
         <button class="call-option">Ring nå</button>
         <button class="message-option">Send melding</button>
     </div>
