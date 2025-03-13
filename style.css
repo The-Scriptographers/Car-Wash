@@ -708,6 +708,34 @@ cards, buttons and testimonials*/
   opacity: 0;
   animation: fadeInOut 4s infinite; /* Adjust duration as needed */
 }
+.booking-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
+.booking-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  text-align: center;
+}
+
+.booking-popup button {
+  margin: 10px 5px;
+  padding: 8px 20px;
+  cursor: pointer;
+}
 /* Base styles - hidden by default */
 .scroll-down {
   display: none; /* Hidden on desktop */
