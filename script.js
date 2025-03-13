@@ -13,25 +13,30 @@ document.addEventListener('DOMContentLoaded', function() {
         span.style.animationDelay = `${index * 0.1}s`;
         logo.appendChild(span);
     });
-
-    // Centralized Booking Configuration
+//booking 
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
-        buttonSelector: '.book-appointment-btn'
+        buttonSelector: '.book-appointment-btn',
+        defaultMessage: 'Hei, jeg vil gjerne bestille en tid med ULF.',
     };
-
-    // Booking Function
+    
     function setupBookingButtons() {
-        // Find all elements with the book-appointment-btn class
         const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
         
         bookingButtons.forEach(button => {
             button.addEventListener('click', function(e) {
-                // Prevent default button behavior
                 e.preventDefault();
                 
-                // Initiate phone call
-                window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+                // Check if it's a mobile device
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                if (isMobile) {
+                    window.location.href = `sms:${BOOKING_CONFIG.phoneNumber}?body=${encodeURIComponent(BOOKING_CONFIG.defaultMessage)}`;
+                } else {
+                    // Fallback for desktop - could show a popup or use the phone call instead
+                    alert(`Please text ${BOOKING_CONFIG.phoneNumber} to book an appointment.\nMessage: ${BOOKING_CONFIG.defaultMessage}`);
+                    // Or fallback to phone call: window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+                }
             });
         });
     }
