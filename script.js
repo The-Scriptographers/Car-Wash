@@ -13,79 +13,31 @@ document.addEventListener('DOMContentLoaded', function() {
         span.style.animationDelay = `${index * 0.1}s`;
         logo.appendChild(span);
     });
-//booking 
-const BOOKING_CONFIG = {
-    phoneNumber: '+4740498499',
-    buttonSelector: '.book-appointment-btn',
-    defaultMessage: 'Hei, jeg vil gjerne bestille en tid med ULF.'
-};
 
-const popupStyle =
-function setupBookingButtons() {
-    // Add styles to document
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = popupStyle;
-    document.head.appendChild(styleSheet);
+    // Centralized Booking Configuration
+    const BOOKING_CONFIG = {
+        phoneNumber: '+4740498499',
+        buttonSelector: '.book-appointment-btn'
+    };
 
-    const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
-    
-    bookingButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            // Create popup elements
-            const overlay = document.createElement('div');
-            overlay.className = 'booking-overlay';
-            
-            const popup = document.createElement('div');
-            popup.className = 'booking-popup';
-            popup.innerHTML = `
-                <p>Hvordan vil du bestille?</p>
-                <button class="sms-btn">Send SMS</button>
-                <button class="call-btn">Ring</button>
-            `;
-
-            // Add to document
-            document.body.appendChild(overlay);
-            document.body.appendChild(popup);
-
-            // Check if it's a mobile device
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-            // SMS button handler
-            popup.querySelector('.sms-btn').addEventListener('click', () => {
-                if (isMobile) {
-                    window.location.href = `sms:${BOOKING_CONFIG.phoneNumber}?body=${encodeURIComponent(BOOKING_CONFIG.defaultMessage)}`;
-                } else {
-                    alert(`Vennligst send SMS til ${BOOKING_CONFIG.phoneNumber}\nMelding: ${BOOKING_CONFIG.defaultMessage}`);
-                }
-                cleanup();
+    // Booking Function
+    function setupBookingButtons() {
+        // Find all elements with the book-appointment-btn class
+        const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
+        
+        bookingButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Prevent default button behavior
+                e.preventDefault();
+                
+                // Initiate phone call
+                window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
             });
-
-            // Call button handler
-            popup.querySelector('.call-btn').addEventListener('click', () => {
-                if (isMobile) {
-                    window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
-                } else {
-                    alert(`Vennligst ring ${BOOKING_CONFIG.phoneNumber} for å bestille en time.`);
-                }
-                cleanup();
-            });
-
-            // Cleanup function to remove popup
-            function cleanup() {
-                document.body.removeChild(overlay);
-                document.body.removeChild(popup);
-            }
-
-            // Close popup when clicking overlay
-            overlay.addEventListener('click', cleanup);
         });
-    });
-}
+    }
 
-// Call the booking setup function
-setupBookingButtons();
+    // Call the booking setup function
+    setupBookingButtons();
 
     // Array of quotes to cycle through
     const quotes = [
