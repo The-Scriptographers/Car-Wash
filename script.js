@@ -17,8 +17,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Centralized Booking Configuration
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
+        defaultMessage: 'Hei, jeg vil gjerne bestille en time.',
         buttonSelector: '.book-appointment-btn'
     };
+    // Create and append the mobile choice popup
+     const mobilePopup = document.createElement('div');
+     mobilePopup.className = 'mobile-choice-popup';
+     mobilePopup.innerHTML = `
+    <div class="mobile-popup-content">
+        <span class="close-mobile-popup">×</span>
+        <h3>Velg handling</h3>
+        <button class="call-option">Ring nå</button>
+        <button class="message-option">Send melding</button>
+    </div>
+`;
+document.body.appendChild(mobilePopup);
 
     // Create and append the popup element to the body
     const popup = document.createElement('div');
@@ -38,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    // Function to show the popup
+    // Function to show the popup (desktop)
     function showPopup() {
         popup.style.display = 'flex';
         setTimeout(() => {
@@ -47,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 10);
     }
 
-    // Function to hide the popup
+    // Function to hide the popup (desktop)
     function hidePopup() {
         popup.querySelector('.popup-content').style.transform = 'translateY(-20px)';
         popup.querySelector('.popup-content').style.opacity = '0';
@@ -55,7 +68,39 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.style.display = 'none';
         }, 300);
     }
+    // Function to show mobile popup
+function showMobilePopup() {
+    mobilePopup.style.display = 'flex';
+    setTimeout(() => {
+        mobilePopup.querySelector('.mobile-popup-content').style.transform = 'translateY(0)';
+        mobilePopup.querySelector('.mobile-popup-content').style.opacity = '1';
+    }, 10);
+}
+// Function to hide mobile popup
+function hideMobilePopup() {
+    mobilePopup.querySelector('.mobile-popup-content').style.transform = 'translateY(-20px)';
+    mobilePopup.querySelector('.mobile-popup-content').style.opacity = '0';
+    setTimeout(() => {
+        mobilePopup.style.display = 'none';
+    }, 300);
+}
+// Add click events for mobile popup
+mobilePopup.querySelector('.close-mobile-popup').addEventListener('click', hideMobilePopup);
+mobilePopup.addEventListener('click', function(e) {
+    if (e.target === mobilePopup) {
+        hideMobilePopup();
+    }
+});
+// Add functionality to mobile options
+mobilePopup.querySelector('.call-option').addEventListener('click', () => {
+    window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+    hideMobilePopup();
+});
 
+mobilePopup.querySelector('.message-option').addEventListener('click', () => {
+    window.location.href = `sms:${BOOKING_CONFIG.phoneNumber}?body=${encodeURIComponent(BOOKING_CONFIG.defaultMessage)}`;
+    hideMobilePopup();
+});
     // Add click event to close button
     popup.querySelector('.close-popup').addEventListener('click', hidePopup);
 
@@ -67,29 +112,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Setup booking buttons
-    function setupBookingButtons() {
-        // Find all elements with the book-appointment-btn class
-        const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
-        
-        bookingButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Prevent default button behavior
-                e.preventDefault();
-                
-                // Check if the device is mobile
-                if (isMobileDevice()) {
-                    // If mobile, initiate phone call
-                    window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
-                } else {
-                    // If desktop, show popup
-                    showPopup();
-                }
-            });
+function setupBookingButtons() {
+    const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
+    
+    bookingButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (isMobileDevice()) {
+                // Show mobile choice popup
+                showMobilePopup();
+            } else {
+                // Show desktop popup
+                showDesktopPopup();
+            }
         });
-    }
+    });
+}
 
-    // Call the booking setup function
-    setupBookingButtons();
+// Call the booking setup function
+setupBookingButtons();
 
     // Array of quotes to cycle through
     const quotes = [
