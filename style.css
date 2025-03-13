@@ -58,12 +58,24 @@ body, h1, h2, h3, p, ul, li, input, textarea, button {
   padding: 0;
   box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100vw; /* Prevent any overflow beyond viewport */
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;  
+}
 body {
   font-family: var(--body-font);
   color: var(--text-color);
   line-height: 1.6;
   background-color: var(--light-bg);
+  width: 100%;
+  max-width: 100vw; /* Prevent any overflow beyond viewport */
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0; 
 }
 
 
@@ -123,12 +135,16 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
+  position: relative;
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 100%; /* Ensure it doesn't exceed parent */
+  padding: 0 1rem; /* Add padding to avoid edge overflow */
+  box-sizing: border-box;
 }
 
 .logo {
@@ -172,31 +188,6 @@ body {
   display: none; /* Hide by default on desktop */
   cursor: pointer;
 }
-
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  display: block;
-  background: var(--light-bg);
-  height: 2px;
-  width: 24px;
-  position: relative;
-}
-
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  content: '';
-  position: absolute;
-}
-
-.nav-toggle-label span::before {
-  top: -8px;
-}
-
-.nav-toggle-label span::after {
-  bottom: -8px;
-}
-
 
 /* Section Layout */
 .section {
@@ -353,6 +344,65 @@ cards, buttons and testimonials*/
 
 .book-appointment-btn:hover {
   background-color: var(--dirty-red);
+}
+
+/* Phone Popup Styles */
+.phone-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 350px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.close-popup:hover {
+  color: var(--accent-color);
+}
+
+.popup-content h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.popup-content p {
+  margin-bottom: 0.5rem;
+}
+
+.phone-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-top: 1rem;
 }
 
 /* Service Cards */
@@ -524,7 +574,7 @@ cards, buttons and testimonials*/
 }
 
 /* About */
-.about-content {
+.section-about {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -719,6 +769,31 @@ cards, buttons and testimonials*/
   opacity: 0;
   animation: fadeInOut 4s infinite; /* Adjust duration as needed */
 }
+/* Base styles - hidden by default */
+.scroll-down {
+  display: none; /* Hidden on desktop */
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  z-index: 2;
+}
+
+.scroll-down::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border-right: 3px solid #fff; /* Adjust color as needed */
+  border-bottom: 3px solid #fff;
+  transform: translateX(-50%) rotate(45deg);
+  animation: scrollArrow 2s infinite;
+}
+
 
 /* 2. Tablet Styles (applied when screen width is 992px or less) */
 @media screen and (max-width: 992px) {
@@ -744,93 +819,287 @@ cards, buttons and testimonials*/
   }
 }
 
-/* 3. Mobile Styles (applied when screen width is 768px or less) */
+/* 3. Mobile Styles (optimized for screens 768px or less) */
 @media screen and (max-width: 768px) {
-  /* Header adjustments */
-  .hero-content h1 {
-    font-size: 2rem; /* Even smaller headline */
-  }
-  .hero-content p {
-    font-size: 1rem;
-  }
+  /* Hero Section - Full screen optimization */
   
-  /* Nav adjustments - move your existing nav mobile styles here */
+   .hero {
+    min-height: 95vh;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    max-width: 100vw; /* Prevent overflow */
+    overflow: hidden; /* Extra safety */
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem;
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-content p {
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Scroll-down arrow for hero */
+  .scroll-down {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 50px;
+    z-index: 2;
+    display: block;
+    cursor: pointer;
+  }
+
+  .scroll-down::before {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+
+  /* Navigation */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
   .nav-toggle-label {
     display: block;
+    z-index: 1001; /* Above the menu */
+    padding: 1rem;
+    cursor: pointer;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-toggle-label span {
+    display: block;
+    background: var(--light-bg);
+    height: 2px;
+    width: 24px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle-label span:nth-child(1) {
+    margin-bottom: 6px;
+  }
+
+  .nav-toggle-label span:nth-child(2) {
+    margin: 6px 0;
+  }
+
+  .nav-toggle-label span:nth-child(3) {
+    margin-top: 6px;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
   }
 
   .nav-links {
     position: absolute;
-    right: 0;
-    top: 60px;
-    background: var(--primary-color);
-    display: none;
+    top: 100%; 
+    right: 0; 
     width: 100%;
+    max-width: 100vw;
+    height: auto; /* Only as tall as content */
+    background: var(--primary-color);
+    display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0;
+    justify-content: flex-start;
+    padding: 5rem 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 999; /* Below navbar but above hero */
   }
-  
-  .nav-links li {
-    margin: 10px 0;
-  }
-  
+
   .nav-toggle:checked ~ .nav-links {
-    display: flex;
+    right: 0;
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Service grid adjustment */
+
+  .nav-links li {
+    margin: 1rem 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .nav-toggle:checked ~ .nav-links li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-toggle:checked ~ .nav-links li:nth-child(1) { transition-delay: 0.1s; }
+  .nav-toggle:checked ~ .nav-links li:nth-child(2) { transition-delay: 0.2s; }
+  .nav-toggle:checked ~ .nav-links li:nth-child(3) { transition-delay: 0.3s; }
+  .nav-toggle:checked ~ .nav-links li:nth-child(4) { transition-delay: 0.4s; }
+  .nav-toggle-label span {
+    display: block;
+    background: var(--light-bg);
+    height: 2px;
+    width: 24px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle-label span:nth-child(2) {
+    margin: 6px 0;
+  }
+
+  .nav-toggle-label span:nth-child(1) { margin-bottom: 6px; }
+  .nav-toggle-label span:nth-child(3) { margin-top: 6px; }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  /* Services Grid */
   .services-grid {
-    display: flex; /* Switch to flexbox for horizontal scrolling */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    grid-template-columns: none; /* Remove grid columns */
-    padding: 0 2rem; /* Add side padding for better spacing */
-    scroll-snap-type: x mandatory; /* Snap to each card */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    padding-bottom: 2rem; 
+    display: flex;
+    overflow-x: auto;
+    padding: 1rem 1rem 2rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 4rem;
+    max-width: 100vw;
+    white-space: nowrap;
+    position: relative; /* Add this for arrow positioning */
   }
 
   .service-card {
-    flex: 0 0 85%; /* Card takes 85% of viewport width on mobile */
-    scroll-snap-align: center; /* Center each card when scrolling */
-    margin-right: 1rem; /* Space between cards */
-    
+    flex: 0 0 85vw;
+    scroll-snap-align: center;
+    white-space: normal;
+    max-width: 300px;
   }
 
-  /* Optional: Hide scrollbar for better aesthetics */
+  /* Hide scrollbar for cleaner look */
   .services-grid::-webkit-scrollbar {
-    display: none; /* Hide scrollbar on Webkit browsers */
+    display: none;
   }
   .services-grid {
-    -ms-overflow-style: none; /* Hide scrollbar on IE/Edge */
-    scrollbar-width: none; /* Hide scrollbar on Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-  
-  /* Location adjustments */
+
+  /* Location */
   .location-info {
     flex-direction: column;
     align-items: center;
+    padding: 1rem;
+    gap: 1.5rem;
   }
-  
+
   .map-container iframe {
     width: 100%;
-    height: 300px;
+    height: 250px; /* Optimized for mobile */
+    max-width: 500px;
   }
-  
-  /* Footer adjustments */
+
+  /* Footer */
   .footer-section {
     width: 100%;
     text-align: center;
+    padding: 1.5rem 1rem;
   }
-  
+
   .social-icons {
     justify-content: center;
+    gap: 1rem; /* Better spacing */
+    padding: 1rem 0;
   }
-  
+
   .social-icons img {
     margin-left: 0;
+    width: 30px; /* Consistent size */
+    height: 30px;
   }
+
   .extra-services-list {
-    padding: 1rem;
-  }  
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  /* General Mobile Optimizations */
+  .book-appointment-btn {
+    padding: 6px 12px; /* Smaller padding */
+    font-size: clamp(0.8rem, 3.5vw, 0.9rem); /* Smaller fluid font */
+    width: 40%; /* Still full-width for tap area */
+    max-width: 200px; /* Reduced max-width */
+    margin: 0.5rem auto; /* Centered with spacing */
+    display: block;
+    touch-action: manipulation;
+  }
+
+  .book-appointment-btn:hover {
+    background-color: #792121;
+  }
+/* Animation scroll on hero section*/
+@keyframes scrollArrow {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) rotate(45deg);
+  }
+}
+
+
+/* Optional: Adjust for very small screens */
+@media screen and (max-width: 480px) {
+  .scroll-down {
+    bottom: 20px;
+  }
+}
 }

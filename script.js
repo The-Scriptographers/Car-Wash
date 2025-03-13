@@ -20,7 +20,53 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonSelector: '.book-appointment-btn'
     };
 
-    // Booking Function
+    // Create and append the popup element to the body
+    const popup = document.createElement('div');
+    popup.className = 'phone-popup';
+    popup.innerHTML = `
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h3>Ta kontakt</h3>
+            <p>Ring oss på:</p>
+            <p class="phone-number">${BOOKING_CONFIG.phoneNumber}</p>
+        </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Function to check if the device is mobile
+    function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    // Function to show the popup
+    function showPopup() {
+        popup.style.display = 'flex';
+        setTimeout(() => {
+            popup.querySelector('.popup-content').style.transform = 'translateY(0)';
+            popup.querySelector('.popup-content').style.opacity = '1';
+        }, 10);
+    }
+
+    // Function to hide the popup
+    function hidePopup() {
+        popup.querySelector('.popup-content').style.transform = 'translateY(-20px)';
+        popup.querySelector('.popup-content').style.opacity = '0';
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 300);
+    }
+
+    // Add click event to close button
+    popup.querySelector('.close-popup').addEventListener('click', hidePopup);
+
+    // Close popup when clicking outside the content
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) {
+            hidePopup();
+        }
+    });
+
+    // Setup booking buttons
     function setupBookingButtons() {
         // Find all elements with the book-appointment-btn class
         const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
@@ -30,8 +76,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Prevent default button behavior
                 e.preventDefault();
                 
-                // Initiate phone call
-                window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+                // Check if the device is mobile
+                if (isMobileDevice()) {
+                    // If mobile, initiate phone call
+                    window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+                } else {
+                    // If desktop, show popup
+                    showPopup();
+                }
             });
         });
     }
@@ -64,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateQuote, 5000);
 });
 
+// Rest of your existing script.js code below this point
 // Function to scroll smoothly to a section by its ID
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
@@ -239,7 +292,7 @@ if (window.location.pathname.endsWith('.html')) {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const href = link.getAttribute('href');
-      // Only append .html if it’s not already there and not an external link
+      // Only append .html if it's not already there and not an external link
       const newHref = href.endsWith('.html') || href.startsWith('http') ? href : href + '.html';
       window.location.href = newHref;
     });
