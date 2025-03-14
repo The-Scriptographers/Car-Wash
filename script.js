@@ -113,7 +113,7 @@ mobilePopup.querySelector('.message-option').addEventListener('click', () => {
     });
 
     // Setup booking buttons
-// Replace this in your setupBookingButtons function
+
 function setupBookingButtons() {
     const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
     console.log('Found buttons:', bookingButtons.length);
@@ -133,6 +133,29 @@ function setupBookingButtons() {
 // Call the booking setup function
 setupBookingButtons();
 
+// Services Section Swipe Hint
+  function setupSwipeHint() {
+    const servicesGrid = document.querySelector('.services-grid');
+    const swipeHint = document.querySelector('.swipe-hint');
+
+    if (!servicesGrid || !swipeHint) return;
+
+    // Function to hide hint
+    function hideSwipeHint() {
+      swipeHint.style.transition = 'opacity 0.5s ease';
+      swipeHint.style.opacity = '0';
+      setTimeout(() => {
+        swipeHint.style.display = 'none';
+      }, 500);
+    }
+
+    // Listen for scroll or touchstart event
+    servicesGrid.addEventListener('scroll', hideSwipeHint, { once: true });
+    servicesGrid.addEventListener('touchstart', hideSwipeHint, { once: true }); // For mobile touch
+  }
+
+  // Initialize swipe hint
+  setupSwipeHint();
     // Array of quotes to cycle through
     const quotes = [
         "Skinnende bil, hver gang!",

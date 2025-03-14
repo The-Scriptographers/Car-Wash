@@ -1158,11 +1158,57 @@ cards, buttons and testimonials*/
 .call-option:hover, .message-option:hover {
   background: var(--hover-color);
 }
+ /* Swipe hint styles */
+ .swipe-hint {
+  display: none; /* Hidden by default on desktop */
+}
 
-/* Optional: Adjust for very small screens */
-@media screen and (max-width: 480px) {
-  .scroll-down {
-    bottom: 20px;
+.swipe-hint {
+  display: block;
+  position: absolute;
+  top: 55%;
+  right: 15px;
+  transform: translateY(-50%);
+  color: var(--light-bg);
+  font-size: 1rem;
+  font-family: var(--heading-font);
+  font-weight: 400;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  padding: 3px 10px;
+  border-radius: 25px 5px 25px 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2);
+  animation: bossPulse 2s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.swipe-hint::after {
+  content: '→';
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--light-bg);
+}
+
+@keyframes bossPulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.05);
+    opacity: 1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), inset 0 1px 4px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2);
   }
 }
 }
+
