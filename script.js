@@ -17,28 +17,145 @@ document.addEventListener('DOMContentLoaded', function() {
     // Centralized Booking Configuration
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
+        defaultMessage: 'Hei, jeg vil gjerne bestille en time for .. (ex: utvendig og invendig vask).',
         buttonSelector: '.book-appointment-btn'
     };
+  
+    // Create and append the popup element to the body
+    const popup = document.createElement('div');
+    popup.className = 'phone-popup';
+    popup.innerHTML = `
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h3>En ren bil er bare ett telefonsamtale unna!</h3>
+            <p>Ring oss eller send en SMS, så finner vi et tidspunkt som passer deg:📞</p>
+            <p class="phone-number">${BOOKING_CONFIG.phoneNumber}</p>
+        </div>
+    `;
+    document.body.appendChild(popup);
 
-    // Booking Function
-    function setupBookingButtons() {
-        // Find all elements with the book-appointment-btn class
-        const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
-        
-        bookingButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Prevent default button behavior
-                e.preventDefault();
-                
-                // Initiate phone call
-                window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
-            });
-        });
+    // Function to check if the device is mobile
+    function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
-    // Call the booking setup function
-    setupBookingButtons();
+    // Function to show the popup (desktop)
+    function showPopup() {
+        popup.style.display = 'flex';
+        setTimeout(() => {
+            popup.querySelector('.popup-content').style.transform = 'translateY(0)';
+            popup.querySelector('.popup-content').style.opacity = '1';
+        }, 10);
+    }
 
+    // Function to hide the popup (desktop)
+    function hidePopup() {
+        popup.querySelector('.popup-content').style.transform = 'translateY(-20px)';
+        popup.querySelector('.popup-content').style.opacity = '0';
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 300);
+    }
+      // Create and append the mobile choice popup
+      const mobilePopup = document.createElement('div');
+      mobilePopup.className = 'mobile-choice-popup';
+      mobilePopup.innerHTML = `
+     <div class="mobile-popup-content">
+         <span class="close-mobile-popup">×</span>
+         <h3>Ring meg eller send en melding med ønsket tidspunkt – jeg svarer deg så snart jeg kan! 😊</h3>
+         <button class="call-option">Ring nå</button>
+         <button class="message-option">Send melding</button>
+     </div>
+ `;
+ document.body.appendChild(mobilePopup);
+ 
+    // Function to show mobile popup
+function showMobilePopup() {
+    mobilePopup.style.display = 'flex';
+    setTimeout(() => {
+        mobilePopup.querySelector('.mobile-popup-content').style.transform = 'translateY(0)';
+        mobilePopup.querySelector('.mobile-popup-content').style.opacity = '1';
+    }, 10);
+}
+// Function to hide mobile popup
+function hideMobilePopup() {
+    mobilePopup.querySelector('.mobile-popup-content').style.transform = 'translateY(-20px)';
+    mobilePopup.querySelector('.mobile-popup-content').style.opacity = '0';
+    setTimeout(() => {
+        mobilePopup.style.display = 'none';
+    }, 300);
+}
+// Add click events for mobile popup
+mobilePopup.querySelector('.close-mobile-popup').addEventListener('click', hideMobilePopup);
+mobilePopup.addEventListener('click', function(e) {
+    if (e.target === mobilePopup) {
+        hideMobilePopup();
+    }
+});
+// Add functionality to mobile options
+mobilePopup.querySelector('.call-option').addEventListener('click', () => {
+    window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+    hideMobilePopup();
+});
+
+mobilePopup.querySelector('.message-option').addEventListener('click', () => {
+    window.location.href = `sms:${BOOKING_CONFIG.phoneNumber}?body=${encodeURIComponent(BOOKING_CONFIG.defaultMessage)}`;
+    hideMobilePopup();
+});
+    // Add click event to close button
+    popup.querySelector('.close-popup').addEventListener('click', hidePopup);
+
+    // Close popup when clicking outside the content
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) {
+            hidePopup();
+        }
+    });
+
+    // Setup booking buttons
+
+function setupBookingButtons() {
+    const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
+    console.log('Found buttons:', bookingButtons.length);
+    bookingButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Button clicked, isMobile:', isMobileDevice());
+            if (isMobileDevice()) {
+                showMobilePopup();  // This is correct
+            } else {
+                showPopup();       // Changed from showDesktopPopup() to showPopup()
+            }
+        });
+    });
+}
+
+// Call the booking setup function
+setupBookingButtons();
+
+// Services Section Swipe Hint
+  function setupSwipeHint() {
+    const servicesGrid = document.querySelector('.services-grid');
+    const swipeHint = document.querySelector('.swipe-hint');
+
+    if (!servicesGrid || !swipeHint) return;
+
+    // Function to hide hint
+    function hideSwipeHint() {
+      swipeHint.style.transition = 'opacity 0.5s ease';
+      swipeHint.style.opacity = '0';
+      setTimeout(() => {
+        swipeHint.style.display = 'none';
+      }, 500);
+    }
+
+    // Listen for scroll or touchstart event
+    servicesGrid.addEventListener('scroll', hideSwipeHint, { once: true });
+    servicesGrid.addEventListener('touchstart', hideSwipeHint, { once: true }); // For mobile touch
+  }
+
+  // Initialize swipe hint
+  setupSwipeHint();
     // Array of quotes to cycle through
     const quotes = [
         "Skinnende bil, hver gang!",
@@ -64,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateQuote, 5000);
 });
 
+// Rest of your existing script.js code below this point
 // Function to scroll smoothly to a section by its ID
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
@@ -239,7 +357,7 @@ if (window.location.pathname.endsWith('.html')) {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const href = link.getAttribute('href');
-      // Only append .html if it’s not already there and not an external link
+      // Only append .html if it's not already there and not an external link
       const newHref = href.endsWith('.html') || href.startsWith('http') ? href : href + '.html';
       window.location.href = newHref;
     });

@@ -344,22 +344,83 @@ cards, buttons and testimonials*/
   background-color: #792121;
 }
 
+/* Phone Popup Styles */
+.phone-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 350px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.close-popup:hover {
+  color: var(--accent-color);
+}
+
+.popup-content h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.popup-content p {
+  margin-bottom: 0.5rem;
+}
+
+.phone-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-top: 1rem;
+}
+
 /* Service Cards */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
   gap: 2rem;
-  max-width: 1200px; /* or whatever fits your design */
-  margin: 0 auto; /* center the grid */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem; 
 }
 
 .service-card {
   background: #fff;
-  padding: var(--card-padding);
+  padding: 1.5rem;
   border-radius: 10px;
   box-shadow: var(--standard-shadow);
-  transition: var(--transition-speed), box-shadow 0.3s ease;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
   overflow: hidden;
+  
 }
 
 .service-card:hover {
@@ -368,18 +429,26 @@ cards, buttons and testimonials*/
 }
 
 .service-card img {
-  width: 100%; 
-  height: 200px; 
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 10px; /* Rounded top only */
+  
 }
 
 .service-card h3 {
-  margin-bottom: 1rem;
-  color: #007BFF;
-  align-items: center;
+  margin: 1rem 0 0.5rem;
+  color: var(--primary-color); /* Use brand color instead of #007BFF */
+  font-family: var(--heading-font);
+  font-size: 1.25rem;
+  text-align: center;
 }
-
+.service-card p {
+  margin: 0 0 1rem;
+  color: var(--text-color);
+  font-size: 1rem;
+  text-align: center;
+}
 /* Extra Services */
 .extra-services-list {
   background: #fff;
@@ -938,34 +1007,48 @@ cards, buttons and testimonials*/
     z-index: 1000;
   }
 
-  /* Services Grid */
-  .services-grid {
-    display: flex;
-    overflow-x: auto;
-    padding: 1rem 1rem 2rem;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 4rem;
-    max-width: 100vw;
-    white-space: nowrap;
-    position: relative; /* Add this for arrow positioning */
-  }
 
-  .service-card {
-    flex: 0 0 85vw;
-    scroll-snap-align: center;
-    white-space: normal;
-    max-width: 300px;
-  }
+ /*  Services Grid */
+.services-grid {
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0; /* Vertical padding only */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 6rem; /* Increased gap for more spacing between cards */
+  max-width: 100%;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  padding-left: calc(50vw - 40vw); /* 50% viewport - half card width */
+      padding-right: calc(50vw - 40vw); /* Matching right padding for scroll */
+}
 
-  /* Hide scrollbar for cleaner look */
-  .services-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .services-grid {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+
+/* Service Card */
+.service-card {
+  flex: 0 0 80vw; /* 80% of viewport width for each card */
+  scroll-snap-align: center;
+  white-space: normal;
+  max-width: 305px; /* Maximum card width */
+  background: #fff;
+  padding: var(--card-padding);
+  border-radius: 10px;
+  box-shadow: var(--standard-shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+
+/* Hide scrollbar */
+.services-grid::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* Extra Services List */
+.extra-services-list {
+  padding: 1.5rem;
+  margin: 0 1rem;
+}
 
   /* Location */
   .location-info {
@@ -1000,10 +1083,7 @@ cards, buttons and testimonials*/
     height: 30px;
   }
 
-  .extra-services-list {
-    padding: 1.5rem;
-    margin: 0 1rem;
-  }
+  
 
   /* General Mobile Optimizations */
   .book-appointment-btn {
@@ -1033,12 +1113,104 @@ cards, buttons and testimonials*/
     transform: translateX(-50%) translateY(10px) rotate(45deg);
   }
 }
+/* Mobile Choice Popup Styles */
+.mobile-choice-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
+.mobile-popup-content {
+  background: var(--light-bg);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  max-width: 300px;
+  width: 90%;
+}
 
-/* Optional: Adjust for very small screens */
-@media screen and (max-width: 480px) {
-  .scroll-down {
-    bottom: 20px;
+.close-mobile-popup {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.call-option, .message-option {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background: var(--accent-color);
+  color: var(--light-bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.call-option:hover, .message-option:hover {
+  background: var(--hover-color);
+}
+ /* Swipe hint styles */
+ .swipe-hint {
+  display: none; /* Hidden by default on desktop */
+}
+
+.swipe-hint {
+  display: block;
+  position: absolute;
+  top: 55%;
+  right: 15px;
+  transform: translateY(-50%);
+  color: var(--light-bg);
+  font-size: 1rem;
+  font-family: var(--heading-font);
+  font-weight: 400;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  padding: 3px 10px;
+  border-radius: 25px 5px 25px 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2);
+  animation: bossPulse 2s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.swipe-hint::after {
+  content: '→';
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--light-bg);
+}
+
+@keyframes bossPulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.05);
+    opacity: 1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4), inset 0 1px 4px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.2);
   }
 }
 }
+
