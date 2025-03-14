@@ -1005,7 +1005,7 @@ cards, buttons and testimonials*/
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 4rem;
-    max-width: 100vw;
+    max-width: 100%;
     white-space: nowrap;
     position: relative; /* Add this for arrow positioning */
   }
@@ -1014,7 +1014,7 @@ cards, buttons and testimonials*/
     flex: 0 0 85vw;
     scroll-snap-align: center;
     white-space: normal;
-    max-width: 300px;
+    max-width: 305px;
   }
 
   /* Hide scrollbar for cleaner look */
