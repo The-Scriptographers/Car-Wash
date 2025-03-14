@@ -1189,10 +1189,13 @@ cards, buttons and testimonials*/
 }
 
 .swipe-hint::after {
-  content: '→';
+  content: 'mer →';
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--light-bg);
+}
+.swipe-hint {
+  display: none; /* Hidden on desktop */
 }
 
 @keyframes bossPulse {
