@@ -406,21 +406,21 @@ cards, buttons and testimonials*/
 /* Service Cards */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem; 
+  padding: 1rem; 
 }
 
 .service-card {
   background: #fff;
-  padding: var(--card-padding);
+  padding: 1.5rem;
   border-radius: 10px;
   box-shadow: var(--standard-shadow);
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
   overflow: hidden;
-  box-sizing: border-box; 
+  
 }
 
 .service-card:hover {
@@ -432,8 +432,8 @@ cards, buttons and testimonials*/
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 10px 10px 0 0; /* Rounded top only */
-  display: block; /* Removes bottom gap */
+  border-radius: 10px; /* Rounded top only */
+  
 }
 
 .service-card h3 {
@@ -1007,39 +1007,46 @@ cards, buttons and testimonials*/
     z-index: 1000;
   }
 
-  /* Services Grid */
-  .services-grid {
-    display: flex;
-    overflow-x: auto;
-    padding: 1rem 1rem 2rem;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 1.5rem; /* Reduced for better spacing */
-    max-width: 100%;
-    white-space: nowrap;
-    scroll-behavior: smooth; /* Smooth scrolling */
-  }
+ /*  Services Grid */
+.services-grid {
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0; /* Vertical padding only */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 6rem; /* Increased gap for more spacing between cards */
+  max-width: 100%;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  padding-left: calc(50vw - 40vw); /* 50% viewport - half card width */
+      padding-right: calc(50vw - 40vw); /* Matching right padding for scroll */
+}
 
-  .service-card {
-    flex: 0 0 calc(85vw - 2rem); /* Adjusted for padding */
-    scroll-snap-align: center;
-    white-space: normal;
-    max-width: 305px;
-    background: #fff; /* Ensure consistency */
-    padding: var(--card-padding);
-    border-radius: 10px;
-    box-shadow: var(--standard-shadow);
-    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-  }
+/* Service Card */
+.service-card {
+  flex: 0 0 80vw; /* 80% of viewport width for each card */
+  scroll-snap-align: center;
+  white-space: normal;
+  max-width: 305px; /* Maximum card width */
+  background: #fff;
+  padding: var(--card-padding);
+  border-radius: 10px;
+  box-shadow: var(--standard-shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
 
-  /* Hide scrollbar for cleaner look */
-  .services-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .services-grid {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+
+/* Hide scrollbar */
+.services-grid::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* Extra Services List */
+.extra-services-list {
+  padding: 1.5rem;
+  margin: 0 1rem;
+}
 
   /* Location */
   .location-info {
@@ -1074,10 +1081,7 @@ cards, buttons and testimonials*/
     height: 30px;
   }
 
-  .extra-services-list {
-    padding: 1.5rem;
-    margin: 0 1rem;
-  }
+  
 
   /* General Mobile Optimizations */
   .book-appointment-btn {
