@@ -796,8 +796,8 @@ cards, buttons and testimonials*/
   left: 50%;
   width: 20px;
   height: 20px;
-  border-right: 3px solid var(--white); 
-  border-bottom: 3px solid var(--white);
+  border-right: 3px solid var(--light-bg); 
+  border-bottom: 3px solid var(--light-bg);
   transform: translateX(-50%) rotate(45deg);
   animation: scrollArrow 2s infinite;
 }
