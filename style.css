@@ -2,37 +2,21 @@
 :root {
   /* Colors */
   --primary-color: #023888;
+  --primary-light: #007BFF;
+  --primary-dark: #012D6B;
+
+  /* Accent */
   --accent-color: #D81E05;
-  --hover-color: rgb(0, 166, 255);
+  --accent-dark: #792121;
+
+  /* Neutral */
   --text-color: #333;
+  --text-light: #444;
   --light-bg: #f8f9fa;
+  --bg-alt: #f9f9f9;
+  --white: #fff;
+  --hover-color: rgb(0, 166, 255);
 
-
-    /* Primary Brand Colors 
-    /*--primary-color: #023888;
-    /*--primary-light: #1955A7;
-    /*--primary-dark: #012D6B;
-    
-    /* Secondary Colors 
-    /*--secondary-color: #FF7D29;
-    /*--secondary-light: #FFA066;
-    /*--secondary-dark: #E56314;
-    
-    /* Tertiary/Background Colors */
-    /*--tertiary-color: #F2F5F9; /* Light blue-gray */
-    /*--tertiary-alt: #E6E1DD;   /* Warm gray alternative */
-    
-    /* Functional Colors */
-    /*--success-color: #28A745;
-    /*--warning-color: #FFC107;
-    /*--error-color: #DC3545;
-    /*--info-color: #4A90E2;
-    
-    /* Neutral Colors 
-    /*--text-dark: #333;
-    /*--text-medium: #666666;
-    /*--text-light: #999999;
-    /*--border-color: #DDDDDD;
 
 
   
@@ -49,6 +33,7 @@
   --hover-shadow: 0 8px 16px var(--hover-color);
   --transition-speed: 0.3s ease;
 }
+
 
 /* 1. Base & Desktop Styles (applied to all devices, with desktop as default) */
 body, h1, h2, h3, p, ul, li, input, textarea, button {
@@ -359,7 +344,7 @@ cards, buttons and testimonials*/
 }
 
 .popup-content {
-  background-color: var(--white);
+  background-color: var(--light-bg);
   padding: 2rem;
   border-radius: 10px;
   width: 90%;
@@ -1114,7 +1099,7 @@ contact-info {
   }
 
   .book-appointment-btn:hover {
-    background-color: var(--accent-dark);
+    background-color:var(--primary-color);
   }
 /* Animation scroll on hero section*/
 @keyframes scrollArrow {
