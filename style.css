@@ -2,37 +2,21 @@
 :root {
   /* Colors */
   --primary-color: #023888;
+  --primary-light: #007BFF;
+  --primary-dark: #012D6B;
+
+  /* Accent */
   --accent-color: #D81E05;
-  --hover-color: rgb(0, 166, 255);
+  --accent-dark: #792121;
+
+  /* Neutral */
   --text-color: #333;
+  --text-light: #444;
   --light-bg: #f8f9fa;
+  --bg-alt: #f9f9f9;
+  --white: #fff;
+  --hover-color: rgb(0, 166, 255);
 
-
-    /* Primary Brand Colors 
-    /*--primary-color: #023888;
-    /*--primary-light: #1955A7;
-    /*--primary-dark: #012D6B;
-    
-    /* Secondary Colors 
-    /*--secondary-color: #FF7D29;
-    /*--secondary-light: #FFA066;
-    /*--secondary-dark: #E56314;
-    
-    /* Tertiary/Background Colors */
-    /*--tertiary-color: #F2F5F9; /* Light blue-gray */
-    /*--tertiary-alt: #E6E1DD;   /* Warm gray alternative */
-    
-    /* Functional Colors */
-    /*--success-color: #28A745;
-    /*--warning-color: #FFC107;
-    /*--error-color: #DC3545;
-    /*--info-color: #4A90E2;
-    
-    /* Neutral Colors 
-    /*--text-dark: #333;
-    /*--text-medium: #666666;
-    /*--text-light: #999999;
-    /*--border-color: #DDDDDD;
 
 
   
@@ -49,6 +33,7 @@
   --hover-shadow: 0 8px 16px var(--hover-color);
   --transition-speed: 0.3s ease;
 }
+
 
 /* 1. Base & Desktop Styles (applied to all devices, with desktop as default) */
 body, h1, h2, h3, p, ul, li, input, textarea, button {
@@ -170,7 +155,7 @@ body {
 }
 
 .nav-links a:hover {
-  color: #007BFF;
+  color: var(--primary-light);
 }
 
 .nav-links a.active {
@@ -227,7 +212,7 @@ h2::after {
 }
 
 #services h2 {
-  color: #000000; /* Dark text for light backgrounds */
+  color:var(--text-color); /* Dark text for light backgrounds */
   padding: 1.5rem; /* Padding around the text */
   border-radius: 5px; /* Rounded corners for the background */
 }
@@ -238,7 +223,7 @@ h2::after {
   right: 20px;
   display: none;
   background-color: var(--accent-color);
-  color: white;
+  color: var(--light-bg);
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -250,14 +235,14 @@ h2::after {
 }
 
 #back-to-top:hover {
-  background-color: #792121;
+  background-color:  var(--accent-dark);
 }
 
 
 /* Footer */
 .footer {
   background-color: var(--text-color);
-  color: #fff;
+  color: var(--light-bg);
   padding: 30px 0;
   margin-top: 60px;
   font-family: var(--heading-font);
@@ -277,7 +262,7 @@ h2::after {
 }
 
 .footer-section h3 {
-  color: #fff;
+  color: var(--light-bg);
   margin-bottom: 15px;
 }
 
@@ -291,19 +276,19 @@ h2::after {
 }
 
 .footer-section ul li a {
-  color: #ddd;
+  color: var(--light-bg);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-section ul li a:hover {
-  color: #fff;
+  color: var(--light-bg);
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 20px;
-  border-top: 1px solid #444;
+  border-top: 1px solid var(--text-light);
   margin-top: 20px;
 }
 
@@ -341,7 +326,7 @@ cards, buttons and testimonials*/
 }
 
 .book-appointment-btn:hover {
-  background-color: #792121;
+  background-color: var(--accent-dark);
 }
 
 /* Phone Popup Styles */
@@ -359,7 +344,7 @@ cards, buttons and testimonials*/
 }
 
 .popup-content {
-  background-color: #fff;
+  background-color: var(--light-bg);
   padding: 2rem;
   border-radius: 10px;
   width: 90%;
@@ -414,8 +399,8 @@ cards, buttons and testimonials*/
 }
 
 .service-card {
-  background: #fff;
-  padding: 1.5rem;
+  background: var(--light-bg);
+  padding: var(--card-padding);
   border-radius: 10px;
   box-shadow: var(--standard-shadow);
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
@@ -451,7 +436,7 @@ cards, buttons and testimonials*/
 }
 /* Extra Services */
 .extra-services-list {
-  background: #fff;
+  background: var(--light-bg);
   padding: var(--card-padding);
   border-radius: 10px;
   box-shadow: var(--standard-shadow);
@@ -476,7 +461,7 @@ cards, buttons and testimonials*/
 }
 
 .extra-service h3 {
-  color: #007BFF;
+  color: var(--primary-light);
   font-size: 1.2rem;
 }
 
@@ -495,7 +480,7 @@ cards, buttons and testimonials*/
 }
 
 .testimonial-card {
-  background: #f9f9f9;
+  background: var(--bg-alt);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -516,7 +501,7 @@ cards, buttons and testimonials*/
 
 .testimonial-card h4 {
   font-weight: bold;
-  color: #007BFF;
+  color: var(--primary-light);
 }
 
 .profile-pic {
@@ -529,7 +514,7 @@ cards, buttons and testimonials*/
 /* Location */
 #location {
   padding: 40px 20px;
-  background-color: #f9f9f9;
+  background-color:  var(--light-bg);
 }
 
 .location-container {
@@ -556,15 +541,17 @@ cards, buttons and testimonials*/
   transition: var(--transition-speed);
 }
 
-.contact-info {
+contact-info {
   max-width: 400px;
-  text-align: left;
+  text-align:center;
   margin-top: 20px;
+  margin-left: auto; 
+  margin-right: 0; 
   color: #444;
   font-size: 16px;
-  opacity: 0;  /* Initially hidden */
-  transform: translateY(30px); /* Start from below */
-  transition: opacity 1s ease, transform 1s ease;  /* Animation effect */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .contact-info.show {
@@ -681,7 +668,7 @@ cards, buttons and testimonials*/
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--primary-dark);
   color: var(--light-bg);
   border: none;
   padding: 10px;
@@ -693,7 +680,7 @@ cards, buttons and testimonials*/
 .next { right: 10px; }
 
 .prev:hover, .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--primary-dark);
 }
 
 /* Slides */
@@ -729,7 +716,7 @@ cards, buttons and testimonials*/
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: var(--primary-dark);
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -747,8 +734,8 @@ cards, buttons and testimonials*/
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: var(--primary-dark);
+  color:var(--light-bg);
   border: none;
   padding: 10px 20px;
   font-size: 24px;
@@ -759,7 +746,7 @@ cards, buttons and testimonials*/
 .fullscreen-next { right: 20px; }
 
 .fullscreen-prev:hover, .fullscreen-next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--primary-dark);
 }
 
 /* Utilities */
@@ -796,8 +783,8 @@ cards, buttons and testimonials*/
   left: 50%;
   width: 20px;
   height: 20px;
-  border-right: 3px solid #fff; /* Adjust color as needed */
-  border-bottom: 3px solid #fff;
+  border-right: 3px solid var(--light-bg); 
+  border-bottom: 3px solid var(--light-bg);
   transform: translateX(-50%) rotate(45deg);
   animation: scrollArrow 2s infinite;
 }
@@ -938,7 +925,7 @@ cards, buttons and testimonials*/
     right: 0; 
     width: 100%;
     max-width: 100vw;
-    height: auto; /* Only as tall as content */
+    height: auto; 
     background: var(--primary-color);
     display: flex;
     flex-direction: column;
@@ -1030,13 +1017,28 @@ cards, buttons and testimonials*/
   scroll-snap-align: center;
   white-space: normal;
   max-width: 305px; /* Maximum card width */
-  background: #fff;
+  background: var(--light-bg);
   padding: var(--card-padding);
   border-radius: 10px;
   box-shadow: var(--standard-shadow);
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
+@keyframes swipeAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-35px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.services-grid {
+  animation: swipeAnimation 2s ease-in-out 3;
+}
 
 /* Hide scrollbar */
 .services-grid::-webkit-scrollbar {
@@ -1097,7 +1099,7 @@ cards, buttons and testimonials*/
   }
 
   .book-appointment-btn:hover {
-    background-color: #792121;
+    background-color:var(--primary-color);
   }
 /* Animation scroll on hero section*/
 @keyframes scrollArrow {
@@ -1160,4 +1162,4 @@ cards, buttons and testimonials*/
 .call-option:hover, .message-option:hover {
   background: var(--hover-color);
 }
-}
+
