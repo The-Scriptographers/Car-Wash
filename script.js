@@ -53,10 +53,10 @@ function initializeSlideshow() {
 
     // function for showing slides with fade-effect
     function showSlides() {
-        slides.forEach((slide) => slide.classList.remove("active")); // hide all slides
-        slideIndex = (slideIndex + 1) % slides-length;
-        slides[slideIndex].classList.add("active"); // show next slide
-    }
+        slides.forEach((slide) => slide.classList.remove("active")); // Hide all slides
+        slideIndex = (slideIndex + 1) % slides.length;
+        slides[slideIndex].classList.add("active"); // Show next slide
+      }
 
     // function for manually changing slides
     function changeSlide(n) {
@@ -375,7 +375,7 @@ function initializeScrollEffects() {
 
 // animate when scrolling
 function animateOnScroll() {
-    const sections = document.querySelectorAll(".section, .section-about");
+    const sections = document.querySelectorAll(".section, .section-about, .container, .slideshow-container, .gallery-container");
     const triggerBottom = window.innerHeight * 0.8;
 
     sections.forEach((section) => {
