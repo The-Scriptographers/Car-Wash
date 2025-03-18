@@ -556,15 +556,17 @@ cards, buttons and testimonials*/
   transition: var(--transition-speed);
 }
 
-.contact-info {
+contact-info {
   max-width: 400px;
-  text-align: left;
+  text-align:center;
   margin-top: 20px;
-  color: var(--text-color);
+  margin-left: auto; 
+  margin-right: 0; 
+  color: #444;
   font-size: 16px;
-  opacity: 0;  /* Initially hidden */
-  transform: translateY(30px); /* Start from below */
-  transition: opacity 1s ease, transform 1s ease;  /* Animation effect */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .contact-info.show {
