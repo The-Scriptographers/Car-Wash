@@ -1229,3 +1229,64 @@ margin-left: 20px;
   list-style-type: none;
   padding: 0;
 }
+
+#dataList {
+  list-style-type: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 20 px auto;
+}
+
+#dataList li {
+  background: #f8f9fa;
+  border-left: 5px solid #D81E05;
+  padding: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+#dataList li:hover  {
+  transform: scale(1.02);
+}
+
+#dataList li strong {
+  color: #D81E05;
+  font-size: 1.2em;
+}
+
+#dataList li p {
+  margin: 5px 0;
+  color: #333;
+  font-size: 1em;
+}
+
+#dataList li .rating {
+  font-weight: bold;
+  color: #ff9800;
+}
+
+#dataList li .reviewer {
+  font-style: italic;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.review-item {
+  background: #f8f9fa;
+  border-left: 5px solid #D81E05;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-item h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.review-item p {
+  margin: 5px 0;
+  color: #555;
+}

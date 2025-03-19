@@ -173,6 +173,7 @@ function initializeReviews() {
         return;
     }
 
+    
     // add the data in realtime database when the button gets pushed
     addButton.addEventListener("click", () => {
         const title = titleInput.value;
@@ -209,23 +210,34 @@ function initializeReviews() {
 // retrieve data from Realtime Database and show in the list
 function fetchData() {
     const dataList = document.getElementById("dataList");
-    if (!dataList) return;
+    if(!dataList) return;
 
     const reviewsRef = ref(db, 'reviews');
     get(reviewsRef).then(snapshot => {
         if (snapshot.exists()) {
-            dataList.innerHTML = ""; // Clear list before update
+            dataList.innerHTML = ""; // clear list before update
+
             snapshot.forEach(childSnapshot => {
                 const review = childSnapshot.val();
-                const li = document.createElement("li");
-                li.textContent = `Tittel: ${review.title}, Vurdering: ${review.rating}, Forfatter: ${review.reviewer}, Kommentar: ${review.comment}`;
-                dataList.appendChild(li);
+
+                // create HTML elements for a cleaner view
+                const reviewItem = document.createElement("div");
+                reviewItem.classList.add("review-item");
+
+                reviewItem.innerHTML = `<h3>${review.title} (${review.rating}★)</h3>
+                <p><strong>Forfatter:</strong> ${review.reviewer}</p>
+                <p>${review.comment}</p>
+                `;
+
+                dataList.appendChild(reviewItem);
             });
         } else {
             console.log("Ingen anmeldelser funnet");
         }
     }).catch(error => console.error("Feil ved henting:", error));
 }
+
+
 
 // Initialize animations
 function initializeAnimations() {
