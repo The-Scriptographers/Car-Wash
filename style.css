@@ -799,7 +799,7 @@ h2::after {
   /* Services Grid */
   .services-grid {
     display: flex;
-    overflow-x: scroll; /* Changed to scroll to force visibility */
+    overflow-x: auto !important; /* Changed to scroll to force visibility */
     padding: 1rem 0;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
