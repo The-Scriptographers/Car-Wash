@@ -236,16 +236,17 @@ function animateOnScroll() {
 document.addEventListener('DOMContentLoaded', function() {
     var serviceCards = document.querySelectorAll('.service-card');
 
-    // Sjekk om vi er på index.html før vi legger til navigasjonen
-    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+    // Sjekk om vi er på index-siden ved å ekskludere "tjenester" fra URL-en
+    if (!window.location.pathname.includes('tjenester')) {
         serviceCards.forEach(function(card) {
             card.style.cursor = 'pointer';
             card.addEventListener('click', function() {
-                window.location.href = 'tjenester.html';
+                window.location.href = '/tjenester';
             });
         });
     }
 });
+
 
 window.addEventListener("scroll", animateOnScroll);
 
