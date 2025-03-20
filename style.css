@@ -1044,11 +1044,17 @@ margin-left: 20px;
   animation: swipeAnimation 2s ease-in-out 3;
 }
 
-/* Hide scrollbar */
 .services-grid::-webkit-scrollbar {
-  display: none;
+  height: 6px; /* Thin scrollbar */
+}
+.services-grid::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3); /* Subtle color */
+  border-radius: 10px;
 }
 
+.services-grid::-webkit-scrollbar-track {
+  background: transparent; /* Keep it clean */
+}
 
 /* Extra Services List */
 .extra-services-list {
