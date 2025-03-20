@@ -80,6 +80,7 @@ body {
 .hero-O { background: url(images/ulf-armoverbildør.jpg) no-repeat center center/cover; }
 .hero-K {   background: url(images/UlfOgLokalet.png) no-repeat center center/cover; }
 .hero-F{   background: url(images/ulf-vaskerBil2.png) no-repeat center center/cover; }
+.hero-R { background: url(images/ulf-smil.png) no-repeat center center/cover;}
 
 .hero::after {
   content: '';
@@ -90,7 +91,7 @@ body {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
-
+    
 .hero-content {
   z-index: 1;
 }
@@ -553,6 +554,8 @@ cards, buttons and testimonials*/
   transform: scale(1.02);
   transition: var(--transition-speed);
 }
+
+
 
 contact-info {
   max-width: 400px;

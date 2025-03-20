@@ -226,8 +226,8 @@ function fetchData() {
                 reviewItem.classList.add("review-item");
 
                 reviewItem.innerHTML = `<h3>${review.title} (${review.rating}★)</h3>
-                <p><strong>Forfatter:</strong> ${review.reviewer}</p>
-                <p>${review.comment}</p>
+                <p><strong>Kunde:</strong> ${review.reviewer}</p>
+                <p><strong>Kommentar: </strong>${review.comment}</p>
                 `;
 
                 dataList.appendChild(reviewItem);
