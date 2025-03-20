@@ -582,55 +582,46 @@ contact-info {
 }
 
 /* About */
+
 .section-about {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 1000px;
 }
+
 
 .about-image {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
-  width: 300px;
-  height: 300px;
-  border: 2px solid var(--primary-color);
-  box-shadow: var(--standard-shadow);
-  background: var(--light-bg);
-  padding: 3.5rem;
-  border-radius: 1.5px;
-  transition: var(--transition-speed), box-shadow 0.3s ease;
-}
-  
-.about-image img {
-  max-width: 120%;
-  max-height: 120%;
-  object-fit: cover;
+  padding: 10px; /* Litt plass rundt bildet */
 }
 
-.about-image:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--hover-shadow);
+.about-image img {
+  border-radius: 15px; /* Runde hjørner */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Skygge for dybde */
+  max-width: 100%; /* Sikrer responsivitet */
+  height: auto;
 }
 
 .about-text {
   font-size: 16px;
   line-height: 1.6;
   margin: 10px 0;
+  max-width: 600px;
 }
 
 .about-text b {
-  display: block;
-  margin: 15px 0 5px;
+display: block;
+margin: 15px 0 5px;
 }
 
 .about-text li {
-  text-align: left;
-  margin-left: 20px;
+text-align: left;
+margin-left: 20px;
 }
 
 /*Gallery and Slideshow */
@@ -1053,11 +1044,17 @@ contact-info {
   animation: swipeAnimation 2s ease-in-out 3;
 }
 
-/* Hide scrollbar */
 .services-grid::-webkit-scrollbar {
-  display: none;
+  height: 6px; /* Thin scrollbar */
+}
+.services-grid::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3); /* Subtle color */
+  border-radius: 10px;
 }
 
+.services-grid::-webkit-scrollbar-track {
+  background: transparent; /* Keep it clean */
+}
 
 /* Extra Services List */
 .extra-services-list {
@@ -1176,4 +1173,126 @@ contact-info {
   background: var(--hover-color);
 }
 
+}
+
+/*
+
+  reviews
+
+*/
+
+.reviews-page .container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 25px;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.reviews-page input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.reviews-page input[type="number"] {
+  width: 100%;
+}
+
+.reviews-page textarea {
+  resize: vertical;
+}
+
+.reviews-page button {
+  background-color: #D81E05;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.reviews-page button:hover {
+  background-color: #D81E05;
+}
+
+.reviews-page h2 {
+  text-align: center;
+  margin-top: 40px;
+  color: #333;
+}
+
+.reviews-page ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#dataList {
+  list-style-type: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 20 px auto;
+}
+
+#dataList li {
+  background: #f8f9fa;
+  border-left: 5px solid #D81E05;
+  padding: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+#dataList li:hover  {
+  transform: scale(1.02);
+}
+
+#dataList li strong {
+  color: #D81E05;
+  font-size: 1.2em;
+}
+
+#dataList li p {
+  margin: 5px 0;
+  color: #333;
+  font-size: 1em;
+}
+
+#dataList li .rating {
+  font-weight: bold;
+  color: #ff9800;
+}
+
+#dataList li .reviewer {
+  font-style: italic;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.review-item {
+  background: #f8f9fa;
+  border-left: 5px solid #D81E05;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-item h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.review-item p {
+  margin: 5px 0;
+  color: #555;
 }
