@@ -233,19 +233,19 @@ function animateOnScroll() {
     });
 }
 
-// This script makes all elements with the class 'service-card' clickable, redirecting to 'tjenester.html' upon click, and changes the cursor to indicate interactivity.
 document.addEventListener('DOMContentLoaded', function() {
     var serviceCards = document.querySelectorAll('.service-card');
-    
-    serviceCards.forEach(function(card) {
-      // Change cursor to pointer on hover to indicate the card is clickable
-      card.style.cursor = 'pointer';
-      
-      card.addEventListener('click', function() {
-        window.location.href = 'tjenester.html';
-      });
-    });
-  });
+
+    // Sjekk om vi er på index.html før vi legger til navigasjonen
+    if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+        serviceCards.forEach(function(card) {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function() {
+                window.location.href = 'tjenester.html';
+            });
+        });
+    }
+});
 
 window.addEventListener("scroll", animateOnScroll);
 
