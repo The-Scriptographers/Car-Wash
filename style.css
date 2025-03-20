@@ -1006,38 +1006,15 @@ margin-left: 20px;
   padding: 1rem 0; /* Vertical padding only */
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  gap:  1.5rem; /* Increased gap for more spacing between cards */
+  gap: 6rem; /* Increased gap for more spacing between cards */
   max-width: 100%;
   white-space: nowrap;
   scroll-behavior: smooth;
-  padding-left: 1rem; /* Simpler padding */
-  padding-right: 1rem;
-  animation: swipeAnimation 2s ease-in-out 3;
-}
-.services-grid::-webkit-scrollbar {
-  height: 6px;
+  padding-left: calc(50vw - 40vw); /* 50% viewport - half card width */
+      padding-right: calc(50vw - 40vw); /* Matching right padding for scroll */
 }
 
-.services-grid::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-}
 
-.services-grid::-webkit-scrollbar-track {
-  background: transparent;
-}
-@keyframes swipeAnimation {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-35px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-}
 /* Service Card */
 .service-card {
   flex: 0 0 80vw; /* 80% of viewport width for each card */
@@ -1051,6 +1028,26 @@ margin-left: 20px;
   transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
+@keyframes swipeAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-35px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.services-grid {
+  animation: swipeAnimation 2s ease-in-out 3;
+}
+
+/* Hide scrollbar */
+.services-grid::-webkit-scrollbar {
+  display: none;
+}
 
 
 /* Extra Services List */
@@ -1170,7 +1167,7 @@ margin-left: 20px;
   background: var(--hover-color);
 }
 
-
+}
 
 /*
 
