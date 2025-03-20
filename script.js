@@ -14,8 +14,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const app = initializeApp(firebaseConfig); // initilaizes Firebase in the web - page 
+const db = getDatabase(app); // Retrieves database from Firebase, which then gets used to store and fetch data (for Reviews)
+
 
 // Global variables for slides and gallery
 let slideIndex = 0;
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Slideshow-functionality
-function initializeSlideshow() {
+function initializeSlideshow() { // starts a slide show with fade effects
     let slides = document.querySelectorAll(".slide");
     if (slides.length === 0) return; // dont continue if there are no slides
 
@@ -52,7 +53,7 @@ function initializeSlideshow() {
     let slideInterval;
 
     // function for showing slides with fade-effect
-    function showSlides() {
+    function showSlides() {   
         slides.forEach((slide) => slide.classList.remove("active")); // Hide all slides
         slideIndex = (slideIndex + 1) % slides.length;
         slides[slideIndex].classList.add("active"); // Show next slide
@@ -80,7 +81,7 @@ function initializeSlideshow() {
 
     // start slideshow 
     slides[slideIndex].classList.add("active"); // show first slide
-    slideInterval = setInterval(showSlides, 5000);
+    slideInterval = setInterval(showSlides, 5000); // picture changes every 5 seconds
 }
 
 // Gallery functionality with fullscreen-view
@@ -111,7 +112,7 @@ function initializeGallery() {
         body.style.overflow = "hidden"; // deactivate scrolling
     }
 
-    // change fullscreen-picture with navigation buttons
+    // function that lets the user change fullscreen-pictures with buttons
     function changeFullscreenImage(n) {
         fullscreenIndex = 
         (fullscreenIndex + n + currentImages.length) %
@@ -130,7 +131,7 @@ function initializeGallery() {
     window.changeFullscreenImage = changeFullscreenImage;
     window.closeFullscreen = closeFullscreen;
 
-    // attach click-events til slideshow-images (separate selection)
+    // attach click-events to slideshow-images (separate selection)
     if (slides.length > 0) {
         slides.forEach((img) => {
             img.addEventListener("click", () => openFullscreen(img.src, slides));
@@ -152,14 +153,14 @@ function initializeGallery() {
         nextBtn.addEventListener("click", () => changeFullscreenImage(1));
     }
 
-    // close fullscreen by clickung outside of the picture
+    // close fullscreen by clicking outside of the picture
     fullscreenOverlay.addEventListener("click", (e) => {
         if (e.target === fullscreenOverlay) closeFullscreen();
     });
 }
 
 // Firebase reviews functionality
-function initializeReviews() {
+function initializeReviews() { // sets up the review-system, which is connected to the Firebase
     // Bring elements from HTML - with check if it i exists
     const titleInput = document.getElementById("title");
     const ratingInput = document.getElementById("rating");
@@ -174,7 +175,7 @@ function initializeReviews() {
     }
 
     
-    // add the data in realtime database when the button gets pushed
+    // create a new review in the firebase-DB when the user clicks "legg til" / "add"
     addButton.addEventListener("click", () => {
         const title = titleInput.value;
         const rating = ratingInput.value;
@@ -195,9 +196,9 @@ function initializeReviews() {
                 ratingInput.value = "";
                 reviewerInput.value = "";
                 commentInput.value = "";
-                fetchData(); // Updates list with reviews
+                fetchData(); // calls function to update list with reviews
             })
-            .catch(error => console.error("Feil ved lagring:", error));
+            .catch(error => console.error("Feil ved lagring:", error)); // error message if it doesnt work
         } else {
             console.log("Alle felt må fylles ut!");
         }
@@ -207,7 +208,7 @@ function initializeReviews() {
     fetchData();
 }
 
-// retrieve data from Realtime Database and show in the list
+// retrieves data from the Realtime Database and shows in the web-page for the users
 function fetchData() {
     const dataList = document.getElementById("dataList");
     if(!dataList) return;
@@ -258,7 +259,7 @@ function initializeAnimations() {
         animateOnScroll();
 }
 
-// Booking-functionality
+// Makes it possible for users to click "Bestill-time"/"Book an appointment"-button for starting a phonecall automatically
 function initializeBookingButtons() {
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
@@ -273,8 +274,8 @@ function initializeBookingButtons() {
             // Prevent default button behavior
             e.preventDefault();
 
-            // Start phonecall
-            window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+            // Start phonecall for the added phonenumber
+            window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`; 
         }); 
     });
 }
@@ -309,7 +310,7 @@ function initializeQuoteRotation() {
     setInterval(updateQuote, 5000);
 }
 
-// iniitalize testimonials
+// handles the view of testimonials (customer reviews) on the index page 
 function initializeTestimonials() {
     // Testimonial rotation
     const testimonials = document.querySelectorAll(".testimonial-card");
@@ -318,7 +319,7 @@ function initializeTestimonials() {
     let currentTestimonial = 0;
     const totalTestimonials = testimonials.length;
 
-    // show testimonial with given index
+    // show testimonial with given index, only one customer review gets showed at a time
     function showTestimonial(index) {
         testimonials.forEach((testimonial, i) => {
             testimonial.style.display = i === index ? "block" : "none";
@@ -336,7 +337,7 @@ function initializeTestimonials() {
     showTestimonial(currentTestimonial); // show first testimonial
 }
 
-// scroll effects
+// handles scroll effects
 function initializeScrollEffects() {
     // change navigation view when scrolling
     const nav = document.querySelector("nav");
@@ -385,7 +386,7 @@ function initializeScrollEffects() {
     }
 }
 
-// animate when scrolling
+// function for sections on the website to be animated when they come into view (screen)
 function animateOnScroll() {
     const sections = document.querySelectorAll(".section, .section-about, .container, .slideshow-container, .gallery-container");
     const triggerBottom = window.innerHeight * 0.8;
@@ -416,7 +417,8 @@ function initializeServiceCards() {
         // Change mouse cursor to pointer on hover to indicate that the card is clickable
         card.style.cursor = 'pointer';
 
-        card.addEventListener('click', function() {
+        // User gets sent to a new web-page when the user clicks
+        card.addEventListener('click', function() { 
             window.location.href = 'tjenester.html';
         });
     });
