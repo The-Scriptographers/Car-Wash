@@ -406,45 +406,6 @@ function animateOnScroll() {
     });
 }
 
-// initialize navigation
-function initializeNavigation() {
-   // Mobile menu toggle functionality
-   const navToggle = document.getElementById('nav-toggle');
-   const navLinks = document.querySelector('.nav-links');
-    
-   if (navToggle && navLinks) {
-    document.addEventListener('click', function(event) {
-        const isClickInside = navLinks.contains(event.target) ||
-                        event.target === navToggle ||
-                        (event.target.parentNode && event.target.parentNode === navToggle);
-
-        if (!isClickInside && navToggle.checked) {
-            navToggle.checked = false; // Close the menu if clicked outside or on toggle
-        }
-    });
-   }
-   
-   // remove .html from URL in browser's addressfield
-   if (window.location.pathname.endsWith('.html')) {
-    const cleanPath = window.location.pathname.replace('.html', '');
-    window.history.replaceState({}, document.title, cleanPath);
-   }
-   
-   // Handle navigation click to add .html
-   document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', (e) => {
-        // Check if there is a link that should not have default behavior 
-        if (link.getAttribute('data-no-navigate') === 'true') {
-            return; // Skip default behaviour for special links
-        }
-        e.preventDefault();
-        const href = link.getAttribute('href');
-        // add only .html if there is not already there and not an external link
-        const newHref = href.endsWith('.html') || href.startsWith('http') ? href : href + '.html';
-        window.location.href = newHref;
-         });
-    });
-}
 
 
 // initialize servicecards
