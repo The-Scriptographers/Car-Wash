@@ -4,6 +4,7 @@
   --primary-color: #023888;
   --primary-light: #007BFF;
   --primary-dark: #012D6B;
+  --list-bullet-color: #007BFF;
   /* Accent */
   --accent-color: #D81E05;
   --accent-dark: #792121;
@@ -20,11 +21,14 @@
   /* Spacing */
   --section-padding: 3rem 1rem;
   --card-padding: 1.5rem;
+  --list-item-spacing: 0.6rem; 
   /* Effects */
   --standard-shadow: 0 4px 8px rgba(0, 0, 0, 0.76);
   --hover-shadow: 0 8px 16px var(--hover-color);
   --transition-speed: 0.3s ease;
 }
+
+ 
 
 /* 1. Base & Desktop Styles */
 body, h1, h2, h3, p, ul, li, input, textarea, button {
@@ -379,6 +383,53 @@ h2::after {
   font-size: 1rem;
   text-align: center;
 }
+/* Base list styling */
+.service-card ul.service-details {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0; /* Space around the list */
+  text-align: left;
+}
+
+/* List item styling */
+.service-card ul.service-details li {
+  position: relative;
+  padding-left: 1.8rem; /* Space for the blue line */
+  margin-bottom: var(--list-item-spacing);
+  font-size: 0.9rem;
+  color: #444; /* Matches --text-light */
+  line-height: 1.4;
+}
+
+/* Static blue line (always visible) */
+.service-card ul.service-details li::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px; /* Fixed length */
+  height: 2px; /* Thin line */
+  background-color: var(--list-bullet-color); /* Always blue */
+}
+
+/* Gradient underline (hidden by default) */
+.service-card ul.service-details li::after {
+  content: "";
+  position: absolute;
+  left: 1.8rem; /* Starts after the line */
+  bottom: -2px;
+  width: 0; /* Hidden until hover */
+  height: 1px; /* Thin underline */
+  background: linear-gradient(to right, var(--primary-light), var(--accent-color));
+  transition: width 0.3s ease; /* Smooth animation */
+}
+
+/* Show gradient underline on hover */
+.service-card:hover ul.service-details li::after {
+  width: calc(100% - 1.8rem); /* Full width minus padding */
+}
+
 
 /* Extra Services */
 .extra-services-list {
@@ -827,7 +878,20 @@ h2::after {
     box-shadow: var(--standard-shadow);
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
   }
-
+  .service-card ul.service-details li {
+    font-size: 0.85rem;
+    padding-left: 1.6rem;
+  }
+  .service-card ul.service-details li::before {
+    left: 0.4rem;
+    width: 6px;
+  }
+  .service-card ul.service-details li::after {
+    left: 1.6rem;
+  }
+  .service-card:hover ul.service-details li::after {
+    width: calc(100% - 1.6rem);
+  }
   /* Custom Scrollbar */
   .services-grid::-webkit-scrollbar {
     height: 8px; /* Horizontal scrollbar height */
