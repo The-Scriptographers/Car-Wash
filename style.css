@@ -28,6 +28,8 @@
   --transition-speed: 0.3s ease;
 }
 
+ 
+
 /* 1. Base & Desktop Styles */
 body, h1, h2, h3, p, ul, li, input, textarea, button {
   margin: 0;
@@ -38,7 +40,7 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
@@ -49,7 +51,7 @@ body {
   background-color: var(--light-bg);
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
@@ -65,8 +67,6 @@ body {
   text-align: center;
   color: var(--light-bg);
   position: relative;
-  max-width: 100vw;
-  overflow-x: hidden;
 }
 .hero-T { background: url(images/polering.jpg) no-repeat center center/cover; }
 .hero-O { background: url(images/ulf-armoverbildør.jpg) no-repeat center center/cover; }
@@ -80,11 +80,9 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1; /* Explicitly below scroll-down */
 }
 .hero-content {
-  z-index: 2; /* Above overlay */
-  max-width: 90%;
+  z-index: 1;
 }
 .hero-content h1 {
   font-size: 4rem;
@@ -107,8 +105,6 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  max-width: 100vw;
-  overflow-x: hidden;
 }
 .navbar-container {
   display: flex;
@@ -129,8 +125,6 @@ body {
 .nav-links {
   list-style: none;
   display: flex;
-  max-width: 100vw;
-  overflow-x: hidden;
 }
 .nav-links li {
   margin: 0 15px;
@@ -159,8 +153,6 @@ body {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  max-width: 100vw;
-  overflow-x: hidden;
 }
 .section.visible {
   opacity: 1;
@@ -217,8 +209,6 @@ h2::after {
   padding: 30px 0;
   margin-top: 60px;
   font-family: var(--heading-font);
-  max-width: 100vw;
-  overflow-x: hidden;
 }
 .footer-content {
   display: flex;
@@ -397,17 +387,17 @@ h2::after {
 .service-card ul.service-details {
   list-style: none;
   padding: 0;
-  margin: 0.75rem 0;
+  margin: 0.75rem 0; /* Space around the list */
   text-align: left;
 }
 
 /* List item styling */
 .service-card ul.service-details li {
   position: relative;
-  padding-left: 1.8rem;
+  padding-left: 1.8rem; /* Space for the blue line */
   margin-bottom: var(--list-item-spacing);
   font-size: 0.9rem;
-  color: #444;
+  color: #444; /* Matches --text-light */
   line-height: 1.4;
 }
 
@@ -418,27 +408,28 @@ h2::after {
   left: 0.5rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 8px;
-  height: 2px;
-  background-color: var(--list-bullet-color);
+  width: 8px; /* Fixed length */
+  height: 2px; /* Thin line */
+  background-color: var(--list-bullet-color); /* Always blue */
 }
 
 /* Gradient underline (hidden by default) */
 .service-card ul.service-details li::after {
   content: "";
   position: absolute;
-  left: 1.8rem;
+  left: 1.8rem; /* Starts after the line */
   bottom: -2px;
-  width: 0;
-  height: 1px;
+  width: 0; /* Hidden until hover */
+  height: 1px; /* Thin underline */
   background: linear-gradient(to right, var(--primary-light), var(--accent-color));
-  transition: width 0.3s ease;
+  transition: width 0.3s ease; /* Smooth animation */
 }
 
 /* Show gradient underline on hover */
 .service-card:hover ul.service-details li::after {
-  width: calc(100% - 1.8rem);
+  width: calc(100% - 1.8rem); /* Full width minus padding */
 }
+
 
 /* Extra Services */
 .extra-services-list {
@@ -717,12 +708,12 @@ h2::after {
 .scroll-down {
   display: none;
   position: absolute;
-  bottom: 30px; /* Adjusted for visibility */
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 30px;
   height: 50px;
-  z-index: 10; /* Above overlay */
+  z-index: 2;
 }
 .scroll-down::before {
   content: '';
@@ -776,20 +767,20 @@ h2::after {
     margin-bottom: 1.5rem;
   }
   .scroll-down {
-    display: block;
     position: absolute;
-    bottom: 30px; /* Adjusted for visibility */
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
     width: 30px;
     height: 50px;
-    z-index: 10; /* Above overlay */
+    z-index: 2;
+    display: block;
     cursor: pointer;
   }
   .scroll-down::before {
-    width: 20px; /* Increased for visibility */
-    height: 20px;
-    border-width: 3px; /* Thicker for mobile */
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
   }
 
   /* Navigation */
@@ -835,7 +826,6 @@ h2::after {
     transform: translateY(-20px);
     transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     z-index: 999;
-    overflow-x: hidden;
   }
   .nav-toggle:checked ~ .nav-links {
     right: 0;
@@ -860,27 +850,28 @@ h2::after {
   /* Services Grid */
   .services-grid {
     display: flex;
-    overflow-x: auto;
-    max-width: 100vw;
-    padding: 0 1rem;
+    overflow-x: auto !important; /* Changed to scroll to force visibility */
+    padding: 1rem 0;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 1rem;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    gap: 2rem; /* Adjusted gap for mobile */
+    max-width: 100%;
     white-space: nowrap;
     scroll-behavior: smooth;
-    box-sizing: border-box;
-    -ms-overflow-style: auto; /* Changed to ensure visibility */
-    scrollbar-width: auto; /* Increased visibility */
-    scrollbar-color: var(--primary-color) var(--light-bg); /* Stronger contrast */
-    position: relative;
+    padding-left: 1rem; /* Simpler padding */
+    padding-right: 1rem;
+    -ms-overflow-style: scrollbar; /* Force scrollbar on Edge */
+    scrollbar-width: thin; /* Firefox: thinner scrollbar */
+    scrollbar-color: var(--primary-light) var(--light-bg); /* Firefox color */
+    position: relative; /* For faux scrollbar */
   }
 
   /* Service Card */
   .service-card {
-    flex: 0 0 min(80vw, 305px);
+    flex: 0 0 80vw;
     scroll-snap-align: center;
     white-space: normal;
-    max-width: 100%;
+    max-width: 305px;
     background: var(--light-bg);
     padding: var(--card-padding);
     border-radius: 10px;
@@ -903,35 +894,36 @@ h2::after {
   }
   /* Custom Scrollbar */
   .services-grid::-webkit-scrollbar {
-    height: 10px; /* Thicker for visibility */
-    width: 10px;
-    display: block !important; /* Force visibility */
-    -webkit-appearance: none;
+    height: 8px; /* Horizontal scrollbar height */
+    width: 8px; /* Vertical fallback */
+    display: block; /* Force visibility */
+    -webkit-appearance: none; /* Override default Webkit behavior */
   }
   .services-grid::-webkit-scrollbar-track {
     background: var(--light-bg);
-    border-radius: 5px;
+    border-radius: 4px;
     box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
   }
   .services-grid::-webkit-scrollbar-thumb {
     background: var(--primary-color);
-    border-radius: 5px;
+    border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    opacity: 1; /* Force visibility */
+    transition: background var(--transition-speed);
   }
   .services-grid::-webkit-scrollbar-thumb:hover {
     background: var(--primary-light);
   }
-  /* Enhanced Faux Scrollbar */
+
+  /* Faux Scrollbar Fallback for Mobile */
   .services-grid::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 10px;
+    height: 8px;
     background: linear-gradient(to right, transparent, var(--primary-color) 50%, transparent);
-    opacity: 0.8; /* More visible */
+    opacity: 0.5;
     pointer-events: none;
     z-index: 1;
   }
