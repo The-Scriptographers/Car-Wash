@@ -862,7 +862,7 @@ h2::after {
     padding-right: 1rem;
     -ms-overflow-style: scrollbar; /* Force scrollbar on Edge */
     scrollbar-width: thin; /* Firefox: thinner scrollbar */
-    scrollbar-color: var(--primary-light) var(--light-bg); /* Firefox color */
+    scrollbar-color: var(--hover-color) var(--light-bg); /* Firefox color */
     position: relative; /* For faux scrollbar */
   }
 
@@ -899,7 +899,7 @@ h2::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 350%;
     height: 8px;
     background-image: linear-gradient(to right, transparent, var(--primary-color) 50%, transparent);
     background-size: 200% 100%; /* Double the width for smooth looping */
