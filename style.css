@@ -911,7 +911,7 @@ h2::after {
   
   @keyframes moveLight {
     0% {
-      background-position: -60% 0; /* Start off-screen left */
+      background-position: -65% 0; /* Start off-screen left */
     }
     100% {
       background-position: 140% 0; /* End off-screen right */
