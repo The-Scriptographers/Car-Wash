@@ -523,18 +523,19 @@ h2::after {
   transform: scale(1.02);
   transition: var(--transition-speed);
 }
-.contact-info {
+contact-info {
   max-width: 400px;
-  text-align: center;
+  text-align:center;
   margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto; 
+  margin-right: auto; 
   color: #444;
   font-size: 16px;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
 }
+
 .contact-info.show {
   opacity: 1;
   transform: translateY(0);
