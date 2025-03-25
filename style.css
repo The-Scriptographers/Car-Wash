@@ -1225,7 +1225,7 @@ margin-left: 20px;
 }
 
 .reviews-page button:hover {
-  background-color: #D81E05;
+  background-color: #C71C05;
 }
 
 .reviews-page h2 {
@@ -1257,6 +1257,7 @@ margin-left: 20px;
 
 #dataList li:hover  {
   transform: scale(1.02);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* deeper shadow for hover-effect */
 }
 
 #dataList li strong {
@@ -1290,6 +1291,11 @@ margin-left: 20px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.review-item:hover {
+  transform: scale(1.02);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
 .review-item h3 {
   margin: 0;
   font-size: 18px;
@@ -1298,4 +1304,8 @@ margin-left: 20px;
 .review-item p {
   margin: 5px 0;
   color: #555;
+}
+
+#dataList li, .review-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transformation and shadow */
 }
