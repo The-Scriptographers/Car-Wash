@@ -893,30 +893,7 @@ h2::after {
     width: calc(100% - 1.6rem);
   }
   
-  /* Faux Scrollbar Fallback for Mobile */
-  .services-grid::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 350%;
-    height: 8px;
-    background-image: linear-gradient(to right, transparent, var(--primary-color) 50%, transparent);
-    background-size: 200% 100%; /* Double the width for smooth looping */
-    opacity: 0.5;
-    pointer-events: none;
-    z-index: 1;
-    animation: moveLight 3s linear infinite;
-  }
-  
-  @keyframes moveLight {
-    0% {
-      background-position: -65% 0; /* Start off-screen left */
-    }
-    100% {
-      background-position: 140% 0; /* End off-screen right */
-    }
-  }
+ 
 
   /* Extra Services List */
   .extra-services-list {
