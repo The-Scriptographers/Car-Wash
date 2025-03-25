@@ -280,12 +280,17 @@ function initializeBookingButtons() {
     });
 }
 
-// quote rotation
 function initializeQuoteRotation() {
-    const p = document.querySelector('.hero-content p');
-    if (!p) return;
+    // find the paragrap more carefully
+    const p = document.querySelector('.hero .hero-content p');
 
-    // Arrays with quotes that rotate
+    // if no paragraph is found, exit the function
+    if(!p) {
+        console.log('Quote rotation paragraph not found');
+        return;
+    }
+
+    // Define quotes
     const quotes = [
         "Skinnende bil, hver gang!",
         "Den ultimate bilpleieopplevelsen",
@@ -294,21 +299,26 @@ function initializeQuoteRotation() {
     ];
     let currentQuoteIndex = 0;
 
-    // Function for updating the quote with a fade-effect
+    // Rotation function
     function updateQuote() {
-        p.style.opacity = '0'; // Fade out the current quote
+        p.style.opacity = '0';
         setTimeout(() => {
             currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
             p.textContent = quotes[currentQuoteIndex];
-            p.style.opacity = '1'; // Fade in the new quote
-        }, 1000) // delay with a fade-out-animation
+            p.style.opacity = '1';
+        }, 1000);
     }
 
-    // make the first quote visible
+    // set iniital quote
+    p.textContent = quotes[currentQuoteIndex];
     p.style.opacity = '1';
-    // set interval to change quote every 5.second
+
+    // start rotation
     setInterval(updateQuote, 5000);
 }
+
+// Ensure it's called when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeQuoteRotation);
 
 // handles the view of testimonials (customer reviews) on the index page 
 function initializeTestimonials() {
