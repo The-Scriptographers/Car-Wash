@@ -259,47 +259,46 @@ function initializeAnimations() {
         animateOnScroll();
 }
 
-// Makes it possible for users to click "Bestill-time"/"Book an appointment"-button for starting a phonecall automatically
 document.addEventListener('DOMContentLoaded', function() {
-    // Centralized Booking Configuration
+    // centralized BOOKING configuration
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
-        defaultMessage: 'Hei, jeg vil gjerne bestille en time for .. (ex: utvendig og invendig vask).',
+        defaultMessage: 'Hei Jeg vil gjerne bestille en time for .. (ex: utvendig og innvendig vask).',
         buttonSelector: '.book-appointment-btn'
     };
 
     // Function to check if the device is mobile
     function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/.test(navigator.userAgent);
     }
 
-    // Create desktop popup
+    // create desktop popup
     const popup = document.createElement('div');
     popup.className = 'phone-popup';
     popup.innerHTML = `
-        <div class="popup-content">
-            <span class="close-popup">&times;</span>
-            <h3>En ren bil er bare ett telefonsamtale unna!</h3>
-            <p>Ring oss eller send en SMS, så finner vi et tidspunkt som passer deg:📞</p>
-            <p class="phone-number">${BOOKING_CONFIG.phoneNumber}</p>
-        </div>
+    <div class ="popup-content">
+        <span class="close-popup">&times;</span>
+        <h3>En ren bil er bare ett telefonsamtale unna!</h3>
+        <p>Ring oss eller send en SMS, så finner vi et tidspunkt som passer deg:📞</p>
+        <p class="phone-number">${BOOKING_CONFIG.phoneNumber}</p>
+    </div>
     `;
     document.body.appendChild(popup);
 
-    // Create mobile popup
+    // create mobile popup
     const mobilePopup = document.createElement('div');
     mobilePopup.className = 'mobile-choice-popup';
     mobilePopup.innerHTML = `
-        <div class="mobile-popup-content">
-            <span class="close-mobile-popup">×</span>
-            <h3>Ring meg eller send en melding med ønsket tidspunkt – jeg svarer deg så snart jeg kan! 😊</h3>
-            <button class="call-option">Ring nå</button>
-            <button class="message-option">Send melding</button>
-        </div>
+    <div class="mobile-popup-content">
+    <span class="close-mobile-popup">x</span>
+    <h3>Ring meg eller send en melding med ønsket tidspunkt - jeg svarer deg så snart jeg kan! 😊</h3>
+    <button class="call-option">Ring nå</button>
+    <button class="message-option">Send melding</button>
+    </div>
     `;
     document.body.appendChild(mobilePopup);
 
-    // Show desktop popup
+    // show desktop popup
     function showPopup() {
         popup.style.display = 'flex';
         setTimeout(() => {
@@ -317,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // Show mobile popup
+    // show mobile popup
     function showMobilePopup() {
         mobilePopup.style.display = 'flex';
         setTimeout(() => {
@@ -326,23 +325,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 10);
     }
 
-    // Hide mobile popup
+    // hide mobile popup
     function hideMobilePopup() {
         mobilePopup.querySelector('.mobile-popup-content').style.transform = 'translateY(-20px)';
         mobilePopup.querySelector('.mobile-popup-content').style.opacity = '0';
         setTimeout(() => {
-            mobilePopup.style.display = 'none';
+           mobilePopup.style.display = 'none'; 
         }, 300);
     }
 
-    // Setup booking buttons for all buttons with the specified class
+    // setup booking buttons for all buttons with the specified class
     function setupBookingButtons() {
         const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
-        
+
         bookingButtons.forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
-                
+
                 if (isMobileDevice()) {
                     showMobilePopup();
                 } else {
@@ -352,7 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mobile popup event listeners
+    // mobile popup event listeners
     mobilePopup.querySelector('.close-mobile-popup').addEventListener('click', hideMobilePopup);
     mobilePopup.addEventListener('click', function(e) {
         if (e.target === mobilePopup) {
@@ -360,28 +359,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Mobile option button events
+    // Mobilr option button events
     mobilePopup.querySelector('.call-option').addEventListener('click', () => {
-        window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+        window.location.href =`tel:${BOOKING_CONFIG.phoneNumber}`;
         hideMobilePopup();
     });
 
     mobilePopup.querySelector('.message-option').addEventListener('click', () => {
         window.location.href = `sms:${BOOKING_CONFIG.phoneNumber}?body=${encodeURIComponent(BOOKING_CONFIG.defaultMessage)}`;
-        hideMobilePopup();
+        hideMobilePopup()
     });
 
     // Desktop popup event listeners
     popup.querySelector('.close-popup').addEventListener('click', hidePopup);
     popup.addEventListener('click', function(e) {
-        if (e.target === popup) {
+        if(e.target === popup) {
             hidePopup();
         }
     });
-
-    // Call setup function
+    
+    // call setup function
     setupBookingButtons();
+
 });
+
 
 function initializeQuoteRotation() {
     // find the paragrap more carefully
