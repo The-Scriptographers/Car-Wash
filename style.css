@@ -94,12 +94,7 @@ body {
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
-#back-to-top {
-  font-family: Arial, sans-serif; /* Use a non-emoji font */
-  font-style: normal;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
+
 /* Navigation */
 .navbar {
   font-family: var(--heading-font);
