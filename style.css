@@ -463,40 +463,19 @@ h2::after {
   margin: 0.3rem 0;
 }
 
-/* Testimonials */
-.testimonials-grid {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.testimonial-card {
-  background: var(--bg-alt);
+#google-reviews {
+  max-width: 800px; 
+  margin: 0 auto;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
-  text-align: center;
-  display: none;
 }
-.testimonial-card:first-child {
-  display: block;
+
+.elfsight-app {
+  max-width: 600px; 
+  margin: 0 auto; 
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
 }
-.testimonial-card p {
-  font-style: italic;
-  margin-bottom: 10px;
-  color: var(--text-color);
-}
-.testimonial-card h4 {
-  font-weight: bold;
-  color: var(--primary-light);
-}
-.profile-pic {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
+
 
 /* Location */
 #location {
@@ -528,7 +507,7 @@ h2::after {
   text-align: center;
   margin-top: 20px;
   margin-left: auto;
-  margin-right: 0;
+  margin-right: auto;
   color: #444;
   font-size: 16px;
   opacity: 0;
@@ -538,6 +517,8 @@ h2::after {
 .contact-info.show {
   opacity: 1;
   transform: translateY(0);
+  max-width: 400px;
+
 }
 .contact-info p {
   margin: 10px 0;
@@ -548,46 +529,49 @@ h2::after {
 }
 
 /* About */
-
 .section-about {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 600px;
 }
-
-
 .about-image {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px; /* Litt plass rundt bildet */
+  margin-bottom: 20px;
+  width: 300px;
+  height: 300px;
+  border: 2px solid var(--primary-color);
+  box-shadow: var(--standard-shadow);
+  background: var(--light-bg);
+  padding: 3.5rem;
+  border-radius: 1.5px;
+  transition: var(--transition-speed), box-shadow 0.3s ease;
 }
-
 .about-image img {
-  border-radius: 15px; /* Runde hjørner */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Skygge for dybde */
-  max-width: 100%; /* Sikrer responsivitet */
-  height: auto;
+  max-width: 120%;
+  max-height: 120%;
+  object-fit: cover;
 }
-
+.about-image:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+}
 .about-text {
   font-size: 16px;
   line-height: 1.6;
   margin: 10px 0;
-  max-width: 600px;
 }
-
 .about-text b {
-display: block;
-margin: 15px 0 5px;
+  display: block;
+  margin: 15px 0 5px;
 }
-
 .about-text li {
-text-align: left;
-margin-left: 20px;
+  text-align: left;
+  margin-left: 20px;
 }
 
 /* Gallery and Slideshow */
