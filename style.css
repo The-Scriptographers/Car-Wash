@@ -928,11 +928,11 @@ margin-left: 20px;
 
   .nav-links {
     position: absolute;
-    top: 100%; 
-    right: 0; 
+    top: 100%;
+    right: 0;
     width: 100%;
     max-width: 100vw;
-    height: auto; 
+    height: auto;
     background: var(--primary-color);
     display: flex;
     flex-direction: column;
@@ -940,15 +940,18 @@ margin-left: 20px;
     justify-content: flex-start;
     padding: 5rem 0;
     opacity: 0;
-    transform: translateY(-20px);
-    transition: right 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    z-index: 999; /* Below navbar but above hero */
+    transform: translateY(-100%); /* Move it completely out of view initially */
+    visibility: hidden; /* Hide it from view and interaction */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0s 0.3s; /* Add visibility to transition */
+    z-index: 999;
   }
 
+  /* Show nav-links when toggle is checked */
   .nav-toggle:checked ~ .nav-links {
-    right: 0;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0); /* Slide it back into view */
+    visibility: visible; /* Make it visible and interactive */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0s 0s; /* Immediate visibility */
   }
 
   .nav-links li {
