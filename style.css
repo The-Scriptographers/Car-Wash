@@ -980,3 +980,126 @@ margin-left: 20px;
     background: var(--hover-color);
   }
 }
+/* Account & Reviews Section */
+.account-reviews-section {
+  padding: var(--section-padding);
+  background-color: var(--light-bg);
+}
+
+.account-reviews-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.account-management,
+#review-form-container,
+#reviews-list {
+  background: var(--white);
+  padding: var(--card-padding);
+  border-radius: 10px;
+  box-shadow: var(--standard-shadow);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.account-management h3,
+#review-form-container h3,
+#reviews-list h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-family: var(--heading-font);
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid var(--text-light);
+  border-radius: 5px;
+  font-family: var(--body-font);
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.auth-btn {
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.auth-btn:hover {
+  background-color: var(--primary-light);
+}
+
+.danger-btn {
+  background-color: var(--accent-color);
+}
+
+.danger-btn:hover {
+  background-color: var(--accent-dark);
+}
+
+/* Review Items */
+.review-item {
+  background: var(--bg-alt);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  position: relative;
+}
+
+.review-item h4 {
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.review-item p {
+  margin: 0.25rem 0;
+}
+
+.delete-review-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--accent-color);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.delete-review-btn:hover {
+  background: var(--accent-dark);
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .account-reviews-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .account-management,
+  #review-form-container,
+  #reviews-list {
+    max-width: 100%;
+  }
+}
