@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Account & Reviews Logic
     const signInForm = document.getElementById('sign-in-form');
     if (signInForm) {
+        const usernameInput = document.getElementById('username');
         const signedInDiv = document.getElementById('signed-in');
         const userEmailSpan = document.getElementById('user-email');
         const signInBtn = document.getElementById('sign-in-btn');
@@ -58,6 +59,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 signedInDiv.style.display = 'block';
                 reviewFormContainer.style.display = 'block';
                 userEmailSpan.textContent = user.email;
+
+                // retrieve username from the database
+                db.ref('users/' + user.uid).once('value')
+                .then((snapshot) => {
+                    if(snapshot.exists() && snapshot.val().username) {
+                        userUsernameSpan.textContent = snapshot.val().username;
+                    } else {
+                        userUsernameSpan.textContent = "Ukjent bruker";
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error fetching username: ', error);
+                    userUsernameSpan.textContent = "Ukjent bruker";
+                });
+
                 fetchReviews(user);
             } else {
                 signInForm.style.display = 'block';
@@ -71,10 +87,24 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Sign In clicked');
             const email = emailInput.value;
             const password = passwordInput.value;
+            const username = usernameInput.value;
             if (email && password) {
                 auth.signInWithEmailAndPassword(email, password)
                     .then((userCredential) => {
                         console.log('Logged in:', userCredential.user.email);
+
+                        // check if username exists, if not and the username is indicated, update it
+                        if (username) {
+                            db.ref('users/' + userCredential.user.uid).once('value')
+                            .then((snapshot) => {
+                                if(!snapshot.exists() || !snapshot.val().username) {
+                                    db.ref('users/' + userCredential.user.uid).update({
+                                        username: username,
+                                        email: email
+                                    });
+                                }
+                            });
+                        }
                     })
                     .catch((error) => {
                         console.error('Sign In Error:', error.message);
@@ -89,17 +119,24 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Sign Up clicked');
             const email = emailInput.value;
             const password = passwordInput.value;
-            if (email && password) {
+            const username = usernameInput.value;
+            if (email && password && username) {
                 auth.createUserWithEmailAndPassword(email, password)
                     .then((userCredential) => {
                         console.log('Account created:', userCredential.user.email);
+
+                        // save username in the database
+                        db.ref('users/' + userCredential.user.uid).set({
+                            username: username,
+                            email: email
+                        });
                     })
                     .catch((error) => {
                         console.error('Sign Up Error:', error.message);
                         alert('Feil ved registrering: ' + error.message);
                     });
             } else {
-                alert('Vennligst fyll ut både e-post og passord.');
+                alert('Vennligst fyll ut både e-post, brukernavn og passord.');
             }
         });
 
@@ -127,14 +164,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const comment = reviewComment.value;
 
             if (title && rating && comment) {
-                const reviewRef = db.ref('reviews').push();
-                reviewRef.set({
-                    title,
-                    rating,
-                    comment,
-                    userId: user.uid,
-                    userEmail: user.email,
-                    timestamp: Date.now()
+                // Retrieve users username before the review gets saved
+                db.ref('users/' + user.uid).once('value')
+                .then((snapshot) => {
+                    const username = snapshot.exists() && snapshot.val().username ?
+                    snapshot.val().username : "Ukjent bruker";
+
+                    const reviewRef = db.ref('reviews').push();
+                    return reviewRef.set({
+                        title,
+                        rating,
+                        comment,
+                        userId: user.uid,
+                        userEmail: user.email,
+                        username: username,
+                        timestamp: Date.now()
+                    });
                 })
                 .then(() => {
                     reviewTitle.value = '';
@@ -158,6 +203,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         const reviewKey = childSnapshot.key;
                         const reviewItem = document.createElement('div');
                         reviewItem.classList.add('review-item');
+                        
+                        // show username and the e-mail
+                        const displayName = review.username || "Ukjent bruker";
+
                         reviewItem.innerHTML = `
                             <h4>${review.title} (${review.rating}★)</h4>
                             <p><strong>Av:</strong> ${review.userEmail}</p>

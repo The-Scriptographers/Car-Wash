@@ -7,7 +7,11 @@
     <title>ULF's Bilpleie</title>
     <link rel="stylesheet" href="style.css" />
     <!-- Google Maps API (no callback needed for iframe) -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY" async defer></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"
+      async
+      defer
+    ></script>
     <!-- Firebase v9 Compatibility CDN -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -61,7 +65,10 @@
         <div class="service-card">
           <img src="images/polering.jpg" alt="Polering og Lakkbehandling" />
           <h3>Polering og Lakkbehandling</h3>
-          <p>Polering for en speilblank finish, lakkrens for å fjerne urenheter og keramisk coating for ekstra beskyttelse og langvarig glans.</p>
+          <p>
+            Polering for en speilblank finish, lakkrens for å fjerne urenheter
+            og keramisk coating for ekstra beskyttelse og langvarig glans.
+          </p>
         </div>
       </div>
     </section>
@@ -76,16 +83,25 @@
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d545.4969092014303!2d10.292344284119475!3d59.490622559520155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464135002b9a1b17%3A0x7cd4c7c32b7a6525!2sULF's%20Bilpleie!5e1!3m2!1sen!2sno!4v1737550180082!5m2!1sen!2sno"
               width="600"
               height="450"
-              style="border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"
+              style="
+                border: none;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+              "
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
           <div class="contact-info">
-            <p><strong>Adresse:</strong> Hvittingfossveien 129, 3085, Holmestrand</p>
-            <p><strong>Telefon:</strong> +47 404 98 499</p> 
-            <p><br><strong>Åpningstider:</strong><br>Fredag: 08:00 – 16:00<br>Lørdag: Stengt<br>Søndag: Stengt</p>
+            <p>
+              <strong>Adresse:</strong> Hvittingfossveien 129, 3085, Holmestrand
+            </p>
+            <p><strong>Telefon:</strong> +47 404 98 499</p>
+            <p>
+              <br /><strong>Åpningstider:</strong><br />Fredag: 08:00 – 16:00<br />Lørdag:
+              Stengt<br />Søndag: Stengt
+            </p>
           </div>
         </div>
       </div>
@@ -98,30 +114,46 @@
         <!-- Account Management -->
         <div class="account-management">
           <h3>Din Konto</h3>
-          
+
           <div id="auth-container">
             <div id="sign-in-form">
               <h4>Ny bruker? Registrer deg for å komme i gang!</h4>
               <input type="email" id="email" placeholder="E-post" />
+              <input type="text" id="username" placeholder="Brukernavn" />
               <input type="password" id="password" placeholder="Passord" />
               <button id="sign-in-btn" class="auth-btn">Logg Inn</button>
               <button id="sign-up-btn" class="auth-btn">Registrer Deg</button>
             </div>
-            <div id="signed-in" style="display: none;">
-              <p>Logget inn som: <span id="user-email"></span></p>
+            <div id="signed-in" style="display: none">
+              <p>
+                Logget inn som: <span id="user-username"></span> (<span
+                  id="user-email"
+                ></span
+                >)
+              </p>
               <button id="sign-out-btn" class="auth-btn">Logg Ut</button>
-              <button id="delete-account-btn" class="auth-btn danger-btn">Slett Konto</button>
+              <button id="delete-account-btn" class="auth-btn danger-btn">
+                Slett Konto
+              </button>
             </div>
           </div>
         </div>
 
         <!-- Review Form (Visible only when signed in) -->
-        <div id="review-form-container" style="display: none;">
+        <div id="review-form-container" style="display: none">
           <h3>Skriv en Anmeldelse</h3>
           <input type="text" id="review-title" placeholder="Tittel" />
-          <input type="number" id="review-rating" placeholder="Vurdering (1-5)" min="1" max="5" />
+          <input
+            type="number"
+            id="review-rating"
+            placeholder="Vurdering (1-5)"
+            min="1"
+            max="5"
+          />
           <textarea id="review-comment" placeholder="Din kommentar"></textarea>
-          <button id="submit-review-btn" class="auth-btn">Send Anmeldelse</button>
+          <button id="submit-review-btn" class="auth-btn">
+            Send Anmeldelse
+          </button>
         </div>
 
         <!-- Reviews List -->
@@ -156,7 +188,11 @@
           <h3>Følg meg på FaceBook</h3>
           <ul class="social-icons">
             <li>
-              <a href="https://www.facebook.com/profile.php?id=100063566292197" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.facebook.com/profile.php?id=100063566292197"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src="images/fb.png" alt="Facebook" />
               </a>
             </li>
