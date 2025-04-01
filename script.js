@@ -64,13 +64,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 db.ref('users/' + user.uid).once('value')
                 .then((snapshot) => {
                     if(snapshot.exists() && snapshot.val().username) {
+                        const userUsernameSpan = document.getElementById('user-username')
                         userUsernameSpan.textContent = snapshot.val().username;
                     } else {
+                        const userUsernameSpan = document.getElementById('user-username')
                         userUsernameSpan.textContent = "Ukjent bruker";
                     }
                 })
                 .catch((error) => {
                     console.error('Error fetching username: ', error);
+                    const userUsernameSpan = document.getElementById('user-username');
                     userUsernameSpan.textContent = "Ukjent bruker";
                 });
 
@@ -209,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         reviewItem.innerHTML = `
                             <h4>${review.title} (${review.rating}★)</h4>
-                            <p><strong>Av:</strong> ${review.userEmail}</p>
+                            <p><strong>Av:</strong> ${displayName} <br> ${review.userEmail}</p>
                             <p>${review.comment}</p>
                             ${review.userId === user.uid ? `<button class="delete-review-btn" data-key="${reviewKey}">X</button>` : ''}
                         `;
