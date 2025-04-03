@@ -546,14 +546,13 @@ function scrollToSection(sectionId) {
     }
 }
 
-// function for price calculator on tjenester page
 
-      // Calculate veiledende pris for services by "activating" the cards.
-      document.addEventListener('DOMContentLoaded', () => {
-        // CSS for selected state - move to CSS later.
-          const style = document.createElement('style');
-        
-        document.head.appendChild(style);
+// function for price calculator on tjenester page
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on the tjenester.html page
+    if (window.location.pathname.includes('tjenester.html') || window.location.pathname.endsWith('/tjenester')) {
+       
+  
         
         // Insert the price list
         const navbar = document.querySelector('.navbar');
@@ -640,4 +639,5 @@ function scrollToSection(sectionId) {
                 updateTotalPrice();
             });
         });
-    });
+    }
+});
