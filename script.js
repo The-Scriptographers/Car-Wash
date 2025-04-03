@@ -5,242 +5,10 @@ let slideInterval;
 let currentImages = [];
 let fullscreenIndex = 0;
 
-// Single DOMContentLoaded listener
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded');
 
-    // Firebase Initialization
-    const firebaseConfig = {
-        apiKey: "AIzaSyAC9egaN5uRkl64eftsMrcW8riKrpLVN5A",
-        authDomain: "ulfsbilpleie-5b706.firebaseapp.com",
-        databaseURL: "https://ulfsbilpleie-5b706-default-rtdb.firebaseio.com",
-        projectId: "ulfsbilpleie-5b706",
-        storageBucket: "ulfsbilpleie-5b706.firebasestorage.app",
-        messagingSenderId: "175974074415",
-        appId: "1:175974074415:web:b2da1ea0aecce48caa9eda"
-    };
-
-    try {
-        firebase.initializeApp(firebaseConfig);
-        console.log('Firebase initialized');
-    } catch (error) {
-        console.error('Firebase init error:', error);
-    }
-
-    const auth = firebase.auth();
-    const db = firebase.database();
-
-    // Account & Reviews Logic
-    const signInForm = document.getElementById('sign-in-form');
-    if (signInForm) {
-        const usernameInput = document.getElementById('username');
-        const signedInDiv = document.getElementById('signed-in');
-        const userEmailSpan = document.getElementById('user-email');
-        const signInBtn = document.getElementById('sign-in-btn');
-        const signUpBtn = document.getElementById('sign-up-btn');
-        const signOutBtn = document.getElementById('sign-out-btn');
-        const deleteAccountBtn = document.getElementById('delete-account-btn');
-        const reviewFormContainer = document.getElementById('review-form-container');
-        const submitReviewBtn = document.getElementById('submit-review-btn');
-        const reviewsData = document.getElementById('reviews-data');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const reviewTitle = document.getElementById('review-title');
-        const reviewRating = document.getElementById('review-rating');
-        const reviewComment = document.getElementById('review-comment');
-
-        console.log('Sign In Button:', signInBtn);
-        console.log('Sign Up Button:', signUpBtn);
-
-        auth.onAuthStateChanged((user) => {
-            console.log('Auth state:', user ? user.email : 'No user');
-            if (user) {
-                signInForm.style.display = 'none';
-                signedInDiv.style.display = 'block';
-                reviewFormContainer.style.display = 'block';
-                userEmailSpan.textContent = user.email;
-
-                // retrieve username from the database
-                db.ref('users/' + user.uid).once('value')
-                .then((snapshot) => {
-                    if(snapshot.exists() && snapshot.val().username) {
-                        const userUsernameSpan = document.getElementById('user-username')
-                        userUsernameSpan.textContent = snapshot.val().username;
-                    } else {
-                        const userUsernameSpan = document.getElementById('user-username')
-                        userUsernameSpan.textContent = "Ukjent bruker";
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error fetching username: ', error);
-                    const userUsernameSpan = document.getElementById('user-username');
-                    userUsernameSpan.textContent = "Ukjent bruker";
-                });
-
-                fetchReviews(user);
-            } else {
-                signInForm.style.display = 'block';
-                signedInDiv.style.display = 'none';
-                reviewFormContainer.style.display = 'none';
-                reviewsData.innerHTML = '<p>Logg inn for å se og skrive anmeldelser.</p>';
-            }
-        });
-
-        signInBtn.addEventListener('click', () => {
-            console.log('Sign In clicked');
-            const email = emailInput.value;
-            const password = passwordInput.value;
-            const username = usernameInput.value;
-            if (email && password) {
-                auth.signInWithEmailAndPassword(email, password)
-                    .then((userCredential) => {
-                        console.log('Logged in:', userCredential.user.email);
-
-                        // check if username exists, if not and the username is indicated, update it
-                        if (username) {
-                            db.ref('users/' + userCredential.user.uid).once('value')
-                            .then((snapshot) => {
-                                if(!snapshot.exists() || !snapshot.val().username) {
-                                    db.ref('users/' + userCredential.user.uid).update({
-                                        username: username,
-                                        email: email
-                                    });
-                                }
-                            });
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Sign In Error:', error.message);
-                        alert('Feil ved innlogging: ' + error.message);
-                    });
-            } else {
-                alert('Vennligst fyll ut både e-post og passord.');
-            }
-        });
-
-        signUpBtn.addEventListener('click', () => {
-            console.log('Sign Up clicked');
-            const email = emailInput.value;
-            const password = passwordInput.value;
-            const username = usernameInput.value;
-            if (email && password && username) {
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then((userCredential) => {
-                        console.log('Account created:', userCredential.user.email);
-
-                        // save username in the database
-                        db.ref('users/' + userCredential.user.uid).set({
-                            username: username,
-                            email: email
-                        });
-                    })
-                    .catch((error) => {
-                        console.error('Sign Up Error:', error.message);
-                        alert('Feil ved registrering: ' + error.message);
-                    });
-            } else {
-                alert('Vennligst fyll ut både e-post, brukernavn og passord.');
-            }
-        });
-
-        signOutBtn.addEventListener('click', () => {
-            auth.signOut()
-                .then(() => console.log('Logged out'))
-                .catch((error) => alert('Feil ved utlogging: ' + error.message));
-        });
-
-        deleteAccountBtn.addEventListener('click', () => {
-            if (confirm('Er du sikker på at du vil slette kontoen din?')) {
-                const user = auth.currentUser;
-                user.delete()
-                    .then(() => console.log('Account deleted'))
-                    .catch((error) => alert('Feil ved sletting av konto: ' + error.message));
-            }
-        });
-
-        submitReviewBtn.addEventListener('click', () => {
-            const user = auth.currentUser;
-            if (!user) return;
-
-            const title = reviewTitle.value;
-            const rating = reviewRating.value;
-            const comment = reviewComment.value;
-
-            if (title && rating && comment) {
-                // Retrieve users username before the review gets saved
-                db.ref('users/' + user.uid).once('value')
-                .then((snapshot) => {
-                    const username = snapshot.exists() && snapshot.val().username ?
-                    snapshot.val().username : "Ukjent bruker";
-
-                    const reviewRef = db.ref('reviews').push();
-                    return reviewRef.set({
-                        title,
-                        rating,
-                        comment,
-                        userId: user.uid,
-                        userEmail: user.email,
-                        username: username,
-                        timestamp: Date.now()
-                    });
-                })
-                .then(() => {
-                    reviewTitle.value = '';
-                    reviewRating.value = '';
-                    reviewComment.value = '';
-                    console.log('Review submitted');
-                })
-                .catch((error) => alert('Feil ved innsending: ' + error.message));
-            } else {
-                alert('Fyll ut alle felt!');
-            }
-        });
-
-        function fetchReviews(user) {
-            const reviewsRef = db.ref('reviews');
-            reviewsRef.on('value', (snapshot) => {
-                reviewsData.innerHTML = '';
-                if (snapshot.exists()) {
-                    snapshot.forEach((childSnapshot) => {
-                        const review = childSnapshot.val();
-                        const reviewKey = childSnapshot.key;
-                        const reviewItem = document.createElement('div');
-                        reviewItem.classList.add('review-item');
-                        
-                        // show username and the e-mail
-                        const displayName = review.username || "Ukjent bruker";
-
-                        reviewItem.innerHTML = `
-                            <h4>${review.title} (${review.rating}★)</h4>
-                            <p><strong>Av:</strong> ${displayName} <br> ${review.userEmail}</p>
-                            <p>${review.comment}</p>
-                            ${review.userId === user.uid ? `<button class="delete-review-btn" data-key="${reviewKey}">X</button>` : ''}
-                        `;
-                        reviewsData.appendChild(reviewItem);
-                    });
-
-                    document.querySelectorAll('.delete-review-btn').forEach((btn) => {
-                        btn.addEventListener('click', () => {
-                            const reviewKey = btn.getAttribute('data-key');
-                            if (confirm('Er du sikker på at du vil slette denne anmeldelsen?')) {
-                                db.ref(`reviews/${reviewKey}`).remove()
-                                    .then(() => console.log('Review deleted'))
-                                    .catch((error) => alert('Feil ved sletting: ' + error.message));
-                            }
-                        });
-                    });
-                } else {
-                    reviewsData.innerHTML = '<p>Ingen anmeldelser ennå.</p>';
-                }
-            }, (error) => {
-                console.error('Error fetching reviews:', error);
-            });
-        }
-    } else {
-        console.log('Sign-in form not found on this page');
-    }
-
-    // Initialize other features
+    // Non-Firebase features (run on all pages)
     initializeSlideshow();
     initializeGallery();
     initializeAnimations();
@@ -250,13 +18,18 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeBookingButtons();
     initializeQuoteRotation();
     initializeTestimonials();
-    initializeReviews();
+
+    // Firebase-dependent review system (only for index.html)
+    initializeFirebaseAndReviews();
 });
 
-// Slideshow functionality
+// Slideshow functionality (from main branch, with fixes)
 function initializeSlideshow() {
     slides = document.querySelectorAll(".slide");
-    if (slides.length === 0) return;
+    if (!slides || slides.length === 0) {
+        console.log("No slides found");
+        return;
+    }
 
     slideIndex = 0;
     slides[slideIndex].classList.add("active");
@@ -277,10 +50,13 @@ function initializeSlideshow() {
     };
 }
 
-// Gallery functionality with fullscreen view
+// Gallery functionality (from main branch)
 function initializeGallery() {
     const fullscreenOverlay = document.getElementById("fullscreenOverlay");
-    if (!fullscreenOverlay) return;
+    if (!fullscreenOverlay) {
+        console.log("Fullscreen overlay not found");
+        return;
+    }
 
     let slides = document.querySelectorAll(".slide img");
     let galleryImages = document.querySelectorAll(".gallery-img");
@@ -333,74 +109,218 @@ function initializeGallery() {
     });
 }
 
-// Firebase reviews functionality (for older review system, if still needed)
-function initializeReviews() {
-    const titleInput = document.getElementById("title");
-    const ratingInput = document.getElementById("rating");
-    const reviewerInput = document.getElementById("reviewer");
-    const commentInput = document.getElementById("comment");
-    const addButton = document.getElementById("addButton");
-    const dataList = document.getElementById("dataList");
-
-    if (!titleInput || !ratingInput || !reviewerInput || !commentInput || !addButton || !dataList) {
+// Firebase and Advanced Reviews (from first version)
+function initializeFirebaseAndReviews() {
+    // Only run if review-related elements exist (specific to index.html)
+    if (!document.getElementById('sign-in-form') && !document.getElementById('reviews-data')) {
+        console.log('No review elements found. Skipping Firebase.');
         return;
     }
 
-    addButton.addEventListener("click", () => {
-        const title = titleInput.value;
-        const rating = ratingInput.value;
-        const reviewer = reviewerInput.value;
-        const comment = commentInput.value;
+    if (typeof firebase === 'undefined') {
+        console.log('Firebase SDK not loaded. Skipping reviews.');
+        return;
+    }
 
-        if (title && rating && reviewer && comment) {
-            const newReviewKey = firebase.database().ref('reviews').push().key;
-            firebase.database().ref('reviews/' + newReviewKey).set({
-                title: title,
-                rating: rating,
-                reviewer: reviewer,
-                comment: comment
-            })
-            .then(() => {
-                console.log("Anmeldelse lagt til:", title);
-                titleInput.value = "";
-                ratingInput.value = "";
-                reviewerInput.value = "";
-                commentInput.value = "";
-                fetchData();
-            })
-            .catch(error => console.error("Feil ved lagring:", error));
-        } else {
-            console.log("Alle felt må fylles ut!");
+    const firebaseConfig = {
+        apiKey: "AIzaSyAC9egaN5uRkl64eftsMrcW8riKrpLVN5A",
+        authDomain: "ulfsbilpleie-5b706.firebaseapp.com",
+        databaseURL: "https://ulfsbilpleie-5b706-default-rtdb.firebaseio.com",
+        projectId: "ulfsbilpleie-5b706",
+        storageBucket: "ulfsbilpleie-5b706.firebasestorage.app",
+        messagingSenderId: "175974074415",
+        appId: "1:175974074415:web:b2da1ea0aecce48caa9eda"
+    };
+
+    try {
+        firebase.initializeApp(firebaseConfig);
+        console.log('Firebase initialized');
+    } catch (error) {
+        console.error('Firebase init error:', error);
+        return;
+    }
+
+    const auth = firebase.auth();
+    const db = firebase.database();
+
+    const signInForm = document.getElementById('sign-in-form');
+    if (signInForm) {
+        const usernameInput = document.getElementById('username');
+        const signedInDiv = document.getElementById('signed-in');
+        const userEmailSpan = document.getElementById('user-email');
+        const signInBtn = document.getElementById('sign-in-btn');
+        const signUpBtn = document.getElementById('sign-up-btn');
+        const signOutBtn = document.getElementById('sign-out-btn');
+        const deleteAccountBtn = document.getElementById('delete-account-btn');
+        const reviewFormContainer = document.getElementById('review-form-container');
+        const submitReviewBtn = document.getElementById('submit-review-btn');
+        const reviewsData = document.getElementById('reviews-data');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const reviewTitle = document.getElementById('review-title');
+        const reviewRating = document.getElementById('review-rating');
+        const reviewComment = document.getElementById('review-comment');
+
+        // Fetch reviews immediately, even before login
+        fetchReviews(null); // Start with no user logged in
+
+        // Handle authentication state changes
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                signInForm.style.display = 'none';
+                signedInDiv.style.display = 'block';
+                reviewFormContainer.style.display = 'block';
+                userEmailSpan.textContent = user.email;
+
+                db.ref('users/' + user.uid).once('value')
+                    .then((snapshot) => {
+                        const userUsernameSpan = document.getElementById('user-username');
+                        userUsernameSpan.textContent = snapshot.exists() && snapshot.val().username ? snapshot.val().username : "Ukjent bruker";
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching username:', error);
+                        document.getElementById('user-username').textContent = "Ukjent bruker";
+                    });
+
+                fetchReviews(user); // Refresh reviews with user logged in (to show delete buttons)
+            } else {
+                signInForm.style.display = 'block';
+                signedInDiv.style.display = 'none';
+                reviewFormContainer.style.display = 'none';
+                // No need to clear reviewsData here; reviews stay visible
+            }
+        });
+
+        signInBtn.addEventListener('click', () => {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const username = usernameInput.value;
+            if (email && password) {
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        if (username) {
+                            db.ref('users/' + userCredential.user.uid).update({
+                                username: username,
+                                email: email
+                            });
+                        }
+                    })
+                    .catch((error) => alert('Feil ved innlogging: ' + error.message));
+            } else {
+                alert('Vennligst fyll ut både e-post og passord.');
+            }
+        });
+
+        signUpBtn.addEventListener('click', () => {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const username = usernameInput.value;
+            if (email && password && username) {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        db.ref('users/' + userCredential.user.uid).set({
+                            username: username,
+                            email: email
+                        });
+                    })
+                    .catch((error) => alert('Feil ved registrering: ' + error.message));
+            } else {
+                alert('Vennligst fyll ut både e-post, brukernavn og passord.');
+            }
+        });
+
+        signOutBtn.addEventListener('click', () => {
+            auth.signOut().catch((error) => alert('Feil ved utlogging: ' + error.message));
+        });
+
+        deleteAccountBtn.addEventListener('click', () => {
+            if (confirm('Er du sikker på at du vil slette kontoen din?')) {
+                auth.currentUser.delete().catch((error) => alert('Feil ved sletting: ' + error.message));
+            }
+        });
+
+        submitReviewBtn.addEventListener('click', () => {
+            const user = auth.currentUser;
+            if (!user) {
+                alert('Du må logge inn for å skrive en anmeldelse!');
+                return;
+            }
+
+            const title = reviewTitle.value;
+            const rating = reviewRating.value;
+            const comment = reviewComment.value;
+
+            if (title && rating && comment) {
+                db.ref('users/' + user.uid).once('value')
+                    .then((snapshot) => {
+                        const username = snapshot.exists() && snapshot.val().username ? snapshot.val().username : "Ukjent bruker";
+                        const reviewRef = db.ref('reviews').push();
+                        return reviewRef.set({
+                            title,
+                            rating,
+                            comment,
+                            userId: user.uid,
+                            userEmail: user.email,
+                            username: username,
+                            timestamp: Date.now()
+                        });
+                    })
+                    .then(() => {
+                        reviewTitle.value = '';
+                        reviewRating.value = '';
+                        reviewComment.value = '';
+                    })
+                    .catch((error) => alert('Feil ved innsending: ' + error.message));
+            } else {
+                alert('Fyll ut alle felt!');
+            }
+        });
+
+        // Fetch and display reviews, with optional user for delete buttons
+        function fetchReviews(user) {
+            const reviewsRef = db.ref('reviews');
+            reviewsRef.on('value', (snapshot) => {
+                reviewsData.innerHTML = '';
+                if (snapshot.exists()) {
+                    snapshot.forEach((childSnapshot) => {
+                        const review = childSnapshot.val();
+                        const reviewKey = childSnapshot.key;
+                        const reviewItem = document.createElement('div');
+                        reviewItem.classList.add('review-item');
+                        const displayName = review.username || "Ukjent bruker";
+                        // Show delete button only if user is logged in and owns the review
+                        const deleteButton = (user && review.userId === user.uid) 
+                            ? `<button class="delete-review-btn" data-key="${reviewKey}">X</button>` 
+                            : '';
+                        reviewItem.innerHTML = `
+                            <h4>${review.title} (${review.rating}★)</h4>
+                            <p><strong>Av:</strong> ${displayName} <br> ${review.userEmail}</p>
+                            <p>${review.comment}</p>
+                            ${deleteButton}
+                        `;
+                        reviewsData.appendChild(reviewItem);
+                    });
+
+                    // Add delete button functionality only if user is logged in
+                    if (user) {
+                        document.querySelectorAll('.delete-review-btn').forEach((btn) => {
+                            btn.addEventListener('click', () => {
+                                const reviewKey = btn.getAttribute('data-key');
+                                if (confirm('Er du sikker på at du vil slette denne anmeldelsen?')) {
+                                    db.ref(`reviews/${reviewKey}`).remove();
+                                }
+                            });
+                        });
+                    }
+                } else {
+                    reviewsData.innerHTML = '<p>Ingen anmeldelser ennå.</p>';
+                }
+            }, (error) => console.error('Error fetching reviews:', error));
         }
-    });
-
-    fetchData();
+    }
 }
 
-function fetchData() {
-    const dataList = document.getElementById("dataList");
-    if (!dataList) return;
-
-    const reviewsRef = firebase.database().ref('reviews');
-    reviewsRef.once('value').then(snapshot => {
-        if (snapshot.exists()) {
-            dataList.innerHTML = "";
-            snapshot.forEach(childSnapshot => {
-                const review = childSnapshot.val();
-                const reviewItem = document.createElement("div");
-                reviewItem.classList.add("review-item");
-                reviewItem.innerHTML = `<h3>${review.title} (${review.rating}★)</h3>
-                    <p><strong>Kunde:</strong> ${review.reviewer}</p>
-                    <p><strong>Kommentar: </strong>${review.comment}</p>`;
-                dataList.appendChild(reviewItem);
-            });
-        } else {
-            console.log("Ingen anmeldelser funnet");
-        }
-    }).catch(error => console.error("Feil ved henting:", error));
-}
-
-// Initialize animations
+// Other functions (from main branch, unchanged)
 function initializeAnimations() {
     const logo = document.getElementById('logo');
     if (logo) {
@@ -416,7 +336,72 @@ function initializeAnimations() {
     animateOnScroll();
 }
 
-// Booking Buttons
+function initializeScrollEffects() {
+    const nav = document.querySelector("nav");
+    if (nav) {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) nav.classList.add("scrolled");
+            else nav.classList.remove("scrolled");
+        });
+    }
+
+    const backToTop = document.getElementById("back-to-top");
+    if (backToTop) {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 200) backToTop.style.display = "block";
+            else backToTop.style.display = "none";
+        });
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+
+    window.addEventListener("scroll", animateOnScroll);
+
+    const contactInfo = document.querySelector('.contact-info');
+    if (contactInfo) {
+        function checkAnimation() {
+            const rect = contactInfo.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.8) contactInfo.classList.add('show');
+        }
+        window.addEventListener('scroll', checkAnimation);
+        window.addEventListener('load', checkAnimation);
+    }
+}
+
+function animateOnScroll() {
+    const sections = document.querySelectorAll(".section, .section-about, .container, .slideshow-container, .gallery-container");
+    if (!sections.length) return;
+    const triggerBottom = window.innerHeight * 0.8;
+
+    sections.forEach((section) => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < triggerBottom) {
+            section.classList.add("visible");
+            section.style.opacity = '1';
+            section.style.transform = 'translateY(0)';
+            section.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
+        } else {
+            section.classList.remove("visible");
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'none';
+        }
+    });
+}
+
+function initializeServiceCards() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card) => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => window.location.href = 'tjenester.html');
+    });
+}
+
+function initializeNavigation() {
+    // Add navigation-specific logic if needed
+}
+
 function initializeBookingButtons() {
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
@@ -505,7 +490,6 @@ function initializeBookingButtons() {
     });
 }
 
-// Quote Rotation
 function initializeQuoteRotation() {
     const p = document.querySelector('.hero .hero-content p');
     if (!p) return;
@@ -532,7 +516,6 @@ function initializeQuoteRotation() {
     setInterval(updateQuote, 5000);
 }
 
-// Testimonials
 function initializeTestimonials() {
     const testimonials = document.querySelectorAll(".testimonial-card");
     if (testimonials.length === 0) return;
@@ -553,79 +536,4 @@ function initializeTestimonials() {
 
     setInterval(nextTestimonial, 9000);
     showTestimonial(currentTestimonial);
-}
-
-// Scroll Effects
-function initializeScrollEffects() {
-    const nav = document.querySelector("nav");
-    if (nav) {
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 50) nav.classList.add("scrolled");
-            else nav.classList.remove("scrolled");
-        });
-    }
-
-    const backToTop = document.getElementById("back-to-top");
-    if (backToTop) {
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 200) backToTop.style.display = "block";
-            else backToTop.style.display = "none";
-        });
-        backToTop.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-    }
-
-    window.addEventListener("scroll", animateOnScroll);
-
-    const contactInfo = document.querySelector('.contact-info');
-    if (contactInfo) {
-        function checkAnimation() {
-            const rect = contactInfo.getBoundingClientRect();
-            if (rect.top <= window.innerHeight * 0.8) contactInfo.classList.add('show');
-        }
-        window.addEventListener('scroll', checkAnimation);
-        window.addEventListener('load', checkAnimation);
-    }
-}
-
-// Animate on Scroll
-function animateOnScroll() {
-    const sections = document.querySelectorAll(".section, .section-about, .container, .slideshow-container, .gallery-container");
-    const triggerBottom = window.innerHeight * 0.8;
-
-    sections.forEach((section) => {
-        const sectionTop = section.getBoundingClientRect().top;
-        if (sectionTop < triggerBottom) {
-            section.classList.add("visible");
-            section.style.opacity = '1';
-            section.style.transform = 'translateY(0)';
-            section.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
-        } else {
-            section.classList.remove("visible");
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(50px)';
-            section.style.transition = 'none';
-        }
-    });
-}
-
-// Service Cards
-function initializeServiceCards() {
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach((card) => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', () => window.location.href = 'tjenester.html');
-    });
-}
-
-// Navigation
-function initializeNavigation() {
-    // Add navigation-specific logic here if needed
-}
-
-// Scroll to Section
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
 }
