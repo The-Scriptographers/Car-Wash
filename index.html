@@ -4,22 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="images/fav.png" />
+    <title>ULF's Bilpleie</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Maps API (no callback needed for iframe) -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"
       async
       defer
     ></script>
-    <title>ULF's Bilpleie</title>
-    <link rel="stylesheet" href="style.css" />
+    <!-- Firebase v9 Compatibility CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
   </head>
   <body>
+    <!-- Your existing HTML remains unchanged -->
     <!-- Header Section -->
     <header class="hero">
       <div class="hero-content">
         <h1>Ulf's Bilpleie</h1>
         <p>Velkommen til Ulfs Bilpleie</p>
         <a href="#" class="book-appointment-btn">Bestill Time</a>
-        <!--<button onclick="scrollToSection('services')">Bestill Time</button> -->
         <div class="scroll-down"></div>
       </div>
     </header>
@@ -35,20 +40,18 @@
           <span></span>
         </label>
         <ul class="nav-links">
-          <li><a href="tjenester.html">Tjenester</a></li>
-          <li><a href="om-meg.html">Om Meg</a></li>
-          <li><a href="kontakt.html">Ta Kontakt</a></li>
-          <li><a href="fotogalleri.html">Fotogalleri</a></li>
-          <li><a href="reviews.html">Anmeldelser</a></li>
+          <li><a href="/tjenester">Tjenester</a></li>
+          <li><a href="/om-meg">Om Meg</a></li>
+          <li><a href="/kontakt">Ta Kontakt</a></li>
+          <li><a href="/fotogalleri">Fotogalleri</a></li>
         </ul>
       </div>
     </nav>
+
     <!-- Services Section -->
     <section id="services" class="section">
       <h2>Mine Tjenester</h2>
-      
       <div class="services-grid">
-        
         <div class="service-card">
           <img src="images/utvendig.jpg" alt="Utvendig Vask" />
           <h3>Utvendig Vask</h3>
@@ -66,9 +69,7 @@
             Polering for en speilblank finish, lakkrens for å fjerne urenheter
             og keramisk coating for ekstra beskyttelse og langvarig glans.
           </p>
-          
         </div>
-        
       </div>
     </section>
 
@@ -76,14 +77,10 @@
     <section id="location" class="section">
       <div class="location-container">
         <h2>Lokasjon</h2>
-
         <div class="location-info">
           <div class="map-container">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d545
-            .4969092014303!2d10.292344284119475!3d59.490622559520155!2m3!1f0!2f0!3f0
-            !3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464135002b9a1b17%3A0x7cd4c7c32b7a6525!2sULF&#39;s%2
-            0Bilpleie!5e1!3m2!1sen!2sno!4v1737550180082!5m2!1sen!2sno"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d545.4969092014303!2d10.292344284119475!3d59.490622559520155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464135002b9a1b17%3A0x7cd4c7c32b7a6525!2sULF's%20Bilpleie!5e1!3m2!1sen!2sno!4v1737550180082!5m2!1sen!2sno"
               width="600"
               height="450"
               style="
@@ -95,66 +92,74 @@
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
-           </div>
+          </div>
           <div class="contact-info">
-            <p><strong>Adresse:</strong> Hvittingfossveien 129, 3085, Holmestrand</p>
-            <p><strong>Telefon:</strong> +47 404 98 499</p> 
             <p>
-              <br>
-              <strong>Åpningstider:</strong><br>
-              Fredag: 08:00 – 16:00<br>
-              Lørdag: Stengt<br>
-              Søndag: Stengt
+              <strong>Adresse:</strong> Hvittingfossveien 129, 3085, Holmestrand
+            </p>
+            <p><strong>Telefon:</strong> +47 404 98 499</p>
+            <p>
+              <br /><strong>Åpningstider:</strong><br />Fredag: 08:00 – 16:00<br />Lørdag:
+              Stengt<br />Søndag: Stengt
             </p>
           </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
-      <h2>Tilbakemeldinger Fra Kundene Mine</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/032/176/191/non_2x/business-avatar-profile-black-icon-man-of-user-symbol-in-trendy-flat-style-isolated-on-male-profile-people-diverse-face-for-social-network-or-web-vector.jpg"
-            alt="John Doe's Profile Picture"
-            class="profile-pic"
-          />
-          <p>
-            "Kan anbefales videre. Bilen får en nøye behandling både innvendig
-            og utvendig. Vi var strålende fornøyd😃."
-          </p>
-          <div class="star-rating">⭐⭐⭐⭐⭐</div>
-          <h4>- Thomas H.</h4>
+    <!-- Reviews and Account Section -->
+    <section id="account-reviews" class="section account-reviews-section">
+      <h2>Konto & Anmeldelser</h2>
+      <div class="account-reviews-container">
+        <!-- Account Management -->
+        <div class="account-management">
+          <h3>Din Konto</h3>
+
+          <div id="auth-container">
+            <div id="sign-in-form">
+              <h4>Ny bruker? Registrer deg for å komme i gang!</h4>
+              <input type="email" id="email" placeholder="E-post" />
+              <input type="text" id="username" placeholder="Brukernavn" />
+              <input type="password" id="password" placeholder="Passord" />
+              <button id="sign-in-btn" class="auth-btn">Logg Inn</button>
+              <button id="sign-up-btn" class="auth-btn">Registrer Deg</button>
+            </div>
+            <div id="signed-in" style="display: none">
+              <p>
+                <strong> Logget inn som:</strong> <br /><span
+                  id="user-username"
+                ></span>
+                <br />(<span id="user-email"></span>)
+              </p>
+              <button id="sign-out-btn" class="auth-btn">Logg Ut</button>
+              <button id="delete-account-btn" class="auth-btn danger-btn">
+                Slett Konto
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div class="testimonial-card">
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/032/176/191/non_2x/business-avatar-profile-black-icon-man-of-user-symbol-in-trendy-flat-style-isolated-on-male-profile-people-diverse-face-for-social-network-or-web-vector.jpg"
-            alt="John Doe's Profile Picture"
-            class="profile-pic"
+        <!-- Review Form (Visible only when signed in) -->
+        <div id="review-form-container" style="display: none">
+          <h3>Skriv en Anmeldelse</h3>
+          <input type="text" id="review-title" placeholder="Tittel" />
+          <input
+            type="number"
+            id="review-rating"
+            placeholder="Vurdering (1-5)"
+            min="1"
+            max="5"
           />
-          <p>
-            "Leverte inn bil som trengte en real vask både innvendig og utvendig
-            (du vet, vinter, grus og sand, unger, hund og så videre). Kjørte
-            hjem igjen i det som så ut som og føltes som ny bil. Strøkent
-            resultat og suveren service. Kommer tilbake!"
-          </p>
-          <div class="star-rating">⭐⭐⭐⭐⭐</div>
-          <h4>- Vibeke B.</h4>
+          <textarea id="review-comment" placeholder="Din kommentar"></textarea>
+          <button id="submit-review-btn" class="auth-btn">
+            Send Anmeldelse
+          </button>
         </div>
 
-        <div class="testimonial-card">
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/032/176/191/non_2x/business-avatar-profile-black-icon-man-of-user-symbol-in-trendy-flat-style-isolated-on-male-profile-people-diverse-face-for-social-network-or-web-vector.jpg"
-            alt="John Doe's Profile Picture"
-            class="profile-pic"
-          />
-          <p>
-            "Meget bra bilpleie. Leverer et solid resultat, det er ingen grunn
-            for å dra andre plasser 😀 konkurransedyktig pris og service."
-          </p>
-          <div class="star-rating">⭐⭐⭐⭐⭐</div>
-          <h4>- Roy-Erik M</h4>
+        <!-- Reviews List -->
+        <div id="reviews-list">
+          <h3>Anmeldelser</h3>
+          <div id="reviews-data"></div>
         </div>
       </div>
     </section>
@@ -177,7 +182,6 @@
             <li><a href="om-meg.html">Om Meg</a></li>
             <li><a href="kontakt.html">Ta Kontakt</a></li>
             <li><a href="fotogalleri.html">Fotogalleri</a></li>
-            <li><a href="reviews.html">Anmeldelser</a></li>
           </ul>
         </div>
         <div class="footer-section">
@@ -188,19 +192,20 @@
                 href="https://www.facebook.com/profile.php?id=100063566292197"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><img src="images/fb.png" alt="Facebook"
-              /></a>
+              >
+                <img src="images/fb.png" alt="Facebook" />
+              </a>
             </li>
             <span>Ulf's Bilpleie</span>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 ULF's Bilpleie. Alle rettigheter forbeholdt.</p>
+        <p>© 2025 ULF's Bilpleie. Alle rettigheter forbeholdt.</p>
       </div>
     </footer>
 
     <!-- Main JavaScript file -->
-    <script src="script.js" type="module"></script>
+    <script src="script.js"></script>
   </body>
 </html>
