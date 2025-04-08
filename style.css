@@ -991,7 +991,7 @@ margin-left: 20px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1.5rem; /* Reduced gap for smaller screens */
   justify-content: center;
 }
 
@@ -1006,6 +1006,19 @@ margin-left: 20px;
   max-width: 400px;
   height: 100%;
   text-align: center;
+}
+
+/* Modified #reviews-list to add scrolling */
+#reviews-list {
+  max-height: 400px; /* Default height for larger screens */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Ensure other sections remain unaffected */
+.account-management,
+#review-form-container {
+  max-width: 400px;
 }
 
 .account-management h3,
@@ -1024,11 +1037,11 @@ textarea {
   border: 1px solid var(--text-light);
   border-radius: 5px;
   font-family: var(--body-font);
-  font-size: 1rem;
+  font-size: 1rem; /* Base font size */
 }
 
 textarea {
-  min-height: 100px;
+  min-height: 80px; /* Slightly smaller default height for mobile */
   resize: vertical;
 }
 
@@ -1075,14 +1088,14 @@ textarea {
 
 .delete-review-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   background: var(--accent-color);
   color: var(--white);
   border: none;
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 30px; /* Larger for touch targets */
+  height: 30px;
   cursor: pointer;
   transition: background-color var(--transition-speed);
 }
@@ -1091,16 +1104,86 @@ textarea {
   background: var(--accent-dark);
 }
 
-/* Responsive Adjustments */
+/* Custom scrollbar styling for #reviews-list */
+#reviews-list::-webkit-scrollbar {
+  width: 6px; /* Thinner scrollbar for mobile */
+}
+
+#reviews-list::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 3px;
+}
+
+#reviews-list::-webkit-scrollbar-track {
+  background: var(--light-bg);
+}
+
+/* Enhanced Responsive Adjustments */
 @media screen and (max-width: 768px) {
   .account-reviews-container {
     flex-direction: column;
     align-items: center;
+    gap: 1rem; /* Smaller gap for mobile */
+    padding-right:  2rem; /* Add side padding for narrow screens */
   }
 
   .account-management,
   #review-form-container,
   #reviews-list {
     max-width: 100%;
+    padding: 1rem; /* Consistent padding for smaller screens */
+  }
+
+  /* Adjust max-height for mobile */
+  #reviews-list {
+    max-height: 250px; /* Reduced height for smaller screens */
+  }
+
+  /* Improve readability and touch targets */
+  input,
+  textarea {
+    font-size: 1.1rem; /* Slightly larger for readability */
+    padding: 0.65rem; /* Adjusted padding */
+  }
+
+  .auth-btn,
+  .danger-btn {
+    width: 100%; /* Full-width buttons on mobile */
+    padding: 0.85rem; /* Larger padding for touch */
+    font-size: 1.1rem; /* Larger text for readability */
+  }
+
+  .delete-review-btn {
+    width: 35px; /* Larger touch target */
+    height: 35px;
+    font-size: 1rem; /* Ensure icon/text is readable */
+  }
+
+  /* Reduce heading size slightly */
+  .account-management h3,
+  #review-form-container h3,
+  #reviews-list h3 {
+    font-size: 1.25rem; /* Smaller but still prominent */
+  }
+}
+
+/* Extra small screens (phones below 480px) */
+@media screen and (max-width: 480px) {
+  .account-reviews-section {
+    padding: 1rem; /* Reduced padding */
+  }
+
+  #reviews-list {
+    max-height: 200px; /* Even smaller height for very small screens */
+  }
+
+  input,
+  textarea {
+    font-size: 1rem; /* Adjust back slightly for tiny screens */
+  }
+
+  .auth-btn,
+  .danger-btn {
+    padding: 0.75rem; /* Slightly smaller padding */
   }
 }
