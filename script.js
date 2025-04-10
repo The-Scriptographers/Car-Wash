@@ -544,6 +544,103 @@ function scrollToSection(sectionId) {
         section.scrollIntoView({ behavior: 'smooth'});
     }
 }
+
+
+
+// function for price calculator on tjenester page
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on the tjenester.html page
+    if (window.location.pathname.includes('tjenester.html') || window.location.pathname.endsWith('/tjenester')) {
+       
+  
+        
+        // Insert the price list
+        const navbar = document.querySelector('.navbar');
+        
+        // Create the price list container
+        const priceListContainer = document.createElement('section');
+        priceListContainer.id = 'price-list-container';
+        priceListContainer.innerHTML = `
+            <h3>Valgte Tjenester</h3>
+            <ul id="selected-services-list"></ul>
+            <div class="total-section">
+                <strong>Veiledende Pris: <span id="total-price">0</span> NOK</strong>
+            </div>
+        `;
+        
+        // Insert after the navbar
+        navbar.insertAdjacentElement('afterend', priceListContainer);
+        
+        // Select all service cards after the DOM is fully loaded. Did not work when selecting before CSS.
+        const serviceCards = document.querySelectorAll('.service-card');
+        const selectedServicesList = document.getElementById('selected-services-list');
+        const totalPriceElement = document.getElementById('total-price');
+        
+        // Create a price tracking object
+        const selectedServices = {};
+        
+        // Extract price from text 
+        function extractPrice(priceText) {
+            // Look for numbers in the string
+            const matches = priceText.match(/\d[\d\s]*(?=\s*NOK)/);
+            if (matches) {
+                // Remove all non-digit characters and convert to number
+                return parseInt(matches[0].replace(/\D/g, ''), 10);
+            }
+            return 0;
+        }
+        
+        // Update the total price
+        function updateTotalPrice() {
+            const totalPrice = Object.values(selectedServices).reduce((sum, price) => sum + price, 0);
+            totalPriceElement.textContent = totalPrice;
+        }
+        
+        // Add click event to each service card
+        serviceCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const serviceName = this.querySelector('h3').textContent.trim();
+                const priceElements = this.querySelectorAll('p');
+                let price = 0;
+                
+                // Find the price text in the last paragraph
+                for (let i = priceElements.length - 1; i >= 0; i--) {
+                    const text = priceElements[i].textContent;
+                    if (text.includes('NOK') || text.includes('Pris')) {
+                        price = extractPrice(text);
+                        break;
+                    }
+                }
+                
+                // Toggle the selected state
+                this.classList.toggle('selected');
+                
+                if (this.classList.contains('selected')) {
+                    // Add to selected services
+                    selectedServices[serviceName] = price;
+                    
+                    // Create a list itemn for the selected service
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<span>${serviceName}</span><span>${price} NOK</span>`;
+                    listItem.dataset.service = serviceName;
+                    selectedServicesList.appendChild(listItem);
+                } else {
+                    // Remove from selected services
+                    delete selectedServices[serviceName];
+                    
+                    // Remove list item
+                    const listItem = selectedServicesList.querySelector(`li[data-service="${serviceName}"]`);
+                    if (listItem) {
+                        listItem.remove();
+                    }
+                }
+                
+                // Update Veil. Pris.
+                updateTotalPrice();
+            });
+        });
+    }
+});
 document.addEventListener('DOMContentLoaded', function () {
     const statusElement = document.getElementById('open-status');
     if (!statusElement) return; // If the element doesn't exist, do nothing
@@ -572,3 +669,4 @@ document.addEventListener('DOMContentLoaded', function () {
       weekendNote.textContent = '🚫 Vi har stengt på lørdager og søndager.';
   }
 });
+

@@ -344,6 +344,72 @@ h2::after {
 }
 
 /* Service Cards */
+
+.service-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.service-card.selected {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  border: 2px solid #28A745;
+}
+
+.service-card.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #28A745;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+#price-list-container {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 800px;
+  background-color: var(--bg-alt);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#selected-services-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#selected-services-list li {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#price-list-container h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.total-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  font-size: 1.2rem;
+  text-align: right;
+}
+
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(300px, 1fr));
