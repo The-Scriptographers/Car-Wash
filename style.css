@@ -713,7 +713,11 @@ margin-left: 20px;
   .footer-content { padding: 0 20px; }
   .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
 }
-
+@media (min-width: 769px) {
+  .scroll-indicators {
+    display: none;
+  }
+}
 /* 3. Mobile Styles */
 @media screen and (max-width: 768px) {
   /* Hero Section */
@@ -845,14 +849,14 @@ margin-left: 20px;
     padding-left: 1rem; /* Simpler padding */
     padding-right: 1rem;
     -ms-overflow-style: scrollbar; /* Force scrollbar on Edge */
-    scrollbar-width: thin; /* Firefox: thinner scrollbar */
+    scrollbar-width: none; /* Firefox: thinner scrollbar */
     scrollbar-color: var(--hover-color) var(--light-bg); /* Firefox color */
     position: relative; /* For faux scrollbar */
   }
 
   /* Service Card */
   .service-card {
-    flex: 0 0 80vw;
+    flex: 0 0 85%;
     scroll-snap-align: center;
     white-space: normal;
     max-width: 305px;
@@ -861,6 +865,10 @@ margin-left: 20px;
     border-radius: 10px;
     box-shadow: var(--standard-shadow);
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    margin-right: 15px;
+  }
+  .services-grid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
   }
   .service-card ul.service-details li {
     font-size: 0.85rem;
@@ -876,9 +884,59 @@ margin-left: 20px;
   .service-card:hover ul.service-details li::after {
     width: calc(100% - 1.6rem);
   }
+  .section {
+    position: relative; /* Make sure the section has relative positioning */
+  }
+  .scroll-indicators {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    pointer-events: none;
+    transform: translateY(-50%); /* Center vertically */
+  }
+  .scroll-arrow {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    pointer-events: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+  .scroll-arrow:hover {
+    opacity: 1;
+  }
   
- 
-
+  .scroll-left {
+    margin-left: 10px;
+  }
+  
+  .scroll-right {
+    margin-right: 10px;
+  }
+  
+  /* Animation for the arrows */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .scroll-arrow {
+    animation: pulse 2s infinite;
+  }
+  
   /* Extra Services List */
   .extra-services-list {
     padding: 1.5rem;
