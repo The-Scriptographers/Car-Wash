@@ -537,3 +537,38 @@ function initializeTestimonials() {
     setInterval(nextTestimonial, 9000);
     showTestimonial(currentTestimonial);
 }
+// function for scrolling evenly to a section after ID
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if(section) {
+        section.scrollIntoView({ behavior: 'smooth'});
+    }
+}
+document.addEventListener('DOMContentLoaded', function () {
+    const statusElement = document.getElementById('open-status');
+    if (!statusElement) return; // If the element doesn't exist, do nothing
+  
+    const now = new Date();
+    const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const hour = now.getHours();
+  
+    const isWeekend = (day === 0 || day === 6); // Sunday or Saturday
+    const isWeekday = (day >= 1 && day <= 5);
+    const isOpenNow = isWeekday && hour >= 8 && hour < 16;
+  
+    if (isOpenNow) {
+        statusElement.textContent = '🟢 Åpent nå – vi har åpent til kl. 16:00';
+        statusElement.style.color = 'green';
+    } else if (isWeekend) {
+        statusElement.textContent = '🔴 Stengt – vi åpner igjen mandag kl. 08:00';
+        statusElement.style.color = 'red';
+    } else {
+        statusElement.textContent = '🔴 Stengt – vi åpner i morgen kl. 08:00';
+        statusElement.style.color = 'red';
+    }
+    // Always show weekend closure notice
+  const weekendNote = document.getElementById('weekend-note');
+  if (weekendNote) {
+      weekendNote.textContent = '🚫 Vi har stengt på lørdager og søndager.';
+  }
+});
