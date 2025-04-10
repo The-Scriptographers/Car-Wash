@@ -1036,6 +1036,15 @@ margin-left: 20px;
   margin-bottom: 1rem;
   font-family: var(--heading-font);
 }
+#signed-in {
+  background:  white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  text-align: center;
+  margin: auto;
+}
 
 input,
 textarea {
