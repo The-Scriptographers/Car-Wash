@@ -528,6 +528,14 @@ h2::after {
   color: var(--text-color);
 }
 
+#open-status {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+
 /* About */
 
 .section-about {
