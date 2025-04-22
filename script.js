@@ -551,6 +551,7 @@ function scrollToSection(sectionId) {
     }
 }
 
+
 // function for price calculator on tjenester page
 document.addEventListener('DOMContentLoaded', () => {
     // Check if we're on the tjenester.html page
@@ -562,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const priceListContainer = document.createElement('section');
         priceListContainer.id = 'price-list-container';
         priceListContainer.innerHTML = `
-            <h3>Valgte Tjenester</h3>
+            <h3>Valgte Tjenester <small>(klikk for å fjerne)</small></h3>
             <ul id="selected-services-list"></ul>
             <div class="total-section">
                 <strong>Veiledende Pris: <span id="total-price">0</span> NOK</strong>
@@ -577,8 +578,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedServicesList = document.getElementById('selected-services-list');
         const totalPriceElement = document.getElementById('total-price');
         
-        // Create a price tracking object
+        // Create a price tracking object and card map
         const selectedServices = {};
+        const cardMap = new Map(); // map service name to card element
+        
+        // Add some styling to make list items look clickable
+        const style = document.createElement('style');
+        style.textContent = `
+            #selected-services-list li {
+                display: flex;
+                justify-content: space-between;
+                padding: 8px;
+                margin: 5px 0;
+                background-color: #f5f5f5;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+            #selected-services-list li:hover {
+                background-color: #f0f0f0;
+            }
+            #selected-services-list li > span:first-child::before {
+                content: "⊖ ";
+                color: #D81E05;
+                font-size: 1.5em;
+            }
+        `;
+        document.head.appendChild(style);
         
         // Extract price from text 
         function extractPrice(priceText) {
@@ -597,14 +623,18 @@ document.addEventListener('DOMContentLoaded', () => {
             totalPriceElement.textContent = totalPrice;
         }
         
-        // Add click event to each service card
-        serviceCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Prevent default behavior
-                e.preventDefault();
-                
-                const serviceName = this.querySelector('h3').textContent.trim();
-                const priceElements = this.querySelectorAll('p');
+        // Function to toggle service selection
+        function toggleService(serviceName) {
+            const card = cardMap.get(serviceName);
+            if (!card) return;
+            
+            // Toggle the card's selected state
+            card.classList.toggle('selected');
+            
+            if (card.classList.contains('selected')) {
+                // This should never happen when clicking a list item
+                // (since the service is already selected), but keeping for completeness
+                const priceElements = card.querySelectorAll('p');
                 let price = 0;
                 
                 // Find the price text in the last paragraph
@@ -616,35 +646,52 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 
-                // Toggle the selected state
-                this.classList.toggle('selected');
+                // Add to selected services
+                selectedServices[serviceName] = price;
                 
-                if (this.classList.contains('selected')) {
-                    // Add to selected services
-                    selectedServices[serviceName] = price;
-                    
-                    // Create a list item for the selected service
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `<span>${serviceName}</span><span>${price} NOK</span>`;
-                    listItem.dataset.service = serviceName;
-                    selectedServicesList.appendChild(listItem);
-                } else {
-                    // Remove from selected services
-                    delete selectedServices[serviceName];
-                    
-                    // Remove list item
-                    const listItem = selectedServicesList.querySelector(`li[data-service="${serviceName}"]`);
-                    if (listItem) {
-                        listItem.remove();
-                    }
+                // Create a list item for the selected service
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<span>${serviceName}</span><span>${price} NOK</span>`;
+                listItem.dataset.service = serviceName;
+                selectedServicesList.appendChild(listItem);
+            } else {
+                // Remove from selected services
+                delete selectedServices[serviceName];
+                
+                // Remove list item
+                const listItem = selectedServicesList.querySelector(`li[data-service="${serviceName}"]`);
+                if (listItem) {
+                    listItem.remove();
                 }
-                
-                // Update Veil. Pris.
-                updateTotalPrice();
+            }
+            
+            // Update total price
+            updateTotalPrice();
+        }
+        
+        // Add click event to each service card
+        serviceCards.forEach(card => {
+            const serviceName = card.querySelector('h3').textContent.trim();
+            cardMap.set(serviceName, card); // Store reference to the card
+            
+            card.addEventListener('click', function(e) {
+                // Prevent default behavior
+                e.preventDefault();
+                toggleService(serviceName);
             });
+        });
+        
+        // Add click event to the selected services list (event delegation)
+        selectedServicesList.addEventListener('click', function(e) {
+            const listItem = e.target.closest('li[data-service]');
+            if (listItem) {
+                const serviceName = listItem.dataset.service;
+                toggleService(serviceName);
+            }
         });
     }
 });
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const statusElement = document.getElementById('open-status');
