@@ -9,9 +9,6 @@ let fullscreenIndex = 0;
 document.addEventListener('DOMContentLoaded', function() {
     initializeServiceCardScrolling();
 
-    // Reviews functionality
-    initializeReviews();
-
     // slides and gallery
     initializeSlideshow();
     initializeGallery();
@@ -23,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeServiceCards();
     initializeBookingButtons();
     initializeQuoteRotation();
-    initializeTestimonials();
+    initializeOpeningHours();
 });
 
 // Slideshow-functionality
@@ -140,87 +137,6 @@ function initializeGallery() {
         if (e.target === fullscreenOverlay) closeFullscreen();
     });
 }
-
-// Firebase reviews functionality
-function initializeReviews() { // sets up the review-system, which is connected to the Firebase
-    // Bring elements from HTML - with check if it i exists
-    const titleInput = document.getElementById("title");
-    const ratingInput = document.getElementById("rating");
-    const reviewerInput = document.getElementById("reviewer");
-    const commentInput = document.getElementById("comment");
-    const addButton = document.getElementById("addButton");
-    const dataList = document.getElementById("dataList");
-
-    // If we are not on the review-page, exit function
-    if (!titleInput || !ratingInput || !reviewerInput || !commentInput || !addButton || !dataList) {
-        return;
-    }
-
-    
-    // create a new review in the firebase-DB when the user clicks "legg til" / "add"
-    addButton.addEventListener("click", () => {
-        const title = titleInput.value;
-        const rating = ratingInput.value;
-        const reviewer = reviewerInput.value;
-        const comment = commentInput.value;
-
-        if (title && rating && reviewer && comment ) {
-            const newReviewKey = push(ref(db, 'reviews')).key; // generates a new unique key
-            set(ref(db, 'reviews/' + newReviewKey), {
-                title: title,
-                rating: rating,
-                reviewer: reviewer,
-                comment: comment
-            })
-            .then(() => {
-                console.log("Anmeldelse lagt til:", title);
-                titleInput.value = "";
-                ratingInput.value = "";
-                reviewerInput.value = "";
-                commentInput.value = "";
-                fetchData(); // calls function to update list with reviews
-            })
-            .catch(error => console.error("Feil ved lagring:", error)); // error message if it doesnt work
-        } else {
-            console.log("Alle felt må fylles ut!");
-        }
-    });
-
-    // Load inn reviews by startup
-    fetchData();
-}
-
-// retrieves data from the Realtime Database and shows in the web-page for the users
-function fetchData() {
-    const dataList = document.getElementById("dataList");
-    if(!dataList) return;
-
-    const reviewsRef = ref(db, 'reviews');
-    get(reviewsRef).then(snapshot => {
-        if (snapshot.exists()) {
-            dataList.innerHTML = ""; // clear list before update
-
-            snapshot.forEach(childSnapshot => {
-                const review = childSnapshot.val();
-
-                // create HTML elements for a cleaner view
-                const reviewItem = document.createElement("div");
-                reviewItem.classList.add("review-item");
-
-                reviewItem.innerHTML = `<h3>${review.title} (${review.rating}★)</h3>
-                <p><strong>Kunde:</strong> ${review.reviewer}</p>
-                <p><strong>Kommentar: </strong>${review.comment}</p>
-                `;
-
-                dataList.appendChild(reviewItem);
-            });
-        } else {
-            console.log("Ingen anmeldelser funnet");
-        }
-    }).catch(error => console.error("Feil ved henting:", error));
-}
-
-
 
 // Initialize animations
 function initializeAnimations() {
@@ -403,36 +319,6 @@ function initializeQuoteRotation() {
     setInterval(updateQuote, 5000);
 }
 
-// Ensure it's called when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeQuoteRotation);
-
-// handles the view of testimonials (customer reviews) on the index page 
-function initializeTestimonials() {
-    // Testimonial rotation
-    const testimonials = document.querySelectorAll(".testimonial-card");
-    if (testimonials.length === 0) return;
-
-    let currentTestimonial = 0;
-    const totalTestimonials = testimonials.length;
-
-    // show testimonial with given index, only one customer review gets showed at a time
-    function showTestimonial(index) {
-        testimonials.forEach((testimonial, i) => {
-            testimonial.style.display = i === index ? "block" : "none";
-        });
-    }
-
-    // go to the next testimonial
-    function nextTestimonial() {
-        currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
-        showTestimonial(currentTestimonial);
-    }
-
-    // start rotation
-    setInterval(nextTestimonial, 9000); // Rotate every 9.second
-    showTestimonial(currentTestimonial); // show first testimonial
-}
-
 // handles scroll effects
 function initializeScrollEffects() {
     // change navigation view when scrolling
@@ -502,8 +388,6 @@ function animateOnScroll() {
         }
     });
 }
-
-
 
 // initialize servicecards
 function initializeServiceCards() {
@@ -600,6 +484,7 @@ function initializeServiceCardScrolling() {
       });
     });
   }
+
   document.addEventListener('DOMContentLoaded', function () {
     const statusElement = document.getElementById('open-status');
     if (!statusElement) return; // If the element doesn't exist, do nothing
