@@ -7,7 +7,6 @@ let fullscreenIndex = 0;
 
 // Main function that drives when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initializeServiceCardScrolling();
 
     // Reviews functionality
     initializeReviews();
@@ -528,78 +527,6 @@ function scrollToSection(sectionId) {
     }
 }
 
-// trying to implement visible arrow for scrolling services 
-function initializeServiceCardScrolling() {
-    // First approach: Handle section-level scroll indicators
-    const serviceSections = document.querySelectorAll('.section');
-    
-    serviceSections.forEach(section => {
-      // Find the services grid within this section
-      const grid = section.querySelector('.services-grid');
-      if (!grid) return; // Skip if no grid found in this section
-      
-     
-      // Second approach: Handle card-level scroll indicators (your manual HTML ones)
-      const cards = grid.querySelectorAll('.service-card');
-      
-      cards.forEach(card => {
-        // Find scroll indicators within this card
-        const indicators = card.querySelector('.scroll-indicators');
-        if (!indicators) return; // Skip if no indicators in this card
-        
-        const leftArrow = indicators.querySelector('.scroll-left');
-        const rightArrow = indicators.querySelector('.scroll-right');
-        
-        // Function to determine card width
-        function getCardWidth() {
-          const cardStyle = window.getComputedStyle(card);
-          return card.offsetWidth + parseInt(cardStyle.marginRight, 10);
-        }
-        
-        // Update arrow visibility based on scroll position
-        function updateArrowVisibility() {
-          if (leftArrow) {
-            // Only show left arrow if we're not at the start
-            leftArrow.style.opacity = grid.scrollLeft > 10 ? '0.8' : '0.3';
-          }
-          
-          if (rightArrow) {
-            // Only show right arrow if we're not at the end
-            const isAtEnd = Math.abs(grid.scrollLeft + grid.clientWidth - grid.scrollWidth) < 10;
-            rightArrow.style.opacity = isAtEnd ? '0.3' : '0.8';
-          }
-        }
-        
-        // Scroll handlers for arrows
-        if (leftArrow) {
-          leftArrow.addEventListener('click', () => {
-            const cardWidth = getCardWidth();
-            grid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-          });
-        }
-        
-        if (rightArrow) {
-          rightArrow.addEventListener('click', () => {
-            const cardWidth = getCardWidth();
-            grid.scrollBy({ left: cardWidth, behavior: 'smooth' });
-          });
-        }
-        
-        // Initialize arrow visibility and listen for changes
-        grid.addEventListener('scroll', updateArrowVisibility);
-        window.addEventListener('resize', updateArrowVisibility);
-        
-        // Initial check
-        setTimeout(updateArrowVisibility, 100);
-      });
-      
-      // Make sure there's at least some scroll event handling on the grid
-      grid.addEventListener('scroll', function() {
-        // This ensures scroll events are properly captured
-        console.log('Grid scrolled');
-      });
-    });
-  }
   document.addEventListener('DOMContentLoaded', function () {
     const statusElement = document.getElementById('open-status');
     if (!statusElement) return; // If the element doesn't exist, do nothing
