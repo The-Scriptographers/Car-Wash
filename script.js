@@ -7,7 +7,6 @@ let fullscreenIndex = 0;
 
 // Main function that drives when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    addScrollArrowStyles(); // Add the scroll arrow styles
     initializeServiceCardScrolling();
 
     // slides and gallery
@@ -24,54 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeOpeningHours();
 });
 
-function addScrollArrowStyles() {
-    const styleSheet = document.createElement('style');
-    styleSheet.innerHTML = `
-    .scroll-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    font-size: 20px;
-    font-weight: bold;
-    transition: opacity 0.3s ease;
-    }
-    
-    .scroll-left {
-    left: 10px;
-    }
-    
-    .scroll-right {
-    right: 10px;
-    }
-
-    .services-grid {
-    position: relative;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    overflow-x: auto;
-    }
-
-    .services-grid::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-    }
-    `;
-    document.head.appendChild(styleSheet);
-}
-
 // Slideshow-functionality
 function initializeSlideshow() { // starts a slide show with fade effects
-    slides = document.querySelectorAll(".slide");
+    let slides = document.querySelectorAll(".slide");
     if (slides.length === 0) return; // dont continue if there are no slides
 
     let slideIndex = 0;
@@ -84,6 +38,13 @@ function initializeSlideshow() { // starts a slide show with fade effects
         slides[slideIndex].classList.add("active"); // Show next slide
       }
 
+    // function for manually changing slides
+    function changeSlide(n) {
+        clearInterval(slideInterval); // stop auto-slideshow with manual navigation
+        slides.forEach((slide) => slide.classList.remove("active")); // hide all slides
+        slideIndex = (slideIndex + 1) % slides.length;
+        slides[slideIndex].classList.add("active"); // show next slide
+    }
 
     // function for manually changing slides
     function changeSlide(n) {
@@ -91,7 +52,7 @@ function initializeSlideshow() { // starts a slide show with fade effects
         slides.forEach((slide) => slide.classList.remove("active")); // hide all slides
         slideIndex = (slideIndex + n + slides.length) % slides.length;
         slides[slideIndex].classList.add("active"); // show next slide
-        slideInterval = setInterv>al(showSlides, 5000); // start auto-slideshow again
+        slideInterval = setInterval(showSlides, 5000); // start auto-slideshow again
     }
 
     // make the function available gloval for buttons
@@ -451,72 +412,78 @@ function scrollToSection(sectionId) {
     }
 }
 
-
-function initializeNavigation() {
-    
-}
-
+// trying to implement visible arrow for scrolling services 
 function initializeServiceCardScrolling() {
-    const serviceGrids = document.querySelectorAll('.services-grid');
-
-    serviceGrids.forEach(grid => {
-        if(!grid) return; // skip if no grid found
-
-        // create navigation arrows for this specifically
-        const leftArrow = document.createElement('div');
-        leftArrow.className = 'scroll-arrow scroll-left';
-        leftArrow.innerHTML = '&lt;';
-
-        const rightArrow = document.createElement('div');
-        rightArrow.className = 'scroll-arrow scroll-right';
-        rightArrow.innerHTML = '&gt;';
-
-        // add arrows to the parent section (not the grid itself)
-        const parentSection = grid.closest('.section');
-        if(parentSection) {
-            parentSection.style.position = 'relative'; // make sure parent is positioned
-            parentSection.appendChild(leftArrow);
-            parentSection.appendChild(rightArrow);
-        }
-
-        // function to determine card width for scrolling amount
+    // First approach: Handle section-level scroll indicators
+    const serviceSections = document.querySelectorAll('.section');
+    
+    serviceSections.forEach(section => {
+      // Find the services grid within this section
+      const grid = section.querySelector('.services-grid');
+      if (!grid) return; // Skip if no grid found in this section
+      
+     
+      // Second approach: Handle card-level scroll indicators (your manual HTML ones)
+      const cards = grid.querySelectorAll('.service-card');
+      
+      cards.forEach(card => {
+        // Find scroll indicators within this card
+        const indicators = card.querySelector('.scroll-indicators');
+        if (!indicators) return; // Skip if no indicators in this card
+        
+        const leftArrow = indicators.querySelector('.scroll-left');
+        const rightArrow = indicators.querySelector('.scroll-right');
+        
+        // Function to determine card width
         function getCardWidth() {
-            const firstCard = grid.querySelector('.service-card');
-            if(!firstCard) return 300; // default witdh if no card found
-
-            const cardStyle = window.getComputedStyle(firstCard);
-            return firstCard.offsetWidth + parseInt(cardStyle.marginRight, 10);
+          const cardStyle = window.getComputedStyle(card);
+          return card.offsetWidth + parseInt(cardStyle.marginRight, 10);
         }
-
-        // update arrow visibility based on scroll position
+        
+        // Update arrow visibility based on scroll position
         function updateArrowVisibility() {
-            // only show left arrow if we're not at the start
+          if (leftArrow) {
+            // Only show left arrow if we're not at the start
             leftArrow.style.opacity = grid.scrollLeft > 10 ? '0.8' : '0.3';
-
-            // only show right arrow if we're not at the end
+          }
+          
+          if (rightArrow) {
+            // Only show right arrow if we're not at the end
             const isAtEnd = Math.abs(grid.scrollLeft + grid.clientWidth - grid.scrollWidth) < 10;
             rightArrow.style.opacity = isAtEnd ? '0.3' : '0.8';
+          }
         }
-
-        // scroll handlers for arrows
-        leftArrow.addEventListener('click', () => {
+        
+        // Scroll handlers for arrows
+        if (leftArrow) {
+          leftArrow.addEventListener('click', () => {
             const cardWidth = getCardWidth();
-            grid.scrollBy({ left: -cardWidth, behavior: 'smooth'});
-        });
-
-        rightArrow.addEventListener('click', () => {
+            grid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+          });
+        }
+        
+        if (rightArrow) {
+          rightArrow.addEventListener('click', () => {
             const cardWidth = getCardWidth();
-            grid.scrollBy({ left: cardWidth, behavior: 'smooth'});
-        });
-
-        // initialize arrow visibility and listen for changes
+            grid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+          });
+        }
+        
+        // Initialize arrow visibility and listen for changes
         grid.addEventListener('scroll', updateArrowVisibility);
         window.addEventListener('resize', updateArrowVisibility);
-
-        // initial check
+        
+        // Initial check
         setTimeout(updateArrowVisibility, 100);
+      });
+      
+      // Make sure there's at least some scroll event handling on the grid
+      grid.addEventListener('scroll', function() {
+        // This ensures scroll events are properly captured
+        console.log('Grid scrolled');
+      });
     });
-}
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     const statusElement = document.getElementById('open-status');
