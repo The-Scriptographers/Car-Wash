@@ -242,15 +242,25 @@ function initializeFirebaseAndReviews() {
         submitReviewBtn.addEventListener('click', () => {
             const user = auth.currentUser;
             if (!user) {
-                alert('Du må logge inn for å skrive en anmeldelse!');
+                alert('Du må logge inn for å skrive en anmeldelse!/You must log in to write a review!');
                 return;
             }
 
-            const title = reviewTitle.value;
-            const rating = reviewRating.value;
-            const comment = reviewComment.value;
+            const title = reviewTitle.value.trim();
+            const rating = reviewRating.value.trim();
+            const comment = reviewComment.value.trim();
 
-            if (title && rating && comment) {
+            if (!title || !rating || !comment) {
+                alert('Fyll ut alle felt!/ Fill in all fields!');
+                return;
+            }
+            
+            // adding rule, allowing user to only rate between 1 and 5
+            if(!['1', '2', '3', '4', '5'].includes(rating)) {
+                alert('Vennligst oppgi en gyldig vurdering mellom 1 og 5/Please add a review with a rating betweeen 1 and 5');
+                return;
+            }
+
                 db.ref('users/' + user.uid).once('value')
                     .then((snapshot) => {
                         const username = snapshot.exists() && snapshot.val().username ? snapshot.val().username : "Ukjent bruker";
@@ -271,9 +281,6 @@ function initializeFirebaseAndReviews() {
                         reviewComment.value = '';
                     })
                     .catch((error) => alert('Feil ved innsending: ' + error.message));
-            } else {
-                alert('Fyll ut alle felt!');
-            }
         });
 
         // Fetch and display reviews, with optional user for delete buttons
