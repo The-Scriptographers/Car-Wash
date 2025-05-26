@@ -692,7 +692,6 @@ margin-left: 20px;
   animation: fadeInOut 4s infinite;
 }
 .scroll-down {
-  display: none;
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -700,6 +699,8 @@ margin-left: 20px;
   width: 30px;
   height: 50px;
   z-index: 2;
+  display: block; /* Changed from none to block */
+  cursor: pointer;
 }
 .scroll-down::before {
   content: '';
@@ -712,6 +713,11 @@ margin-left: 20px;
   border-bottom: 3px solid var(--light-bg);
   transform: translateX(-50%) rotate(45deg);
   animation: scrollArrow 2s infinite;
+}
+@keyframes scrollArrow {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-10px) rotate(45deg); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(10px) rotate(45deg); }
 }
 
 /* 2. Tablet Styles */
