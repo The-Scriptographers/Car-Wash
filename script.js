@@ -23,7 +23,129 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeBookingButtons();
     initializeQuoteRotation();
     initializeTestimonials();
+
+    initializeMobileScrollIndicators();
+    
+    initializeBookingSystem();
+
+    initializeOpeningHours();
+
 });
+
+// Function for initializing mobile scroll indicators
+function initializeMobileScrollIndicators() {
+    // check if we are on the same mobile device
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    // finda all services-grid containers
+    const servicesGrids = document.querySelectorAll('.services-grid');
+
+    servicesGrids.forEach((grid, index) => {
+        // create scroll indicator
+        const scrollIndicator = document.createElement('div');
+        scrollIndicator.className = 'mobile-scroll-indicator';
+        scrollIndicator.innerHTML = `
+        <div class="scroll-hint">
+            <span class="scroll-text">Dra for å se flere</span>
+            <div class="scroll-arrow"> -></div>
+        </div>
+        `;
+
+        // add indicator after grid
+        grid.parentNode.insertBefore(scrollIndicator, grid.nextSibling);
+        
+        // check if grid can scroll
+        function checkScrollability() {
+            if(isMobile()) {
+                const canScroll = grid.scrollWidth > grid.clientWidth;
+                scrollIndicator.style.display = canScroll ? 'flex' : 'none';
+            } else {
+                scrollIndicator.style.display = 'none';
+            }
+        }
+
+        // check when page loads and window resizes
+        checkScrollability();
+        window.addEventListener('resize', checkScrollability);
+    });
+}
+
+// add CSS styles for mobile scroll indicators
+function addMobileScrollStyles() {
+    const mobileScrollStyles = document.createElement('style');
+    mobileScrollStyles.textContent = `
+        .mobile-scroll-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(216, 30, 4, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(216, 30, 5, 0.3);
+        }
+
+        .scroll-text {
+            font-size: 12px;
+            color: #D81E05;
+            font-weight: 500;
+        }
+
+        .scroll-arrow {
+            color: #D81E05;
+            font-size: 14px;
+            animation: slideRight 1.5s infinite;
+        }
+
+        @keyframes slideRight {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* hide on desktop */
+        @media (min-width: 769px) {
+            .mobile-scroll-indicator {
+                display: none !important;
+            }    
+        }
+
+        /* make sure services-grid can be scrolled on mobile */
+        @media (max-width: 768px) {
+            .services-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 20px;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .service-card {
+                flex: 0 0 300px; /* fixed width for consistent scrolling */
+                scroll-snap-align: start;
+            }
+
+            .services-grid {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    `;
+    document.head.appendChild(mobileScrollStyles);
+}
+
+addMobileScrollStyles();
 
 // Slideshow-functionality
 function initializeSlideshow() { // starts a slide show with fade effects
@@ -240,15 +362,15 @@ function initializeAnimations() {
         animateOnScroll();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // centralized BOOKING configuration
+function initializeBookingSystem() {
+        // centralized BOOKING configuration
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
         defaultMessage: 'Hei Jeg vil gjerne bestille en time for .. (ex: utvendig og innvendig vask).',
         buttonSelector: '.book-appointment-btn'
     };
 
-    // Function to check if the device is mobile
+        // Function to check if the device is mobile
     function isMobileDevice() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/.test(navigator.userAgent);
     }
@@ -279,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.body.appendChild(mobilePopup);
 
-    // show desktop popup
+        // show desktop popup
     function showPopup() {
         popup.style.display = 'flex';
         setTimeout(() => {
@@ -315,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // setup booking buttons for all buttons with the specified class
+        // setup booking buttons for all buttons with the specified class
     function setupBookingButtons() {
         const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
 
@@ -331,8 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-
-    // mobile popup event listeners
+        // mobile popup event listeners
     mobilePopup.querySelector('.close-mobile-popup').addEventListener('click', hideMobilePopup);
     mobilePopup.addEventListener('click', function(e) {
         if (e.target === mobilePopup) {
@@ -351,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hideMobilePopup()
     });
 
-    // Desktop popup event listeners
+       // Desktop popup event listeners
     popup.querySelector('.close-popup').addEventListener('click', hidePopup);
     popup.addEventListener('click', function(e) {
         if(e.target === popup) {
@@ -361,10 +482,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // call setup function
     setupBookingButtons();
-
-});
-
-
+}
+ 
 function initializeQuoteRotation() {
     // find the paragrap more carefully
     const p = document.querySelector('.hero .hero-content p');
@@ -527,8 +646,17 @@ function scrollToSection(sectionId) {
     }
 }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const statusElement = document.getElementById('open-status');
+function initializeNavigation() {
+    // this function can be expanded for navigation-specific functionality
+}
+
+function initializeBookingButtons() {
+
+}
+
+function intitializeOpeningHours() {
+
+const statusElement = document.getElementById('open-status');
     if (!statusElement) return; // If the element doesn't exist, do nothing
   
     const now = new Date();
@@ -554,4 +682,4 @@ function scrollToSection(sectionId) {
   if (weekendNote) {
       weekendNote.textContent = '🚫 Vi har stengt på lørdager og søndager.';
   }
-});
+}
