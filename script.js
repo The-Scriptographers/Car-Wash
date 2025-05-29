@@ -674,7 +674,7 @@ const statusElement = document.getElementById('open-status');
         statusElement.textContent = '🔴 Stengt – vi åpner igjen mandag kl. 08:00';
         statusElement.style.color = 'red';
     } else {
-        statusElement.textContent = '🔴 Stengt – vi åpner i morgen kl. 08:00';
+        statusElement.textContent = '🔴 Stengt – vi åpner kl. 08:00';
         statusElement.style.color = 'red';
     }
     // Always show weekend closure notice
