@@ -23,54 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeBookingButtons();
     initializeQuoteRotation();
     initializeTestimonials();
-
-    initializeMobileScrollIndicators();
-    
-    initializeBookingSystem();
-
-    initializeOpeningHours();
-
 });
-
-// Function for initializing mobile scroll indicators
-function initializeMobileScrollIndicators() {
-    // check if we are on the same mobile device
-    function isMobile() {
-        return window.innerWidth <= 768;
-    }
-
-    // finda all services-grid containers
-    const servicesGrids = document.querySelectorAll('.services-grid');
-
-    servicesGrids.forEach((grid, index) => {
-        // create scroll indicator
-        const scrollIndicator = document.createElement('div');
-        scrollIndicator.className = 'mobile-scroll-indicator';
-        scrollIndicator.innerHTML = `
-        <div class="scroll-hint">
-            <span class="scroll-text">Dra for å se flere</span>
-            <div class="scroll-arrow"> -></div>
-        </div>
-        `;
-
-        // add indicator after grid
-        grid.parentNode.insertBefore(scrollIndicator, grid.nextSibling);
-        
-        // check if grid can scroll
-        function checkScrollability() {
-            if(isMobile()) {
-                const canScroll = grid.scrollWidth > grid.clientWidth;
-                scrollIndicator.style.display = canScroll ? 'flex' : 'none';
-            } else {
-                scrollIndicator.style.display = 'none';
-            }
-        }
-
-        // check when page loads and window resizes
-        checkScrollability();
-        window.addEventListener('resize', checkScrollability);
-    });
-}
 
 // Slideshow-functionality
 function initializeSlideshow() { // starts a slide show with fade effects
@@ -287,15 +240,15 @@ function initializeAnimations() {
         animateOnScroll();
 }
 
-function initializeBookingSystem() {
-        // centralized BOOKING configuration
+document.addEventListener('DOMContentLoaded', function() {
+    // centralized BOOKING configuration
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
         defaultMessage: 'Hei Jeg vil gjerne bestille en time for .. (ex: utvendig og innvendig vask).',
         buttonSelector: '.book-appointment-btn'
     };
 
-        // Function to check if the device is mobile
+    // Function to check if the device is mobile
     function isMobileDevice() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/.test(navigator.userAgent);
     }
@@ -326,7 +279,7 @@ function initializeBookingSystem() {
     `;
     document.body.appendChild(mobilePopup);
 
-        // show desktop popup
+    // show desktop popup
     function showPopup() {
         popup.style.display = 'flex';
         setTimeout(() => {
@@ -362,7 +315,7 @@ function initializeBookingSystem() {
         }, 300);
     }
 
-        // setup booking buttons for all buttons with the specified class
+    // setup booking buttons for all buttons with the specified class
     function setupBookingButtons() {
         const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
 
@@ -378,7 +331,8 @@ function initializeBookingSystem() {
             });
         });
     }
-        // mobile popup event listeners
+
+    // mobile popup event listeners
     mobilePopup.querySelector('.close-mobile-popup').addEventListener('click', hideMobilePopup);
     mobilePopup.addEventListener('click', function(e) {
         if (e.target === mobilePopup) {
@@ -397,7 +351,7 @@ function initializeBookingSystem() {
         hideMobilePopup()
     });
 
-       // Desktop popup event listeners
+    // Desktop popup event listeners
     popup.querySelector('.close-popup').addEventListener('click', hidePopup);
     popup.addEventListener('click', function(e) {
         if(e.target === popup) {
@@ -407,8 +361,10 @@ function initializeBookingSystem() {
     
     // call setup function
     setupBookingButtons();
-}
- 
+
+});
+
+
 function initializeQuoteRotation() {
     // find the paragrap more carefully
     const p = document.querySelector('.hero .hero-content p');
@@ -571,17 +527,8 @@ function scrollToSection(sectionId) {
     }
 }
 
-function initializeNavigation() {
-    // this function can be expanded for navigation-specific functionality
-}
-
-function initializeBookingButtons() {
-
-}
-
-function intitializeOpeningHours() {
-
-const statusElement = document.getElementById('open-status');
+  document.addEventListener('DOMContentLoaded', function () {
+    const statusElement = document.getElementById('open-status');
     if (!statusElement) return; // If the element doesn't exist, do nothing
   
     const now = new Date();
@@ -599,7 +546,7 @@ const statusElement = document.getElementById('open-status');
         statusElement.textContent = '🔴 Stengt – vi åpner igjen mandag kl. 08:00';
         statusElement.style.color = 'red';
     } else {
-        statusElement.textContent = '🔴 Stengt – vi åpner kl. 08:00';
+        statusElement.textContent = '🔴 Stengt – vi åpner i morgen kl. 08:00';
         statusElement.style.color = 'red';
     }
     // Always show weekend closure notice
@@ -607,4 +554,4 @@ const statusElement = document.getElementById('open-status');
   if (weekendNote) {
       weekendNote.textContent = '🚫 Vi har stengt på lørdager og søndager.';
   }
-}
+});
