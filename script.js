@@ -18,56 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeBookingButtons();
     initializeQuoteRotation();
     initializeTestimonials();
-    initializeMobileScrollIndicators()
 
     // Firebase-dependent review system (only for index.html)
     initializeFirebaseAndReviews();
 });
-
-// Mobile-scroll indicator-functionality
-function initializeMobileScrollIndicators() {
-    // check if were on a mobile device
-    function isMobile() {
-        return window.innerWidth <= 768;
-    }
-
-    // find all service-grid containers
-    const serviceGrids = document.querySelectorAll('.services-grid');
-
-    serviceGrids.forEach((grid, index) => {
-        // create scroll indicator
-        const scrollIndicator = document.createElement('div');
-        scrollIndicator.className = 'mobile-scroll-indicator';
-        scrollIndicator.innerHTML = `
-        <div class="scroll-hint">
-            <span class="scroll-text">Dra for å se flere</span>
-            <div class="scroll-arrow">-></div>
-        </div>
-        `;
-
-        // add indicator after grid
-        grid.parentNode.insertBefore(scrollIndicator, grid.nextSibling);
-
-        // check if grid scrolls
-        function checkScrollability() {
-            if (isMobile()) {
-                const canScroll = grid.scrollWidth > grid.clientWidth;
-                scrollIndicator.style.display = canScroll ? 'flex' : 'none';
-            } else {
-                scrollIndicator.style.display = 'none';
-            }
-        }
-
-
-        // check by page Load and window resize
-        checkScrollability();
-        window.addEventListener('resize', checkScrollability);
-    });
-}
-
-
-document.head.appendChild(mobileScrollStyles);
-
 
 // Slideshow functionality (from main branch, with fixes)
 function initializeSlideshow() {
@@ -765,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function () {
         statusElement.textContent = '🔴 Stengt – vi åpner igjen mandag kl. 08:00';
         statusElement.style.color = 'red';
     } else {
-        statusElement.textContent = '🔴 Stengt – vi åpner kl. 08:00';
+        statusElement.textContent = '🔴 Stengt – vi åpner i morgen kl. 08:00';
         statusElement.style.color = 'red';
     }
     // Always show weekend closure notice
