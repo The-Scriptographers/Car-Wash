@@ -715,7 +715,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (isOpenNow) {
         statusElement.textContent = '🟢 Åpent nå – vi har åpent til kl. 16:00';
         statusElement.style.color = 'green';
-    } else if (isWeekend) {
+    } else if (day === 5 && hour >= 17){
+        statusElement.textContent = '🔴 Stengt – vi åpner igjen fra mandag kl. 08:00'
+        statusElement.style.color = 'red';
+    }
+     else if (isWeekend) {
         statusElement.textContent = '🔴 Stengt – vi åpner igjen mandag kl. 08:00';
         statusElement.style.color = 'red';
     } else {
