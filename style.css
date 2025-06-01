@@ -177,6 +177,12 @@ h2::after {
   margin: 10px auto 0;
   border-radius: 2px;
 }
+.service-card a {
+  text-decoration: none;
+}
+.service-card a:hover {
+  color: #007bff; 
+}
 
 #services h2 {
   color: var(--text-color);
