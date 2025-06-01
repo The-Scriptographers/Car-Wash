@@ -146,6 +146,47 @@ body {
 }
 
 /* Section Layout */
+.swipe-popup {
+  display: none;
+  position: fixed;
+  top: 20%;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  border-radius: 8px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.5s ease-out;
+}
+
+.swipe-popup-content {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.swipe-popup-content p {
+  margin: 0;
+}
+
+.close-swipe-popup {
+  cursor: pointer;
+  font-size: 20px;
+  color: #fff;
+  line-height: 1;
+}
+
+.swipe-popup.show {
+  display: block;
+  opacity: 1;
+}
+
+.swipe-popup.hide {
+  opacity: 0;
+}
 .section {
   padding: var(--section-padding);
   text-align: center;
