@@ -18,55 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeBookingButtons();
     initializeQuoteRotation();
     initializeTestimonials();
-    initializeSwipePopup();
+   
 
 });
-function initializeSwipePopup() {
-  const servicesSection = document.getElementById('services');
-  const swipePopup = document.getElementById('swipePopup');
-  const closeSwipePopup = document.getElementById('closeSwipePopup');
-  let hasShown = false; // Prevent popup from showing multiple times
-
-  if (!servicesSection || !swipePopup) {
-    console.log('Services section or swipe popup not found');
-    return;
-  }
-
-  // Show popup when services section is in view
-  function checkServicesInView() {
-    if (hasShown) return; // Skip if already shown
-
-    const rect = servicesSection.getBoundingClientRect();
-    const triggerBottom = window.innerHeight * 0.8; // 80% of viewport height
-
-    if (rect.top < triggerBottom && rect.bottom > 0) { // Section is in view
-      swipePopup.classList.add('show');
-      hasShown = true;
-
-      // Auto-hide after 4 seconds
-      setTimeout(() => {
-        swipePopup.classList.add('hide');
-        setTimeout(() => {
-          swipePopup.style.display = 'none';
-        }, 500); // Wait for fade-out animation
-      }, 4000);
-    }
-  }
-
-  // Close popup on click
-  if (closeSwipePopup) {
-    closeSwipePopup.addEventListener('click', () => {
-      swipePopup.classList.add('hide');
-      setTimeout(() => {
-        swipePopup.style.display = 'none';
-      }, 500); // Wait for fade-out animation
-    });
-  }
-
-  // Check on scroll and initial load
-  window.addEventListener('scroll', checkServicesInView);
-  window.addEventListener('load', checkServicesInView);
-}
 
 
 

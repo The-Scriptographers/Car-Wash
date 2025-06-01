@@ -871,51 +871,7 @@ margin-left: 20px;
   .nav-toggle:checked ~ .nav-links li:nth-child(3) { transition-delay: 0.3s; }
   .nav-toggle:checked ~ .nav-links li:nth-child(4) { transition-delay: 0.4s; }
 
-   .swipe-popup {
-    display: none;
-    position: fixed;
-    top: 20vh; /* 20% from top for consistent positioning */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.9);
-    border-radius: 12px;
-    padding: 12px 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: opacity 0.3s ease;
-    max-width: 90vw; /* Prevents overflow on small screens */
-  }
 
-  .swipe-popup-content {
-    color: white;
-    font-size: 14px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .swipe-popup-content p {
-    margin: 0;
-    white-space: nowrap;
-  }
-
-  .close-swipe-popup {
-    cursor: pointer;
-    font-size: 18px;
-    color: white;
-    margin-left: 8px;
-  }
-
-  .swipe-popup.show {
-    display: block;
-    opacity: 1;
-  }
-
-  .swipe-popup.hide {
-    opacity: 0;
-  }
 
   /* Simplified services grid for mobile */
   .services-grid {
