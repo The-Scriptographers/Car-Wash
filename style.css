@@ -871,67 +871,67 @@ margin-left: 20px;
   .nav-toggle:checked ~ .nav-links li:nth-child(3) { transition-delay: 0.3s; }
   .nav-toggle:checked ~ .nav-links li:nth-child(4) { transition-delay: 0.4s; }
 
-  /* Services Grid */
-  .swipe-popup {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
-  border-radius: 19px;
-  padding: 10px 20px;
-  box-shadow: 0 5px 9px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.5s ease-out;
-  /* Remove fixed top and right; we'll set position dynamically in JS */
-  left: 50%; /* Start at 50% from left */
-  transform: translateX(-50%); /* Center horizontally */
-}
-
-.swipe-popup-content {
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.swipe-popup-content p {
-  margin: 0;
-}
-
-.close-swipe-popup {
-  cursor: pointer;
-  font-size: 20px;
-  color: #fff;
-  line-height: 1;
-}
-
-.swipe-popup.show {
-  display: block;
-  opacity: 1;
-}
-
-.swipe-popup.hide {
-  opacity: 0;
-}
-  .services-grid {
-    display: flex;
-    overflow-x: auto !important; /* Changed to scroll to force visibility */
-    padding: 1rem 0;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    gap: 2rem; /* Adjusted gap for mobile */
-    max-width: 100%;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-    padding-left: 1rem; /* Simpler padding */
-    padding-right: 1rem;
-    -ms-overflow-style: scrollbar; /* Force scrollbar on Edge */
-    scrollbar-width: none; /* Firefox: thinner scrollbar */
-    scrollbar-color: var(--hover-color) var(--light-bg); /* Firefox color */
-    position: relative; /* For faux scrollbar */
+   .swipe-popup {
+    display: none;
+    position: fixed;
+    top: 20vh; /* 20% from top for consistent positioning */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 12px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease;
+    max-width: 90vw; /* Prevents overflow on small screens */
   }
 
+  .swipe-popup-content {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .swipe-popup-content p {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .close-swipe-popup {
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+    margin-left: 8px;
+  }
+
+  .swipe-popup.show {
+    display: block;
+    opacity: 1;
+  }
+
+  .swipe-popup.hide {
+    opacity: 0;
+  }
+
+  /* Simplified services grid for mobile */
+  .services-grid {
+    display: flex;
+    overflow-x: auto;
+    padding: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  .services-grid::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
   /* Service Card */
   .service-card {
     flex: 0 0 85%;
