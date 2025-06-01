@@ -159,34 +159,7 @@ body {
   transition: opacity 0.5s ease-out;
 }
 
-.swipe-popup-content {
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 
-.swipe-popup-content p {
-  margin: 0;
-}
-
-.close-swipe-popup {
-  cursor: pointer;
-  font-size: 20px;
-  color: #fff;
-  line-height: 1;
-}
-
-.swipe-popup.show {
-  display: block;
-  opacity: 1;
-}
-
-.swipe-popup.hide {
-  opacity: 0;
-}
 .section {
   padding: var(--section-padding);
   text-align: center;
@@ -899,6 +872,48 @@ margin-left: 20px;
   .nav-toggle:checked ~ .nav-links li:nth-child(4) { transition-delay: 0.4s; }
 
   /* Services Grid */
+  .swipe-popup {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
+  border-radius: 19px;
+  padding: 10px 20px;
+  box-shadow: 0 5px 9px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.5s ease-out;
+  /* Remove fixed top and right; we'll set position dynamically in JS */
+  left: 50%; /* Start at 50% from left */
+  transform: translateX(-50%); /* Center horizontally */
+}
+
+.swipe-popup-content {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.swipe-popup-content p {
+  margin: 0;
+}
+
+.close-swipe-popup {
+  cursor: pointer;
+  font-size: 20px;
+  color: #fff;
+  line-height: 1;
+}
+
+.swipe-popup.show {
+  display: block;
+  opacity: 1;
+}
+
+.swipe-popup.hide {
+  opacity: 0;
+}
   .services-grid {
     display: flex;
     overflow-x: auto !important; /* Changed to scroll to force visibility */
