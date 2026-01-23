@@ -1,4 +1,4 @@
-// Global variables for slides and gallery
+// Global variables
 let slideIndex = 0;
 let slides;
 let slideInterval;
@@ -8,7 +8,7 @@ let fullscreenIndex = 0;
 document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM fully loaded');
 
-    // Non-Firebase features (run on all pages)
+    // Initialize all features
     initializeSlideshow();
     initializeGallery();
     initializeAnimations();
@@ -18,13 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeBookingButtons();
     initializeQuoteRotation();
     initializeTestimonials();
-   
-
+    initializeMobileScrollHints();
+    initializeOpenStatus();
 });
 
-
-
-// Slideshow functionality (from main branch, with fixes)
+// Slideshow functionality
 function initializeSlideshow() {
     slides = document.querySelectorAll(".slide");
     if (!slides || slides.length === 0) {
@@ -51,7 +49,7 @@ function initializeSlideshow() {
     };
 }
 
-// Gallery functionality (from main branch)
+// Gallery functionality
 function initializeGallery() {
     const fullscreenOverlay = document.getElementById("fullscreenOverlay");
     if (!fullscreenOverlay) {
@@ -110,8 +108,7 @@ function initializeGallery() {
     });
 }
 
-
-// Other functions (from main branch, unchanged)
+// Animations
 function initializeAnimations() {
     const logo = document.getElementById('logo');
     if (logo) {
@@ -127,6 +124,7 @@ function initializeAnimations() {
     animateOnScroll();
 }
 
+// Scroll effects
 function initializeScrollEffects() {
     const nav = document.querySelector("nav");
     if (nav) {
@@ -139,7 +137,7 @@ function initializeScrollEffects() {
     const backToTop = document.getElementById("back-to-top");
     if (backToTop) {
         window.addEventListener("scroll", () => {
-            if (window.scrollY > 200) backToTop.style.display = "block";
+            if (window.scrollY > 300) backToTop.style.display = "block";
             else backToTop.style.display = "none";
         });
         backToTop.addEventListener("click", () => {
@@ -163,50 +161,70 @@ function initializeScrollEffects() {
 function animateOnScroll() {
     const sections = document.querySelectorAll(".section, .section-about, .container, .slideshow-container, .gallery-container");
     if (!sections.length) return;
-    const triggerBottom = window.innerHeight * 0.8;
+    const triggerBottom = window.innerHeight * 0.85;
 
     sections.forEach((section) => {
         const sectionTop = section.getBoundingClientRect().top;
         if (sectionTop < triggerBottom) {
             section.classList.add("visible");
-            section.style.opacity = '1';
-            section.style.transform = 'translateY(0)';
-            section.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
-        } else {
-            section.classList.remove("visible");
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(50px)';
-            section.style.transition = 'none';
         }
     });
 }
 
-// MODIFIED: Only add navigation to service cards if we're not on the services page
+// Service cards - NO navigation behavior on tjenester page
 function initializeServiceCards() {
     const serviceCards = document.querySelectorAll('.service-card');
+    const isServicesPage = window.location.pathname.includes('tjenester') || 
+                          window.location.pathname.endsWith('/tjenester.html');
 
-    // Only add navigation behavior if we're NOT on the services page
-    if (!window.location.pathname.includes('tjenester.html') && !window.location.pathname.endsWith('/tjenester')) {
+    if (!isServicesPage) {
         serviceCards.forEach((card) => {
             card.style.cursor = 'pointer';
-            card.addEventListener('click', () => window.location.href = 'tjenester.html');
+            card.addEventListener('click', () => {
+                window.location.href = 'tjenester.html';
+            });
         });
     }
 }
 
+// Navigation
 function initializeNavigation() {
-    // Add navigation-specific logic if needed
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    // Close mobile menu when clicking a link
+    if (navToggle && navLinks.length) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.checked = false;
+            });
+        });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        const navbar = document.querySelector('.navbar');
+        const navToggleLabel = document.querySelector('.nav-toggle-label');
+        
+        if (navToggle && navToggle.checked && 
+            !navbar.contains(e.target) && 
+            !navToggleLabel.contains(e.target)) {
+            navToggle.checked = false;
+        }
+    });
 }
 
+// Booking buttons
 function initializeBookingButtons() {
     const BOOKING_CONFIG = {
         phoneNumber: '+4740498499',
-        defaultMessage: 'Hei Jeg vil gjerne bestille en time for .. (ex: utvendig og innvendig vask).',
+        defaultMessage: 'Hei! Jeg vil gjerne bestille en time for bilpleie.',
         buttonSelector: '.book-appointment-btn'
     };
 
     function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/.test(navigator.userAgent);
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/.test(navigator.userAgent) ||
+               (window.innerWidth <= 768);
     }
 
     const popup = document.createElement('div');
@@ -214,9 +232,12 @@ function initializeBookingButtons() {
     popup.innerHTML = `
         <div class="popup-content">
             <span class="close-popup">×</span>
-            <h3>En ren bil er bare ett telefonsamtale unna!</h3>
-            <p>Ring oss eller send en SMS, så finner vi et tidspunkt som passer deg:📞</p>
+            <h3>📞 Ring eller send SMS!</h3>
+            <p>Ta kontakt med oss for å bestille time:</p>
             <p class="phone-number">${BOOKING_CONFIG.phoneNumber}</p>
+            <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">
+                Vi svarer deg så snart vi kan! 😊
+            </p>
         </div>`;
     document.body.appendChild(popup);
 
@@ -224,8 +245,8 @@ function initializeBookingButtons() {
     mobilePopup.className = 'mobile-choice-popup';
     mobilePopup.innerHTML = `
         <div class="mobile-popup-content">
-            <span class="close-mobile-popup">x</span>
-            <h3>Ring meg eller send en melding med ønsket tidspunkt - jeg svarer deg så snart jeg kan! 😊</h3>
+            <span class="close-mobile-popup">×</span>
+            <h3>📞 Velg hvordan du vil kontakte oss:</h3>
             <button class="call-option">Ring nå</button>
             <button class="message-option">Send melding</button>
         </div>`;
@@ -233,59 +254,70 @@ function initializeBookingButtons() {
 
     function showPopup() {
         popup.style.display = 'flex';
-        setTimeout(() => {
-            popup.querySelector('.popup-content').style.transform = 'translateY(0)';
-            popup.querySelector('.popup-content').style.opacity = '1';
-        }, 10);
     }
 
     function hidePopup() {
-        popup.querySelector('.popup-content').style.transform = 'translateY(-20px)';
-        popup.querySelector('.popup-content').style.opacity = '0';
-        setTimeout(() => popup.style.display = 'none', 300);
+        popup.style.display = 'none';
     }
 
     function showMobilePopup() {
         mobilePopup.style.display = 'flex';
-        setTimeout(() => {
-            mobilePopup.querySelector('.mobile-popup-content').style.transform = 'translateY(0)';
-            mobilePopup.querySelector('.mobile-popup-content').style.opacity = '1';
-        }, 10);
     }
 
     function hideMobilePopup() {
-        mobilePopup.querySelector('.mobile-popup-content').style.transform = 'translateY(-20px)';
-        mobilePopup.querySelector('.mobile-popup-content').style.opacity = '0';
-        setTimeout(() => mobilePopup.style.display = 'none', 300);
+        mobilePopup.style.display = 'none';
     }
 
     const bookingButtons = document.querySelectorAll(BOOKING_CONFIG.buttonSelector);
     bookingButtons.forEach(button => {
         button.addEventListener('click', function (e) {
             e.preventDefault();
-            if (isMobileDevice()) showMobilePopup();
-            else showPopup();
+            if (isMobileDevice()) {
+                showMobilePopup();
+            } else {
+                showPopup();
+            }
         });
     });
 
-    mobilePopup.querySelector('.close-mobile-popup').addEventListener('click', hideMobilePopup);
+    // Mobile popup handlers
+    const closeMobile = mobilePopup.querySelector('.close-mobile-popup');
+    if (closeMobile) {
+        closeMobile.addEventListener('click', hideMobilePopup);
+    }
+
     mobilePopup.addEventListener('click', (e) => {
         if (e.target === mobilePopup) hideMobilePopup();
     });
-    mobilePopup.querySelector('.call-option').addEventListener('click', () => {
-        window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
-        hideMobilePopup();
-    });
-    mobilePopup.querySelector('.message-option').addEventListener('click', () => {
-        window.location.href = `sms:${BOOKING_CONFIG.phoneNumber}?body=${encodeURIComponent(BOOKING_CONFIG.defaultMessage)}`;
-        hideMobilePopup();
-    });
-    popup.querySelector('.close-popup').addEventListener('click', hidePopup);
+
+    const callOption = mobilePopup.querySelector('.call-option');
+    if (callOption) {
+        callOption.addEventListener('click', () => {
+            window.location.href = `tel:${BOOKING_CONFIG.phoneNumber}`;
+            hideMobilePopup();
+        });
+    }
+
+    const messageOption = mobilePopup.querySelector('.message-option');
+    if (messageOption) {
+        messageOption.addEventListener('click', () => {
+            window.location.href = `sms:${BOOKING_CONFIG.phoneNumber}?body=${encodeURIComponent(BOOKING_CONFIG.defaultMessage)}`;
+            hideMobilePopup();
+        });
+    }
+
+    // Desktop popup handlers
+    const closePopup = popup.querySelector('.close-popup');
+    if (closePopup) {
+        closePopup.addEventListener('click', hidePopup);
+    }
+
     popup.addEventListener('click', (e) => {
         if (e.target === popup) hidePopup();
     });
 }
 
+// Quote rotation
 function initializeQuoteRotation() {
     const p = document.querySelector('.hero .hero-content p');
     if (!p) return;
@@ -294,7 +326,7 @@ function initializeQuoteRotation() {
         "Skinnende bil, hver gang!",
         "Den ultimate bilpleieopplevelsen",
         "Bilen din fortjener det beste",
-        "Gi bilen din den behandlingen den fortjener"
+        "Profesjonell bilpleie i Holmestrand"
     ];
     let currentQuoteIndex = 0;
 
@@ -304,7 +336,7 @@ function initializeQuoteRotation() {
             currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
             p.textContent = quotes[currentQuoteIndex];
             p.style.opacity = '1';
-        }, 1000);
+        }, 500);
     }
 
     p.textContent = quotes[currentQuoteIndex];
@@ -312,6 +344,7 @@ function initializeQuoteRotation() {
     setInterval(updateQuote, 5000);
 }
 
+// Testimonials
 function initializeTestimonials() {
     const testimonials = document.querySelectorAll(".testimonial-card");
     if (testimonials.length === 0) return;
@@ -334,45 +367,95 @@ function initializeTestimonials() {
     showTestimonial(currentTestimonial);
 }
 
-// function for scrolling evenly to a section after ID
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
+// Mobile scroll hints for service cards
+function initializeMobileScrollHints() {
+    const servicesGrid = document.querySelector('.services-grid');
+    if (!servicesGrid) return;
+
+    // Add touch-friendly scrolling behavior
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    servicesGrid.addEventListener('mousedown', (e) => {
+        isDown = true;
+        servicesGrid.style.cursor = 'grabbing';
+        startX = e.pageX - servicesGrid.offsetLeft;
+        scrollLeft = servicesGrid.scrollLeft;
+    });
+
+    servicesGrid.addEventListener('mouseleave', () => {
+        isDown = false;
+        servicesGrid.style.cursor = 'grab';
+    });
+
+    servicesGrid.addEventListener('mouseup', () => {
+        isDown = false;
+        servicesGrid.style.cursor = 'grab';
+    });
+
+    servicesGrid.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - servicesGrid.offsetLeft;
+        const walk = (x - startX) * 2;
+        servicesGrid.scrollLeft = scrollLeft - walk;
+    });
+
+    // Smooth scroll snap on mobile
+    if (window.innerWidth <= 768) {
+        servicesGrid.style.cursor = 'default';
     }
 }
 
-
-
-document.addEventListener('DOMContentLoaded', function () {
+// Open status indicator
+function initializeOpenStatus() {
     const statusElement = document.getElementById('open-status');
-    if (!statusElement) return; // If the element doesn't exist, do nothing
+    const weekendNote = document.getElementById('weekend-note');
+    
+    if (!statusElement) return;
 
     const now = new Date();
-    const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+    const day = now.getDay(); // 0 = Sunday, 5 = Friday
     const hour = now.getHours();
 
-    const isWeekend = (day === 0 || day === 6); // Sunday or Saturday
+    const isWeekend = (day === 0 || day === 6);
     const isWeekday = (day >= 1 && day <= 5);
     const isOpenNow = isWeekday && hour >= 8 && hour < 16;
 
     if (isOpenNow) {
         statusElement.textContent = '🟢 Åpent nå – vi har åpent til kl. 16:00';
-        statusElement.style.color = 'green';
-    } else if (day === 5 && hour >= 17) {
-        statusElement.textContent = '🔴 Stengt – vi åpner igjen fra mandag kl. 08:00'
-        statusElement.style.color = 'red';
-    }
-    else if (isWeekend) {
-        statusElement.textContent = '🔴 Stengt – vi åpner igjen fra mandag kl. 08:00';
-        statusElement.style.color = 'red';
+        statusElement.style.color = '#28a745';
+        statusElement.style.background = 'rgba(40, 167, 69, 0.1)';
+    } else if (day === 5 && hour >= 16) {
+        statusElement.textContent = '🔴 Stengt – vi åpner igjen mandag kl. 08:00';
+        statusElement.style.color = '#dc3545';
+        statusElement.style.background = 'rgba(220, 53, 69, 0.1)';
+    } else if (isWeekend) {
+        statusElement.textContent = '🔴 Stengt – vi åpner igjen mandag kl. 08:00';
+        statusElement.style.color = '#dc3545';
+        statusElement.style.background = 'rgba(220, 53, 69, 0.1)';
     } else {
         statusElement.textContent = '🔴 Stengt – vi åpner i morgen kl. 08:00';
-        statusElement.style.color = 'red';
+        statusElement.style.color = '#dc3545';
+        statusElement.style.background = 'rgba(220, 53, 69, 0.1)';
     }
-    // Always show weekend closure notice
-    const weekendNote = document.getElementById('weekend-note');
+
     if (weekendNote) {
         weekendNote.textContent = '🚫 Vi har stengt på lørdager og søndager.';
+        weekendNote.style.color = '#666';
     }
+}
+
+// Smooth scroll to section
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// Prevent horizontal scroll issues
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.style.overflowX = 'hidden';
 });
