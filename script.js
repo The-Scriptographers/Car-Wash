@@ -507,18 +507,27 @@ function initializeOmMegPage() {
     }
 }
 
-// Reviews section header animation
+// Reviews carousel
 function initializeReviews() {
-    const header = document.querySelector('.reviews-header');
-    if (!header) return;
+    const track = document.getElementById('reviewsTrack');
+    if (!track) return;
 
-    const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-            header.classList.add('visible');
-            observer.unobserve(header);
-        }
-    }, { threshold: 0.2 });
-    observer.observe(header);
+    // Duplicate cards for seamless infinite loop
+    Array.from(track.children).forEach(card => {
+        track.appendChild(card.cloneNode(true));
+    });
+
+    // Animate header in on scroll
+    const header = document.querySelector('.reviews-header');
+    if (header) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                header.classList.add('visible');
+                observer.unobserve(header);
+            }
+        }, { threshold: 0.2 });
+        observer.observe(header);
+    }
 }
 
 // Price info popup (tjenester page)
