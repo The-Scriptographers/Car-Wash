@@ -448,9 +448,6 @@ h2::after {
   text-align: center;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   position: relative;
-  transform: translateY(-20px);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .close-popup {
@@ -1756,9 +1753,6 @@ html {
     padding: 20px;
     border-radius: 16px;
     text-align: center;
-    transform: translateY(-20px);
-    opacity: 0;
-    transition: all 0.3s ease;
     max-width: 300px;
     width: 90%;
   }
