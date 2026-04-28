@@ -1,23 +1,23 @@
-/* Design System Variables - FINAL ELEGANT */
+/* Design System Variables */
 :root {
-  /* Colors */
-  --primary-color: #1a4faa;
-  --primary-light: #4d8ef0;
-  --primary-dark: #0d3580;
-  --list-bullet-color: #4d8ef0;
+  /* Primary — teal/cyan */
+  --primary-color: #0891b2;
+  --primary-light: #22d3ee;
+  --primary-dark: #0e7490;
+  --list-bullet-color: #22d3ee;
 
-  /* Accent */
-  --accent-color: #e8220a;
-  --accent-dark: #8a2828;
+  /* Accent — rose red for CTAs */
+  --accent-color: #f43f5e;
+  --accent-dark: #be123c;
 
-  /* Neutral - Dark glassmorphism theme */
-  --text-color: #e0e8f5;
-  --text-light: #b8ccdf;
-  --light-bg: #0a1628;
-  --bg-alt: #0d1f38;
-  --white: #f2f5fb;
-  --card-bg: rgba(255, 255, 255, 0.06);
-  --hover-color: #4d8ef0;
+  /* Surface & text */
+  --text-color: #e2e8f0;
+  --text-light: #94a3b8;
+  --light-bg: #080f18;
+  --bg-alt: #0d1726;
+  --white: #f8fafc;
+  --card-bg: rgba(255, 255, 255, 0.045);
+  --hover-color: #22d3ee;
 
   /* Typography */
   --heading-font: 'Poppins', sans-serif;
@@ -29,8 +29,8 @@
   --list-item-spacing: 0.6rem;
 
   /* Effects */
-  --standard-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --hover-shadow: 0 8px 32px rgba(77, 142, 240, 0.3);
+  --standard-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --hover-shadow: 0 8px 32px rgba(34, 211, 238, 0.2);
   --transition-speed: 0.3s ease;
 }
 
@@ -54,11 +54,10 @@ body {
   font-family: var(--body-font);
   color: var(--text-color);
   line-height: 1.6;
-  background: linear-gradient(180deg, #0f1923 0%, #141e2e 50%, #0f1923 100%);
+  background: #080f18;
   background-attachment: fixed;
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -115,14 +114,16 @@ body {
 /* Navigation */
 .navbar {
   font-family: var(--heading-font);
-  background: #1a3358;
+  background: rgba(34, 211, 238, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   color: var(--white);
   padding: 0.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  border-bottom: 1px solid rgba(77, 142, 240, 0.12);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(34, 211, 238, 0.08);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
 }
 
 .navbar-container {
@@ -176,6 +177,7 @@ body {
 
 .nav-links a:hover {
   color: var(--primary-light);
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
 }
 
 .nav-links a.active {
@@ -230,7 +232,7 @@ h2::after {
   content: "";
   display: block;
   width: 80px;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, var(--primary-light), var(--accent-color));
   margin: 10px auto 0;
   border-radius: 2px;
@@ -316,10 +318,8 @@ h2::after {
 
 /* Footer - Keep elegant gradient */
 .footer {
-  background: rgba(5, 12, 30, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-top: 1px solid rgba(77, 142, 240, 0.15);
+  background: #060c14;
+  border-top: 1px solid rgba(34, 211, 238, 0.1);
   color: var(--white);
   padding: 30px 0;
   margin-top: 60px;
@@ -397,21 +397,24 @@ h2::after {
 
 /* Components */
 .book-appointment-btn {
-  padding: 10px 20px;
+  padding: 10px 28px;
   font-size: 1rem;
   color: var(--white);
-  background: linear-gradient(135deg, var(--accent-color), #ff3d1a);
+  background: linear-gradient(135deg, var(--accent-color), #e11d48);
   border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(216, 30, 5, 0.3);
+  box-shadow: 0 4px 20px rgba(244, 63, 94, 0.35);
   font-weight: 600;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .book-appointment-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(216, 30, 5, 0.4);
+  box-shadow: 0 6px 28px rgba(244, 63, 94, 0.5);
 }
 
 /* Price Info Popup */
@@ -435,10 +438,10 @@ h2::after {
 }
 
 .price-popup-card {
-  background: rgba(12, 24, 48, 0.92);
+  background: rgba(6, 14, 28, 0.94);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(77, 142, 240, 0.2);
+  border: 1px solid rgba(34, 211, 238, 0.15);
   border-radius: 20px;
   padding: 2.2rem 2.4rem 2rem;
   max-width: 420px;
@@ -485,7 +488,7 @@ h2::after {
   display: block;
   width: 100%;
   padding: 0.8rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
   color: var(--white);
   border: none;
   border-radius: 10px;
@@ -530,10 +533,10 @@ h2::after {
 }
 
 .popup-content {
-  background: rgba(10, 22, 50, 0.85);
+  background: rgba(6, 14, 28, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(77, 142, 240, 0.2);
+  border: 1px solid rgba(34, 211, 238, 0.15);
   padding: 2rem;
   border-radius: 16px;
   width: 90%;
@@ -594,14 +597,14 @@ h2::after {
   box-shadow: var(--standard-shadow);
   transition: all var(--transition-speed);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .service-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--hover-shadow);
-  border-color: rgba(77, 142, 240, 0.3);
-  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(34, 211, 238, 0.25);
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .service-card img {
@@ -676,7 +679,7 @@ h2::after {
   max-width: 800px;
   margin: 0 auto;
   text-align: left;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.1);
 }
 
 .extra-services-list:hover {
@@ -704,17 +707,35 @@ h2::after {
   margin: 0.3rem 0;
 }
 
-#google-reviews {
-  max-width: 800px; 
-  margin: 0 auto;
-  padding: 20px;
+/* ===== REVIEWS SECTION ===== */
+
+.reviews-section {
+  padding-bottom: 4rem;
 }
 
-.elfsight-app {
-  max-width: 600px; 
-  margin: 0 auto; 
-  word-wrap: break-word; 
-  overflow-wrap: break-word;
+.reviews-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reviews-header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reviews-subtitle {
+  color: var(--text-light);
+  font-size: 1rem;
+  margin-top: 0.4rem;
+}
+
+.reviews-elfsight-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* Location */
@@ -767,7 +788,7 @@ h2::after {
   padding: 2rem;
   border-radius: 16px;
   box-shadow: var(--standard-shadow);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.1);
 }
 
 .contact-info.show {
@@ -855,9 +876,9 @@ h2::after {
   height: 300px;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(77, 142, 240, 0.3);
+  border: 1px solid rgba(34, 211, 238, 0.18);
   box-shadow:
-    0 0 0 6px rgba(77, 142, 240, 0.06),
+    0 0 0 6px rgba(34, 211, 238, 0.04),
     0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
@@ -879,10 +900,10 @@ h2::after {
   position: absolute;
   bottom: -14px;
   right: -14px;
-  background: rgba(10, 22, 50, 0.9);
+  background: rgba(6, 14, 28, 0.94);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(77, 142, 240, 0.35);
+  border: 1px solid rgba(34, 211, 238, 0.22);
   border-radius: 14px;
   padding: 0.65rem 1rem;
   text-align: center;
@@ -955,7 +976,7 @@ h2::after {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(77, 142, 240, 0.15);
+  border: 1px solid rgba(34, 211, 238, 0.12);
   border-radius: 28px;
   padding: 3.5rem 4rem;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.38);
@@ -1229,9 +1250,9 @@ h2::after {
   height: 40%;
   background: linear-gradient(to bottom,
     transparent 0%,
-    rgba(15, 25, 35, 0.2) 30%,
-    rgba(15, 25, 35, 0.6) 65%,
-    rgba(15, 25, 35, 0.95) 100%);
+    rgba(8, 15, 24, 0.2) 30%,
+    rgba(8, 15, 24, 0.65) 65%,
+    rgba(8, 15, 24, 0.97) 100%);
   pointer-events: none;
   z-index: 2;
   border-radius: 0 0 25px 25px;
@@ -1286,7 +1307,7 @@ h2::after {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(77, 142, 240, 0.2);
+  border: 1px solid rgba(34, 211, 238, 0.13);
   border-radius: 24px;
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.35),
@@ -1993,7 +2014,7 @@ html {
   }
 
   /* Navigation */
-  .navbar { position: sticky; top: 0; z-index: 1000; background: #1a3358; }
+  .navbar { position: sticky; top: 0; z-index: 1000; background: rgba(34, 211, 238, 0.07); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 
   .nav-toggle-label {
     display: flex;
@@ -2036,8 +2057,10 @@ html {
     top: 100%;
     left: 0;
     width: 100%;
-    background: #122844;
-    border-top: 1px solid rgba(77, 142, 240, 0.2);
+    background: rgba(8, 15, 24, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(34, 211, 238, 0.15);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     display: flex;
     flex-direction: column;
@@ -2210,10 +2233,10 @@ html {
   }
   
   .mobile-popup-content {
-    background: rgba(10, 22, 50, 0.85);
+    background: rgba(6, 14, 28, 0.94);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(77, 142, 240, 0.2);
+    border: 1px solid rgba(34, 211, 238, 0.13);
     padding: 20px;
     border-radius: 16px;
     text-align: center;
@@ -2234,7 +2257,7 @@ html {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    background: linear-gradient(135deg, var(--accent-color), #ff3d1a);
+    background: linear-gradient(135deg, var(--accent-color), #e11d48);
     color: var(--white);
     border: none;
     border-radius: 50px;

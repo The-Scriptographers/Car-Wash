@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeOpenStatus();
     initializeOmMegPage();
     initializePricePopup();
+    initializeReviews();
 });
 
 // Slideshow functionality
@@ -506,6 +507,20 @@ function initializeOmMegPage() {
     }
 }
 
+// Reviews section header animation
+function initializeReviews() {
+    const header = document.querySelector('.reviews-header');
+    if (!header) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            header.classList.add('visible');
+            observer.unobserve(header);
+        }
+    }, { threshold: 0.2 });
+    observer.observe(header);
+}
+
 // Price info popup (tjenester page)
 function initializePricePopup() {
     const overlay = document.getElementById('pricePopup');
@@ -529,5 +544,5 @@ function initializePricePopup() {
 
 // Prevent horizontal scroll issues
 document.addEventListener('DOMContentLoaded', () => {
-    document.body.style.overflowX = 'hidden';
+    document.documentElement.style.overflowX = 'hidden';
 });
