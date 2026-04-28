@@ -40,63 +40,80 @@
     </nav>
 
     <!-- Main Content Section -->
-    <main>
-      <section class="section section-about">
-        <div class="about-text">
-          <h2>Velkommen til ULF's Bilpleie</h2>
-        </div>
-        <div class="about-image">
-          <img src="images/ulf-smil.png" alt="Ulf's Bilpleie" />
-        </div>
+    <main class="om-page">
 
-        <div class="about-text">
-          <h2>Om Meg</h2>
-          <p>
+      <!-- Profile card -->
+      <section class="om-profile-section">
+        <div class="om-profile-card" data-animate="up">
+          <div class="om-img-side">
+            <div class="om-img-frame">
+              <img src="images/ulf-smil.png" alt="Ulf" />
+            </div>
+            <div class="om-years-badge">
+              <span class="om-count" data-count="20">0</span>
+              <span class="om-years-label">+ års erfaring</span>
+            </div>
+          </div>
+          <div class="om-text-side">
+            <span class="om-eyebrow">Bilpleie &amp; Detailing — Holmestrand</span>
+            <h2>Velkommen til<br>ULF's Bilpleie</h2>
+            <div class="om-profile-line"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content card -->
+      <section class="om-content-section">
+        <div class="om-content-card">
+
+          <h2 data-animate="up">Om Meg</h2>
+
+          <p data-animate="up" data-delay="100">
             Hei og velkommen til Ulfs Bilpleie i Holmestrand! Jeg er Ulf, og med
             over 20 års erfaring i bilpleiebransjen er jeg her for å gi bilen
             din den ultimate behandlingen. Enten det er en grundig vask, en
             speilblank polering, eller en høykvalitets keramisk coating, legger
             jeg hjertet mitt i å få bilen din til å se ut som ny.
           </p>
-          <br />
-          <p>
+
+          <p data-animate="up" data-delay="150">
             For meg er bilpleie en kunstform der hver minste detalj teller. Det
             er noe magisk ved å ta en sliten, støvete bil og forvandle den til
             et skinnende mesterverk. Som perfeksjonist går jeg alltid den ekstra
-            milen ingen flekk overses, og ingen utfordring er for tøff. Med de
+            milen — ingen flekk overses, og ingen utfordring er for tøff. Med de
             beste produktene og teknikkene jeg har finslipt over 20 år, sørger
             jeg for at bilen din ikke bare ser fantastisk ut, men føles som ny,
             hver gang.
           </p>
-          <br />
-          <b>Hvorfor velge Ulfs Bilpleie? </b>
-          <ul>
-            <li>
-              <b>Ekspertise du kan stole på: </b>Med over 20 års erfaring i
-              bransjen har jeg jobbet med alt fra luksusbiler til familiebiler,
-              og hver eneste bil får min fulle oppmerksomhet og bilpleie av
-              høyeste kvalitet.
-            </li>
-            <li>
-              <b>Dedikert til detaljer: </b> Jeg tar meg tid til å gjøre jobben
-              skikkelig, slik at hver eneste del av bilen din skinner.
-            </li>
 
-            <br />
-          </ul>
+          <div class="om-why-wrap" data-animate="up" data-delay="200">
+            <b>Hvorfor velge Ulfs Bilpleie?</b>
+            <ul>
+              <li>
+                <b>Ekspertise du kan stole på:</b> Med over 20 års erfaring i
+                bransjen har jeg jobbet med alt fra luksusbiler til familiebiler,
+                og hver eneste bil får min fulle oppmerksomhet og bilpleie av
+                høyeste kvalitet.
+              </li>
+              <li>
+                <b>Dedikert til detaljer:</b> Jeg tar meg tid til å gjøre jobben
+                skikkelig, slik at hver eneste del av bilen din skinner.
+              </li>
+            </ul>
+          </div>
 
-          <br />
-          <p>
+          <p class="om-closing" data-animate="fade" data-delay="100">
             Jeg tar imot alle kunder med et smil, uansett om du er en
             bilentusiast eller bare vil ha en ren og pen bil. Målet mitt er
             enkelt: å gi bilen din den kjærligheten den fortjener og deg en
             opplevelse som gjør at du kommer tilbake. Klar for å gi bilen din et
             løft? Ta kontakt, så finner vi den perfekte løsningen for deg!
           </p>
-          <br />
+
         </div>
       </section>
-      <button id="back-to-top">⬆</button>
+
+      <button id="back-to-top" aria-label="Tilbake til topp"></button>
     </main>
 
     <!-- Footer Section -->

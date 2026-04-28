@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeTestimonials();
     initializeMobileScrollHints();
     initializeOpenStatus();
+    initializeOmMegPage();
+    initializePricePopup();
 });
 
 // Slideshow functionality
@@ -235,7 +237,7 @@ function initializeBookingButtons() {
             <h3>📞 Ring eller send SMS!</h3>
             <p>Ta kontakt med oss for å bestille time:</p>
             <p class="phone-number">${BOOKING_CONFIG.phoneNumber}</p>
-            <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">
+            <p style="font-size: 0.9rem; color: #b8c4d4; margin-top: 1rem;">
                 Vi svarer deg så snart vi kan! 😊
             </p>
         </div>`;
@@ -453,6 +455,76 @@ function scrollToSection(sectionId) {
     if (section) {
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+}
+
+// Om Meg page animations
+function initializeOmMegPage() {
+    if (!document.querySelector('.om-page')) return;
+
+    // Scroll-reveal observer for [data-animate] elements
+    const animated = document.querySelectorAll('.om-page [data-animate]');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const delay = parseInt(entry.target.dataset.delay || 0);
+            setTimeout(() => entry.target.classList.add('om-visible'), delay);
+            revealObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.12 });
+
+    animated.forEach(el => revealObserver.observe(el));
+
+    // Profile card: animate in shortly after page load
+    const profileCard = document.querySelector('.om-profile-card');
+    if (profileCard) {
+        setTimeout(() => profileCard.classList.add('om-visible'), 120);
+    }
+
+    // Animated counter for years badge
+    const counter = document.querySelector('.om-count');
+    if (counter) {
+        const target = parseInt(counter.dataset.count);
+
+        const startCount = () => {
+            const duration = 1600;
+            const stepTime = Math.floor(duration / target);
+            let current = 0;
+            const timer = setInterval(() => {
+                current++;
+                counter.textContent = current;
+                if (current >= target) clearInterval(timer);
+            }, stepTime);
+        };
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting) return;
+            setTimeout(startCount, 600);
+            counterObserver.unobserve(counter);
+        }, { threshold: 0.3 });
+        counterObserver.observe(counter);
+    }
+}
+
+// Price info popup (tjenester page)
+function initializePricePopup() {
+    const overlay = document.getElementById('pricePopup');
+    const closeBtn = document.getElementById('pricePopupClose');
+    if (!overlay || !closeBtn) return;
+
+    setTimeout(() => overlay.classList.add('visible'), 600);
+
+    closeBtn.addEventListener('click', () => {
+        overlay.classList.remove('visible');
+        setTimeout(() => overlay.style.display = 'none', 350);
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.classList.remove('visible');
+            setTimeout(() => overlay.style.display = 'none', 350);
+        }
+    });
 }
 
 // Prevent horizontal scroll issues
